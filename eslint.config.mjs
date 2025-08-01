@@ -24,7 +24,8 @@ export default defineConfig([
     },
   },
   {
-    ignores: [// Development Dependencies
+    ignores: [
+      // Development Dependencies
       'node_modules/',
       '.expo/',
       '.expo-shared/',
@@ -35,8 +36,8 @@ export default defineConfig([
       'ios/**/*',
       '.ios/',
       '.github/',
-      "apps/**/*",
-      "apps/**/*",
+      'apps/**/*',
+      'apps/**/*',
 
       // Build and Output
       'lib/',
@@ -49,7 +50,7 @@ export default defineConfig([
       // Testing and Coverage
       '__tests__/',
       'test/',
-      "jest.setup.*",
+      'jest.setup.*',
       'coverage/',
       'jest.config.*',
 
@@ -95,6 +96,7 @@ export default defineConfig([
       // IDE specific
       '.idea/',
       '*.sublime-*',
-      '*.swp'],
+      '*.swp',
+    ],
   },
 ]);
