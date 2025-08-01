@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { useVideo } from '@/store/videoStore';
 
-interface TimeDisplayProps {
+export interface TimeDisplayProps {
   showRemaining?: boolean;
   fontSize?: number;
   color?: string;

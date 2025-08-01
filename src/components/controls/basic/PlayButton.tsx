@@ -2,7 +2,7 @@ import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import { useVideo } from '@/store/videoStore';
 import type { FC } from 'react';
 
-interface PlayButtonProps {
+export interface PlayButtonProps {
   size?: number;
   color?: string;
   style?: any;

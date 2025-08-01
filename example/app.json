@@ -5,7 +5,6 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
       "image": "./assets/splash-icon.png",
@@ -26,8 +25,21 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
-    
-
+    },
+    "plugins": [
+      [
+        "react-native-video",
+        {
+          "enableAndroidPictureInPicture": true,
+          "enableNotificationControls": false,
+          "androidExtensions": {
+            "useExoplayerRtsp": false,
+            "useExoplayerSmoothStreaming": true,
+            "useExoplayerHls": true,
+            "useExoplayerDash": false
+          }
+        }
+      ]
+    ]
   }
 }

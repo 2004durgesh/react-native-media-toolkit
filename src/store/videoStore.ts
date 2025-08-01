@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import { Animated } from 'react-native';
+import { withTiming } from 'react-native-reanimated';
+import type { SharedValue } from 'react-native-reanimated';
 import type { VideoState, VideoTheme, VideoPlayerConfig } from '../types/video';
 
 // Default theme and config are now managed inside the store
@@ -35,11 +36,12 @@ interface VideoStore extends VideoState {
   config: VideoPlayerConfig;
   theme: VideoTheme;
   videoRef: React.RefObject<any> | null;
-  controlsOpacity: Animated.Value;
+  controlsOpacity: SharedValue<number> | null;
   hideTimeoutRef: NodeJS.Timeout | null;
 
   // Actions
   initialize: (props: { theme?: Partial<VideoTheme>; config?: Partial<VideoPlayerConfig> }) => void;
+  setControlsOpacity: (opacity: SharedValue<number>) => void;
   setVideoRef: (ref: React.RefObject<any>) => void;
   showControls: () => void;
   hideControls: () => void;
@@ -74,7 +76,7 @@ export const useVideoStore = create<VideoStore>((set, get) => ({
 
   // Refs and animation values
   videoRef: null,
-  controlsOpacity: new Animated.Value(1),
+  controlsOpacity: null,
   hideTimeoutRef: null,
 
   // --- ACTIONS ---
@@ -93,6 +95,7 @@ export const useVideoStore = create<VideoStore>((set, get) => ({
     });
   },
 
+  setControlsOpacity: (opacity) => set({ controlsOpacity: opacity }),
   setVideoRef: (ref) => set({ videoRef: ref }),
 
   // State setters (used by VideoCore)
@@ -108,11 +111,12 @@ export const useVideoStore = create<VideoStore>((set, get) => ({
     if (hideTimeoutRef) {
       clearTimeout(hideTimeoutRef);
     }
-    Animated.timing(controlsOpacity, {
-      toValue: 1,
-      duration: theme.animations.fast,
-      useNativeDriver: true,
-    }).start();
+
+    if (controlsOpacity) {
+      controlsOpacity.value = withTiming(1, {
+        duration: theme.animations.fast,
+      });
+    }
 
     if (config.autoHideControls && isPlaying) {
       const newTimeout = setTimeout(() => get().hideControls(), config.autoHideDelay);
@@ -122,17 +126,22 @@ export const useVideoStore = create<VideoStore>((set, get) => ({
 
   hideControls: () => {
     const { controlsOpacity, theme } = get();
-    Animated.timing(controlsOpacity, {
-      toValue: 0,
-      duration: theme.animations.normal,
-      useNativeDriver: true,
-    }).start();
+    if (controlsOpacity) {
+      controlsOpacity.value = withTiming(0, {
+        duration: theme.animations.normal,
+      });
+    }
   },
 
   toggleControls: () => {
-    const isVisible = (get().controlsOpacity as any)._value > 0.5;
-    if (isVisible) get().hideControls();
-    else get().showControls();
+    const { controlsOpacity } = get();
+    if (controlsOpacity) {
+      const isVisible = controlsOpacity.value > 0.5;
+      if (isVisible) get().hideControls();
+      else get().showControls();
+    } else {
+      get().showControls();
+    }
   },
 
   seek: (time) => {
