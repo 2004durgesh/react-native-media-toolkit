@@ -1,6 +1,6 @@
 const path = require('path');
 const { getDefaultConfig } = require('@expo/metro-config');
-
+const pkg = require('../package.json');
 const root = path.resolve(__dirname, '..');
 
 /**
@@ -14,6 +14,7 @@ module.exports = async () => {
   
   const config = withMetroConfig(getDefaultConfig(__dirname), {
     root,
+    pkg,
     dirname: __dirname,
   });
 

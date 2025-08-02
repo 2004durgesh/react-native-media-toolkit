@@ -4,7 +4,6 @@
     "baseUrl": ".",
     "paths": {
       "react-native-media-toolkit": ["./src/index"],
-      "@/*": ["./src/*"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

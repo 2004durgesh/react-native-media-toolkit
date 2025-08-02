@@ -1,11 +1,10 @@
-import { useState, type FC } from 'react';
+import { useState } from 'react';
 import { View, StyleSheet, type ViewStyle, type LayoutChangeEvent, type AccessibilityProps } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
-import { runOnJS } from 'react-native-worklets';
-import { useVideo } from '@/store/videoStore';
+import Animated, { useAnimatedStyle, useSharedValue, runOnJS } from 'react-native-reanimated';
+import { useVideo, useVideoActions } from '../../../store';
 
-interface ProgressBarProps extends AccessibilityProps {
+export interface ProgressBarProps extends AccessibilityProps {
   height?: number;
   trackColor?: string;
   progressColor?: string;
@@ -14,7 +13,7 @@ interface ProgressBarProps extends AccessibilityProps {
   style?: ViewStyle;
 }
 
-export const ProgressBar: FC<ProgressBarProps> = ({
+export const ProgressBar = ({
   height = 4,
   trackColor,
   progressColor,
@@ -22,14 +21,13 @@ export const ProgressBar: FC<ProgressBarProps> = ({
   thumbColor,
   style,
   accessibilityLabel = 'Video progress bar',
-}) => {
+}: ProgressBarProps) => {
   // Use separate selectors to avoid creating new objects
   const currentTime = useVideo((state) => state.currentTime);
   const duration = useVideo((state) => state.duration);
   const buffering = useVideo((state) => state.buffering);
   const theme = useVideo((state) => state.theme);
-  const seek = useVideo((state) => state.seek);
-  const showControls = useVideo((state) => state.showControls);
+  const { seek, showControls } = useVideoActions();
 
   const [barWidth, setBarWidth] = useState(0);
   const isDragging = useSharedValue(false);

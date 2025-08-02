@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
-import { useVideo } from '@/store/videoStore';
-import type { FC, ReactNode } from 'react';
+import { useVideo, useVideoActions } from '../../store';
+import type { ReactNode } from 'react';
 import Animated, { useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
 import { useEffect } from 'react';
 import TapHandler from '../gestures/TapHandler';
@@ -12,13 +12,13 @@ interface VideoOverlayProps {
   overlay?: boolean;
 }
 
-export const VideoOverlay: FC<VideoOverlayProps> = ({ children, style, overlay = true }) => {
+export const VideoOverlay = ({ children, style, overlay = true }: VideoOverlayProps) => {
   // Create shared value for opacity - only for controls, not video container
   const opacity = useSharedValue(1);
 
   // Get theme and store functions
   const theme = useVideo((state) => state.theme);
-  const setControlsOpacity = useVideo((state) => state.setControlsOpacity);
+  const { setControlsOpacity } = useVideoActions();
 
   // Only set the opacity shared value in the store if this is a controls overlay
   useEffect(() => {

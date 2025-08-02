@@ -2,7 +2,7 @@ const path = require('path');
 const { getConfig } = require('react-native-builder-bob/babel-config');
 const pkg = require('../package.json');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(process.cwd(), '..');
 
 module.exports = function (api) {
   api.cache(true);
@@ -20,6 +20,7 @@ module.exports = function (api) {
             },
           },
         ],
+        'react-native-reanimated/plugin',
       ],
     },
     { root, pkg }

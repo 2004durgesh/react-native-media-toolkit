@@ -1,14 +1,13 @@
-import React, { type ReactNode, useEffect } from 'react';
+import { type ReactNode, useEffect } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { PlayButton } from './controls/basic/PlayButton';
 import { ProgressBar } from './controls/basic/ProgressBar';
 import { TimeDisplay } from './controls/basic/TimeDisplay';
 import { VolumeControl } from './controls/basic/VolumeControl';
-import type { VideoPlayerConfig, VideoSource, VideoTheme } from '@/types/video';
-import { useVideoStore } from '@/store/videoStore';
+import type { VideoPlayerConfig, VideoSource, VideoTheme } from '../types';
+import { VideoProvider, useVideoActions } from '../store';
 import { VideoOverlay } from './core/VideoOverlay';
 import { VideoSurface } from './core/VideoSurface';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 interface VideoPlayerProps {
   source: VideoSource;
@@ -20,17 +19,9 @@ interface VideoPlayerProps {
   poster?: string;
 }
 
-const VideoPlayerComponent: React.FC<VideoPlayerProps> = ({
-  source,
-  children,
-  style,
-  resizeMode,
-  poster,
-  theme,
-  config,
-}) => {
+const VideoPlayerCore = ({ source, children, style, resizeMode, poster, theme, config }: VideoPlayerProps) => {
   // Get the initializer from the store
-  const initialize = useVideoStore((state) => state.initialize);
+  const { initialize } = useVideoActions();
 
   // Initialize store with props on mount and when props change
   useEffect(() => {
@@ -39,19 +30,25 @@ const VideoPlayerComponent: React.FC<VideoPlayerProps> = ({
 
   // this is the root of all the project :)
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={[styles.container, style]}>
-        <VideoOverlay style={styles.videoContainer} overlay={false}>
-          <VideoSurface source={source} resizeMode={resizeMode} poster={poster} />
-          {children}
-        </VideoOverlay>
-      </View>
-    </GestureHandlerRootView>
+    <View style={[styles.container, style]}>
+      <VideoOverlay style={styles.videoContainer} overlay={false}>
+        <VideoSurface source={source} resizeMode={resizeMode} poster={poster} />
+        {children}
+      </VideoOverlay>
+    </View>
+  );
+};
+
+const VideoPlayerComponent = (props: VideoPlayerProps) => {
+  return (
+    <VideoProvider>
+      <VideoPlayerCore {...props} />
+    </VideoProvider>
   );
 };
 
 // VideoControls component that wraps VideoOverlay for controls
-const VideoControls: React.FC<{ children?: ReactNode; style?: any }> = ({ children, style }) => {
+const VideoControls = ({ children, style }: { children?: ReactNode; style?: any }) => {
   return (
     <VideoOverlay style={style} overlay={true}>
       {children}
@@ -59,17 +56,25 @@ const VideoControls: React.FC<{ children?: ReactNode; style?: any }> = ({ childr
   );
 };
 
-// Compound component pattern remains the same
-export const VideoPlayer = Object.assign(VideoPlayerComponent, {
-  Controls: VideoControls,
-  PlayButton,
-  ProgressBar,
-  TimeDisplay,
-  VolumeControl,
-});
+// Compound component pattern with flexible typing for React version compatibility
+const VideoPlayerWithStaticProperties = VideoPlayerComponent as typeof VideoPlayerComponent & {
+  Controls: typeof VideoControls;
+  PlayButton: typeof PlayButton;
+  ProgressBar: typeof ProgressBar;
+  TimeDisplay: typeof TimeDisplay;
+  VolumeControl: typeof VolumeControl;
+};
 
-// Pre-built skins (no changes needed)
-export const DefaultSkin: React.FC = () => (
+VideoPlayerWithStaticProperties.Controls = VideoControls;
+VideoPlayerWithStaticProperties.PlayButton = PlayButton;
+VideoPlayerWithStaticProperties.ProgressBar = ProgressBar;
+VideoPlayerWithStaticProperties.TimeDisplay = TimeDisplay;
+VideoPlayerWithStaticProperties.VolumeControl = VolumeControl;
+
+export const VideoPlayer = VideoPlayerWithStaticProperties;
+
+// Pre-built skins with flexible typing for React version compatibility
+export const DefaultSkin = () => (
   <VideoPlayer.Controls>
     <View style={skinStyles.centerControls}>
       <VideoPlayer.PlayButton size={60} />
@@ -86,7 +91,7 @@ export const DefaultSkin: React.FC = () => (
   </VideoPlayer.Controls>
 );
 
-export const MinimalSkin: React.FC = () => (
+export const MinimalSkin = () => (
   <VideoPlayer.Controls>
     <View style={skinStyles.centerControls}>
       <VideoPlayer.PlayButton size={50} />

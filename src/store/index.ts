@@ -1,2 +1,1 @@
-// Main store exports
-export { useVideoStore, useVideo } from './videoStore';
+export { VideoProvider, useVideo, useVideoState, useVideoActions, useVideoConfig, useVideoTheme } from './VideoContext';

@@ -1,15 +1,15 @@
-import React, { useMemo, type FC } from 'react';
+import React, { useMemo } from 'react';
 import { View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { useVideo } from '@/store';
-import { runOnJS } from 'react-native-worklets';
+import { useVideoActions } from '../../store';
+import { runOnJS } from 'react-native-reanimated';
 
 interface TapHandlerProps {
   children: React.ReactNode;
 }
 
-const TapHandler: FC<TapHandlerProps> = ({ children }) => {
-  const toggleControls = useVideo((state) => state.toggleControls);
+const TapHandler = ({ children }: TapHandlerProps) => {
+  const { toggleControls } = useVideoActions();
   const singleTapGesture = useMemo(
     () =>
       Gesture.Tap()

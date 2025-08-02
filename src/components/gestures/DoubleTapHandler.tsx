@@ -1,4 +1,4 @@
-import { useVideo } from '@/store';
+import { useVideo } from '../../store';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
@@ -10,8 +10,8 @@ import Animated, {
   withSequence,
   withSpring,
   withTiming,
+  runOnJS,
 } from 'react-native-reanimated';
-import { runOnJS } from 'react-native-worklets';
 
 interface DoubleTapGestureProps {
   isLocked?: boolean;
@@ -21,16 +21,17 @@ interface DoubleTapGestureProps {
   children?: React.ReactNode;
 }
 
-export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
+export const DoubleTapGesture = ({
   isLocked = false,
   seekInterval = 10,
   onSeekStart,
   onSeekEnd,
   children,
-}) => {
+}: DoubleTapGestureProps) => {
   const videoRef = useVideo((state) => state.videoRef);
   const [isDoubleTap, setIsDoubleTap] = useState(false);
   const [doubleTapValue, setDoubleTapValue] = useState({ forward: 0, backward: 0 });
+  console.log(isDoubleTap, doubleTapValue);
   const lastTap = useRef(0);
   const animationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -55,7 +56,7 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
   const forwardRippleRef = useAnimatedRef();
   const backwardRippleRef = useAnimatedRef();
 
-  const resetConsecutiveCount = useCallback((direction: 'forward' | 'backward') => {
+  const resetConsecutiveCount = useCallback(() => {
     consecutiveTapCount.current = {
       forward: 0,
       backward: 0,
@@ -75,7 +76,7 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
       scaleValue.value = withSequence(withSpring(1.2), withSpring(1));
 
       animationTimeoutRef.current = setTimeout(() => {
-        runOnJS(resetConsecutiveCount)(direction);
+        runOnJS(resetConsecutiveCount)();
       }, 1000);
     },
     [backwardOpacity, forwardOpacity, resetConsecutiveCount, scaleValue]
@@ -83,7 +84,7 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
 
   const handleSeek = useCallback(
     async (direction: 'forward' | 'backward') => {
-      if (!videoRef.current) return;
+      if (!videoRef?.current) return;
 
       const now = Date.now();
       const timeSinceLastTap = now - consecutiveTapCount.current.lastTapTime;
@@ -153,7 +154,17 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
         rippleOpacity.value = withTiming(0, { duration: 500 });
       })
       .runOnJS(true);
-  }, [isLocked, onSeekStart, activeDirection, translateX, translateY, rippleScale, rippleOpacity, handleSeek, onSeekEnd]);
+  }, [
+    isLocked,
+    onSeekStart,
+    activeDirection,
+    translateX,
+    translateY,
+    rippleScale,
+    rippleOpacity,
+    handleSeek,
+    onSeekEnd,
+  ]);
 
   const createRippleStyle = (ref: any, direction: 'forward' | 'backward') =>
     useAnimatedStyle(() => {

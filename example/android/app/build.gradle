@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'mediatoolkit.example'
+    namespace 'com.anonymous.example'
     defaultConfig {
-        applicationId 'mediatoolkit.example'
+        applicationId 'com.anonymous.example'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

@@ -1,8 +1,8 @@
 import RNVideo from 'react-native-video';
-import { useEffect, useRef, type FC } from 'react';
+import { useEffect, useRef } from 'react';
 import { StyleSheet } from 'react-native';
-import type { VideoSource } from '@/types/video';
-import { useVideo } from '@/store/videoStore';
+import type { VideoSource } from '../../types';
+import { useVideo, useVideoActions } from '../../store';
 
 interface VideoSurfaceProps {
   source: VideoSource;
@@ -11,7 +11,7 @@ interface VideoSurfaceProps {
   poster?: string;
 }
 
-export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, resizeMode = 'contain', poster }) => {
+export const VideoSurface = ({ source, style, resizeMode = 'contain', poster }: VideoSurfaceProps) => {
   const internalVideoRef = useRef(null);
 
   // Use separate selectors to avoid creating new objects
@@ -19,14 +19,10 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, resizeMode 
   const muted = useVideo((state) => state.muted);
   const volume = useVideo((state) => state.volume);
   const playbackRate = useVideo((state) => state.playbackRate);
-  const setPlaying = useVideo((state) => state.setPlaying);
-  const setCurrentTime = useVideo((state) => state.setCurrentTime);
-  const setDuration = useVideo((state) => state.setDuration);
-  const setBuffering = useVideo((state) => state.setBuffering);
-  const setError = useVideo((state) => state.setError);
-  const showControls = useVideo((state) => state.showControls);
-  const setVideoRef = useVideo((state) => state.setVideoRef);
-  const seek = useVideo((state) => state.seek);
+
+  // Get actions from context
+  const { setPlaying, setCurrentTime, setDuration, setBuffering, setError, showControls, setVideoRef, seek } =
+    useVideoActions();
 
   // Set the ref in the store once it's created
   useEffect(() => {

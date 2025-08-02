@@ -1,7 +1,7 @@
 import { View, StyleSheet, Platform } from 'react-native';
-import { VideoPlayer, DefaultSkin } from 'react-native-media-toolkit';
+import { VideoPlayer, MinimalSkin } from 'react-native-media-toolkit';
 
-export default function App() {
+export default function Index() {
   const videoSource = {
     uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
   };
@@ -12,7 +12,7 @@ export default function App() {
     <View style={styles.container}>
       <View style={styles.videoContainer}>
         <VideoPlayer source={videoSource} style={styles.videoPlayer}>
-          <DefaultSkin />
+          <MinimalSkin />
         </VideoPlayer>
       </View>
     </View>

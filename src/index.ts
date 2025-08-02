@@ -18,7 +18,7 @@ export type { TimeDisplayProps } from './components/controls/basic/TimeDisplay';
 export type { VolumeControlProps } from './components/controls/basic/VolumeControl';
 
 // Store
-export { useVideoStore, useVideo } from './store/videoStore';
+export { VideoProvider, useVideo, useVideoState, useVideoActions, useVideoConfig, useVideoTheme } from './store';
 
 // Types
 export type * from './types';
