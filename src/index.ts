@@ -1,6 +1,8 @@
+import Test from './components/Test';
+
 // Main VideoPlayer component and compound components
 export { VideoPlayer, DefaultSkin, MinimalSkin } from './components/VideoPlayer';
-
+export { Test };
 // Core components
 export { VideoOverlay } from './components/core/VideoOverlay';
 export { VideoSurface } from './components/core/VideoSurface';

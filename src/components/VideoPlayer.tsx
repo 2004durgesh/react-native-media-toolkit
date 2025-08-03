@@ -8,7 +8,6 @@ import type { VideoPlayerConfig, VideoSource, VideoTheme } from '@/types/video';
 import { useVideoStore } from '@/store/videoStore';
 import { VideoOverlay } from './core/VideoOverlay';
 import { VideoSurface } from './core/VideoSurface';
-import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 interface VideoPlayerProps {
   source: VideoSource;
@@ -39,14 +38,12 @@ const VideoPlayerComponent: React.FC<VideoPlayerProps> = ({
 
   // this is the root of all the project :)
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <View style={[styles.container, style]}>
-        <VideoOverlay style={styles.videoContainer} overlay={false}>
-          <VideoSurface source={source} resizeMode={resizeMode} poster={poster} />
-          {children}
-        </VideoOverlay>
-      </View>
-    </GestureHandlerRootView>
+    <View style={[styles.container, style]}>
+      <VideoOverlay style={styles.videoContainer} overlay={false}>
+        <VideoSurface source={source} resizeMode={resizeMode} poster={poster} />
+        {children}
+      </VideoOverlay>
+    </View>
   );
 };
 

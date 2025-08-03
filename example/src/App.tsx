@@ -1,5 +1,6 @@
-import { View, StyleSheet, Platform } from 'react-native';
-import { VideoPlayer, DefaultSkin } from 'react-native-media-toolkit';
+import { View, StyleSheet, Platform, Text } from 'react-native';
+import { VideoPlayer, DefaultSkin, Test } from 'react-native-media-toolkit';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   const videoSource = {
@@ -9,13 +10,13 @@ export default function App() {
   console.log('App is rendering, Platform:', Platform.OS);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.videoContainer}>
-        <VideoPlayer source={videoSource} style={styles.videoPlayer}>
-          <DefaultSkin />
-        </VideoPlayer>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <View style={styles.container}>
+        <View style={styles.videoContainer}>
+          <Test />
+        </View>
       </View>
-    </View>
+    </GestureHandlerRootView>
   );
 }
 
@@ -38,5 +39,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     backgroundColor: '#ff0000',
+    flex: 1,
   },
 });

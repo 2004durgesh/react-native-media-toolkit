@@ -36,7 +36,7 @@ export default defineConfig([
       'ios/**/*',
       '.ios/',
       '.github/',
-      'apps/**/*',
+      'example/**/*',
       'apps/**/*',
 
       // Build and Output

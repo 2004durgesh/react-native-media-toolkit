@@ -18,13 +18,13 @@ module.exports = async () => {
   });
 
   config.resolver.unstable_enablePackageExports = true;
-  // Force React and React Native to resolve from root
-  config.resolver.extraNodeModules = {
-  ...(config.resolver.extraNodeModules || {}),
-  react: path.resolve(__dirname, 'node_modules/react'),
-  'react-native': path.resolve(__dirname, 'node_modules/react-native'),
-  'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
-};
+  // // Force React and React Native to resolve from root
+  // config.resolver.extraNodeModules = {
+  // ...(config.resolver.extraNodeModules || {}),
+  // react: path.resolve(__dirname, 'node_modules/react'),
+  // 'react-native': path.resolve(__dirname, 'node_modules/react-native'),
+  // 'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
+// };
 
   return config;
 };

@@ -2,7 +2,7 @@ import { View, StyleSheet } from 'react-native';
 import { useVideo } from '@/store/videoStore';
 import type { FC } from 'react';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { runOnJS } from 'react-native-worklets';
+import { runOnJS } from 'react-native-reanimated';
 
 export interface VolumeControlProps {
   orientation?: 'horizontal' | 'vertical';

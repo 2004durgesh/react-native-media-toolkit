@@ -1,4 +1,4 @@
-import { useVideo } from '@/store';
+import { useVideo } from '../../store';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
@@ -10,8 +10,8 @@ import Animated, {
   withSequence,
   withSpring,
   withTiming,
+  runOnJS,
 } from 'react-native-reanimated';
-import { runOnJS } from 'react-native-worklets';
 
 interface DoubleTapGestureProps {
   isLocked?: boolean;
@@ -31,6 +31,7 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
   const videoRef = useVideo((state) => state.videoRef);
   const [isDoubleTap, setIsDoubleTap] = useState(false);
   const [doubleTapValue, setDoubleTapValue] = useState({ forward: 0, backward: 0 });
+  console.log(isDoubleTap, doubleTapValue);
   const lastTap = useRef(0);
   const animationTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -55,7 +56,7 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
   const forwardRippleRef = useAnimatedRef();
   const backwardRippleRef = useAnimatedRef();
 
-  const resetConsecutiveCount = useCallback((direction: 'forward' | 'backward') => {
+  const resetConsecutiveCount = useCallback(() => {
     consecutiveTapCount.current = {
       forward: 0,
       backward: 0,
@@ -75,7 +76,7 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
       scaleValue.value = withSequence(withSpring(1.2), withSpring(1));
 
       animationTimeoutRef.current = setTimeout(() => {
-        runOnJS(resetConsecutiveCount)(direction);
+        runOnJS(resetConsecutiveCount)();
       }, 1000);
     },
     [backwardOpacity, forwardOpacity, resetConsecutiveCount, scaleValue]
@@ -83,7 +84,7 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
 
   const handleSeek = useCallback(
     async (direction: 'forward' | 'backward') => {
-      if (!videoRef.current) return;
+      if (!videoRef?.current) return;
 
       const now = Date.now();
       const timeSinceLastTap = now - consecutiveTapCount.current.lastTapTime;
@@ -153,50 +154,89 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
         rippleOpacity.value = withTiming(0, { duration: 500 });
       })
       .runOnJS(true);
-  }, [isLocked, onSeekStart, activeDirection, translateX, translateY, rippleScale, rippleOpacity, handleSeek, onSeekEnd]);
+  }, [
+    isLocked,
+    onSeekStart,
+    activeDirection,
+    translateX,
+    translateY,
+    rippleScale,
+    rippleOpacity,
+    handleSeek,
+    onSeekEnd,
+  ]);
 
-  const createRippleStyle = (ref: any, direction: 'forward' | 'backward') =>
-    useAnimatedStyle(() => {
-      if (activeDirection.value !== direction) return { opacity: 0 };
+  const forwardRipple = useAnimatedStyle(() => {
+    if (activeDirection.value !== 'forward') return { opacity: 0 };
 
-      const layout = measure(ref);
-      if (!layout) return { opacity: 0 };
+    const layout = measure(forwardRippleRef);
+    if (!layout) return { opacity: 0 };
 
-      boxWidth.value = layout.width;
-      boxHeight.value = layout.height;
+    boxWidth.value = layout.width;
+    boxHeight.value = layout.height;
 
-      const radius = Math.sqrt(boxWidth.value ** 2 + boxHeight.value ** 2);
-      const width = radius * 2;
-      const height = radius * 2;
+    const radius = Math.sqrt(boxWidth.value ** 2 + boxHeight.value ** 2);
+    const width = radius * 2;
+    const height = radius * 2;
 
-      return {
-        width,
-        height,
-        borderRadius: radius,
-        backgroundColor: 'white',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        zIndex: 1,
-        opacity: rippleOpacity.value,
-        transform: [
-          { translateX: translateX.value - radius },
-          { translateY: translateY.value - radius },
-          { scale: rippleScale.value },
-        ],
-      };
-    });
+    return {
+      width,
+      height,
+      borderRadius: radius,
+      backgroundColor: 'white',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      zIndex: 1,
+      opacity: rippleOpacity.value,
+      transform: [
+        { translateX: translateX.value - radius },
+        { translateY: translateY.value - radius },
+        { scale: rippleScale.value },
+      ],
+    };
+  });
 
-  const directionalStyle = (opacity: Animated.SharedValue<number>) =>
-    useAnimatedStyle(() => ({
-      opacity: opacity.value,
-      transform: [{ scale: scaleValue.value }],
-    }));
+  const backwardRipple = useAnimatedStyle(() => {
+    if (activeDirection.value !== 'backward') return { opacity: 0 };
 
-  const forwardRipple = createRippleStyle(forwardRippleRef, 'forward');
-  const backwardRipple = createRippleStyle(backwardRippleRef, 'backward');
-  const forwardStyle = directionalStyle(forwardOpacity);
-  const backwardStyle = directionalStyle(backwardOpacity);
+    const layout = measure(backwardRippleRef);
+    if (!layout) return { opacity: 0 };
+
+    boxWidth.value = layout.width;
+    boxHeight.value = layout.height;
+
+    const radius = Math.sqrt(boxWidth.value ** 2 + boxHeight.value ** 2);
+    const width = radius * 2;
+    const height = radius * 2;
+
+    return {
+      width,
+      height,
+      borderRadius: radius,
+      backgroundColor: 'white',
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      zIndex: 1,
+      opacity: rippleOpacity.value,
+      transform: [
+        { translateX: translateX.value - radius },
+        { translateY: translateY.value - radius },
+        { scale: rippleScale.value },
+      ],
+    };
+  });
+
+  const forwardStyle = useAnimatedStyle(() => ({
+    opacity: forwardOpacity.value,
+    transform: [{ scale: scaleValue.value }],
+  }));
+
+  const backwardStyle = useAnimatedStyle(() => ({
+    opacity: backwardOpacity.value,
+    transform: [{ scale: scaleValue.value }],
+  }));
 
   return (
     <GestureDetector gesture={doubleTapGesture}>

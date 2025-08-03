@@ -2,10 +2,10 @@ import { useState, type FC } from 'react';
 import { View, StyleSheet, type ViewStyle, type LayoutChangeEvent, type AccessibilityProps } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
-import { runOnJS } from 'react-native-worklets';
+import { runOnJS } from 'react-native-reanimated';
 import { useVideo } from '@/store/videoStore';
 
-interface ProgressBarProps extends AccessibilityProps {
+export interface ProgressBarProps extends AccessibilityProps {
   height?: number;
   trackColor?: string;
   progressColor?: string;
