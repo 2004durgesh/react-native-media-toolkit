@@ -1,7 +1,10 @@
 const path = require('path');
 const { getDefaultConfig } = require('@expo/metro-config');
+const {
+  wrapWithReanimatedMetroConfig,
+} = require('react-native-reanimated/metro-config');
 
-const root = path.resolve(__dirname, '..');
+const root = path.resolve(__dirname, '../..');
 
 /**
  * Metro configuration
@@ -26,5 +29,5 @@ module.exports = async () => {
   // 'react-dom': path.resolve(__dirname, 'node_modules/react-dom'),
 // };
 
-  return config;
+  return wrapWithReanimatedMetroConfig(config);
 };
