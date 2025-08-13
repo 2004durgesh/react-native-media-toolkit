@@ -1,8 +1,22 @@
-const { getDefaultConfig } = require('@expo/metro-config');
+const path = require('path');
+const { getDefaultConfig } = require('@react-native/metro-config');
 const {
-  wrapWithReanimatedMetroConfig,
+    wrapWithReanimatedMetroConfig,
 } = require('react-native-reanimated/metro-config');
 
-const config = getDefaultConfig(__dirname);
+const root = path.resolve(__dirname, '../..');
 
-module.exports = wrapWithReanimatedMetroConfig(config);
+/**
+ * Metro configuration
+ * https://facebook.github.io/metro/docs/configuration
+ *
+ * @type {import('metro-config').MetroConfig}
+ */
+module.exports = (async () => {
+    const { withMetroConfig } = await import('react-native-monorepo-config');
+
+    return wrapWithReanimatedMetroConfig(withMetroConfig(getDefaultConfig(__dirname), {
+        root,
+        dirname: __dirname,
+    }));
+})();
