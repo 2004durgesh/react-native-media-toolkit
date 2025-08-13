@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { useVideo } from '@/store/videoStore';
 
@@ -9,7 +8,7 @@ export interface TimeDisplayProps {
   style?: any;
 }
 
-export const TimeDisplay: FC<TimeDisplayProps> = ({ showRemaining, fontSize = 14, color, style }) => {
+export const TimeDisplay = ({ showRemaining, fontSize = 14, color, style }: TimeDisplayProps) => {
   // Use separate selectors to avoid creating new objects
   const currentTime = useVideo((state) => state.currentTime);
   const duration = useVideo((state) => state.duration);

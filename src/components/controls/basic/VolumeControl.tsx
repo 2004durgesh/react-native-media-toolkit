@@ -1,6 +1,5 @@
 import { View, StyleSheet } from 'react-native';
 import { useVideo } from '@/store/videoStore';
-import type { FC } from 'react';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { runOnJS } from 'react-native-reanimated';
 
@@ -13,14 +12,14 @@ export interface VolumeControlProps {
   style?: any;
 }
 
-export const VolumeControl: FC<VolumeControlProps> = ({
+export const VolumeControl = ({
   orientation = 'horizontal',
   width = 100,
   height = 4,
   trackColor,
   progressColor,
   style,
-}) => {
+}:VolumeControlProps) => {
   // Use separate selectors to avoid creating new objects
   const volume = useVideo((state) => state.volume);
   const theme = useVideo((state) => state.theme);

@@ -1,4 +1,4 @@
-import { useState, type FC } from 'react';
+import { useState } from 'react';
 import { View, StyleSheet, type ViewStyle, type LayoutChangeEvent, type AccessibilityProps } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
@@ -14,7 +14,7 @@ export interface ProgressBarProps extends AccessibilityProps {
   style?: ViewStyle;
 }
 
-export const ProgressBar: FC<ProgressBarProps> = ({
+export const ProgressBar = ({
   height = 4,
   trackColor,
   progressColor,
@@ -22,7 +22,7 @@ export const ProgressBar: FC<ProgressBarProps> = ({
   thumbColor,
   style,
   accessibilityLabel = 'Video progress bar',
-}) => {
+}: ProgressBarProps) => {
   // Use separate selectors to avoid creating new objects
   const currentTime = useVideo((state) => state.currentTime);
   const duration = useVideo((state) => state.duration);

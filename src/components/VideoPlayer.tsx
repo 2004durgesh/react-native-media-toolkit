@@ -19,15 +19,7 @@ interface VideoPlayerProps {
   poster?: string;
 }
 
-const VideoPlayerComponent: React.FC<VideoPlayerProps> = ({
-  source,
-  children,
-  style,
-  resizeMode,
-  poster,
-  theme,
-  config,
-}) => {
+const VideoPlayerComponent = ({ source, children, style, resizeMode, poster, theme, config }: VideoPlayerProps) => {
   // Get the initializer from the store
   const initialize = useVideoStore((state) => state.initialize);
 
@@ -66,7 +58,7 @@ export const VideoPlayer = Object.assign(VideoPlayerComponent, {
 });
 
 // Pre-built skins (no changes needed)
-export const DefaultSkin: React.FC = () => (
+export const DefaultSkin = () => (
   <VideoPlayer.Controls>
     <View style={skinStyles.centerControls}>
       <VideoPlayer.PlayButton size={60} />
@@ -83,7 +75,7 @@ export const DefaultSkin: React.FC = () => (
   </VideoPlayer.Controls>
 );
 
-export const MinimalSkin: React.FC = () => (
+export const MinimalSkin = () => (
   <VideoPlayer.Controls>
     <View style={skinStyles.centerControls}>
       <VideoPlayer.PlayButton size={50} />

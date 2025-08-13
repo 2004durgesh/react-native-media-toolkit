@@ -12568,7 +12568,6 @@ __metadata:
     react-native-builder-bob: ^0.40.13
     react-native-gesture-handler: ^2.24.0
     react-native-media-toolkit: "workspace:*"
-    react-native-monorepo-config: ^0.1.9
     react-native-reanimated: ^3.17.4
     react-native-video: ^6.14.0
     react-test-renderer: 19.1.0
@@ -12576,9 +12575,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"react-native-media-toolkit-example@workspace:example/expo":
+"react-native-media-toolkit-expo-example@workspace:example/expo":
   version: 0.0.0-use.local
-  resolution: "react-native-media-toolkit-example@workspace:example/expo"
+  resolution: "react-native-media-toolkit-expo-example@workspace:example/expo"
   dependencies:
     "@babel/core": ^7.20.0
     "@expo/config-plugins": ^10.1.2
@@ -12593,7 +12592,6 @@ __metadata:
     react-native-builder-bob: ^0.40.8
     react-native-gesture-handler: ^2.24.0
     react-native-media-toolkit: "workspace:*"
-    react-native-monorepo-config: ^0.1.9
     react-native-reanimated: ^3.17.4
     react-native-video: 6.12.0
     react-native-web: ~0.20.0
@@ -12640,7 +12638,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"react-native-monorepo-config@npm:^0.1.8, react-native-monorepo-config@npm:^0.1.9":
+"react-native-monorepo-config@npm:^0.1.8":
   version: 0.1.9
   resolution: "react-native-monorepo-config@npm:0.1.9"
   dependencies:

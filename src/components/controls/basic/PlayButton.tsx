@@ -1,6 +1,5 @@
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import { useVideo } from '@/store/videoStore';
-import type { FC } from 'react';
 
 export interface PlayButtonProps {
   size?: number;
@@ -10,7 +9,7 @@ export interface PlayButtonProps {
   renderPauseIcon?: () => React.ReactNode;
 }
 
-export const PlayButton: FC<PlayButtonProps> = ({ size = 50, color, style, renderPlayIcon, renderPauseIcon }) => {
+export const PlayButton = ({ size = 50, color, style, renderPlayIcon, renderPauseIcon }: PlayButtonProps) => {
   // Use separate selectors to avoid creating new objects
   const isPlaying = useVideo((state) => state.isPlaying);
   const theme = useVideo((state) => state.theme);
