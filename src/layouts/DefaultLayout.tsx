@@ -1,19 +1,19 @@
 import { View } from 'react-native';
 import { VideoPlayer } from '../components/VideoPlayer';
-import { skinStyles } from './CommomStyles';
+import { layoutStyles } from './CommonStyles';
 
-export const DefaultSkin = () => {
+export const DefaultLayout = () => {
   return (
     <VideoPlayer.Controls>
-      <View style={skinStyles.centerControls}>
+      <View style={layoutStyles.centerControls}>
         <VideoPlayer.PlayButton size={60} />
       </View>
-      <View style={skinStyles.bottomControls}>
+      <View style={layoutStyles.bottomControls}>
         <VideoPlayer.ProgressBar />
-        <View style={skinStyles.bottomRow}>
+        <View style={layoutStyles.bottomRow}>
           <VideoPlayer.PlayButton size={30} />
           <VideoPlayer.TimeDisplay />
-          <View style={skinStyles.spacer} />
+          <View style={layoutStyles.spacer} />
           <VideoPlayer.VolumeControl width={80} />
         </View>
       </View>

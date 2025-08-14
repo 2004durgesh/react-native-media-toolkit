@@ -2,9 +2,9 @@ import { StyleSheet } from 'react-native';
 import type { FC, ReactNode } from 'react';
 import Animated, { useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
 import { useEffect } from 'react';
-import TapHandler from '../gestures/TapHandler';
-import { useVideo } from '../../components/providers/VideoProvider';
-import { useControlsVisibility } from '../../hooks/media/useControlsVisibility';
+import { useVideo } from '../../providers';
+import TapHandler from '../../gestures/TapHandler';
+import { useControlsVisibility } from '../../hooks';
 
 interface VideoOverlayProps {
   children?: ReactNode;

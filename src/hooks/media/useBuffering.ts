@@ -1,4 +1,4 @@
-import { useVideo } from '../../components/providers/VideoProvider';
+import { useVideo } from '../../providers';
 import { useCallback } from 'react';
 
 export const useBuffering = () => {

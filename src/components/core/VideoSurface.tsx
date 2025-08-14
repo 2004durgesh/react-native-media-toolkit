@@ -2,12 +2,8 @@ import RNVideo from 'react-native-video';
 import { useEffect, useRef, type FC } from 'react';
 import { StyleSheet } from 'react-native';
 import type { VideoSource } from '../../types';
-import { useVideo } from '../../components/providers/VideoProvider';
-import { usePlayback } from '../../hooks/media/usePlayback';
-import { useVolume } from '../../hooks/media/useVolume';
-import { useProgress } from '../../hooks/media/useProgress';
-import { useBuffering } from '../../hooks/media/useBuffering';
-import { useControlsVisibility } from '../../hooks/media/useControlsVisibility';
+import { useVideo } from '../../providers';
+import { usePlayback, useVolume, useProgress, useBuffering, useControlsVisibility } from '../../hooks';
 
 interface VideoSurfaceProps {
   source: VideoSource;

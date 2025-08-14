@@ -1,14 +1,14 @@
 import { View } from 'react-native';
 import { VideoPlayer } from '../components/VideoPlayer';
-import { skinStyles } from './CommomStyles';
+import { layoutStyles } from './CommonStyles';
 
-export const MinimalSkin = () => {
+export const MinimalLayout = () => {
   return (
     <VideoPlayer.Controls>
-      <View style={skinStyles.centerControls}>
+      <View style={layoutStyles.centerControls}>
         <VideoPlayer.PlayButton size={50} />
       </View>
-      <View style={skinStyles.bottomMinimal}>
+      <View style={layoutStyles.bottomMinimal}>
         <VideoPlayer.ProgressBar height={2} />
       </View>
     </VideoPlayer.Controls>

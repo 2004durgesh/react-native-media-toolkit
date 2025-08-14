@@ -64,5 +64,5 @@ export interface VideoPlayerConfig {
   enableFullscreen: boolean;
   enableVolumeControl: boolean;
   playbackRates: number[];
-  skin: 'default' | 'minimal' | 'netflix' | 'youtube';
+  layout: 'default' | 'minimal' | 'netflix' | 'youtube';
 }

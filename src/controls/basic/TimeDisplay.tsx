@@ -1,6 +1,6 @@
 import { Text, StyleSheet, View } from 'react-native';
-import { useProgress } from '../../../hooks';
-import { useVideo } from '../../../providers';
+import { useProgress } from '../../hooks';
+import { useVideo } from '../../providers';
 
 export interface TimeDisplayProps {
   showRemaining?: boolean;

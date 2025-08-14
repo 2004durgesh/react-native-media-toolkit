@@ -1,4 +1,3 @@
-import { useVideo } from '../../components/providers/VideoProvider';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
@@ -12,6 +11,7 @@ import Animated, {
   withTiming,
   runOnJS,
 } from 'react-native-reanimated';
+import { useVideo } from 'src/providers';
 
 interface DoubleTapGestureProps {
   isLocked?: boolean;
@@ -21,7 +21,7 @@ interface DoubleTapGestureProps {
   children?: React.ReactNode;
 }
 
-export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
+export const DoubleTapHandler: React.FC<DoubleTapGestureProps> = ({
   isLocked = false,
   seekInterval = 10,
   onSeekStart,
@@ -253,4 +253,4 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
   );
 };
 
-export default DoubleTapGesture;
+export default DoubleTapHandler;

@@ -1,6 +1,6 @@
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import { useFullscreen } from '../../../hooks/media/useFullscreen';
-import { useVideo } from '../../../components/providers/VideoProvider';
+import { useFullscreen } from '../../hooks';
+import { useVideo } from '../../providers';
 
 export interface FullscreenButtonProps {
   size?: number;

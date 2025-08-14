@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext, useEffect } from 'react';
 import type { SharedValue } from 'react-native-reanimated';
-import type { VideoState, VideoTheme, VideoPlayerConfig } from '../../types/video';
-import { defaultTheme } from '../../themes/presets/defaultTheme';
+import type { VideoPlayerConfig, VideoState, VideoTheme } from 'src/types';
+import { defaultTheme } from 'src/themes/presets/defaultTheme';
 
 // Default Configuration
 const defaultConfig: VideoPlayerConfig = {
@@ -13,7 +13,7 @@ const defaultConfig: VideoPlayerConfig = {
   enableFullscreen: true,
   enableVolumeControl: true,
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
-  skin: 'default',
+  layout: 'default',
 };
 
 // State and Context

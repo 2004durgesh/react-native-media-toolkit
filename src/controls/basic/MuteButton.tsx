@@ -1,6 +1,6 @@
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import { useVolume } from '../../../hooks/media/useVolume';
-import { useVideo } from '../../../components/providers/VideoProvider';
+import { useVolume } from '../../hooks';
+import { useVideo } from '../../providers';
 
 export interface MuteButtonProps {
   size?: number;

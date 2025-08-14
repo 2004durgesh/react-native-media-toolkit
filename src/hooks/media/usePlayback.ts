@@ -1,4 +1,4 @@
-import { useVideo } from '../../components/providers/VideoProvider';
+import { useVideo } from '../../providers';
 import { useControlsVisibility } from './useControlsVisibility';
 import { useCallback } from 'react';
 

@@ -1,7 +1,6 @@
 import { View, StyleSheet, Text, SafeAreaView } from 'react-native';
-import { DefaultSkin, VideoPlayer } from '../../../src';
+import { DefaultLayout, VideoPlayer, VideoProvider } from '../../../src';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { VideoProvider } from '../../../src/components/providers/VideoProvider';
 
 export default function App() {
   const videoSource = {
@@ -16,7 +15,7 @@ export default function App() {
           <View style={styles.videoContainer}>
             <VideoProvider>
               <VideoPlayer source={videoSource} style={styles.videoPlayer}>
-                <DefaultSkin />
+                <DefaultLayout />
               </VideoPlayer>
             </VideoProvider>
           </View>

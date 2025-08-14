@@ -1,9 +1,9 @@
 import React, { type ReactNode } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { PlayButton } from './controls/basic/PlayButton';
-import { ProgressBar } from './controls/basic/ProgressBar';
-import { TimeDisplay } from './controls/basic/TimeDisplay';
-import { VolumeControl } from './controls/basic/VolumeControl';
+import { PlayButton } from '../controls/basic/PlayButton';
+import { ProgressBar } from '../controls/basic/ProgressBar';
+import { TimeDisplay } from '../controls/basic/TimeDisplay';
+import { VolumeControl } from '../controls/basic/VolumeControl';
 import type { VideoPlayerConfig, VideoSource, VideoTheme } from '../types';
 import { VideoOverlay } from './core/VideoOverlay';
 import { VideoSurface } from './core/VideoSurface';

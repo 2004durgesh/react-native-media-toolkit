@@ -1,6 +1,6 @@
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import { usePlayback } from '../../../hooks/media/usePlayback';
-import { useVideo } from '../../../components/providers/VideoProvider';
+import { usePlayback } from '../../hooks';
+import { useVideo } from '../../providers';
 
 export interface PlayButtonProps {
   size?: number;
