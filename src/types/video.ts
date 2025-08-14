@@ -26,8 +26,11 @@ export interface VideoTheme {
     text: string;
     textSecondary: string;
     error: string;
+    success: string;
+    border: string;
+    focus: string;
   };
-  spacing: {
+  sizing: {
     xs: number;
     sm: number;
     md: number;
@@ -40,6 +43,11 @@ export interface VideoTheme {
     medium: string;
     bold: string;
   };
+  fontSizes: {
+    sm: number;
+    md: number;
+    lg: number;
+  };
   animations: {
     fast: number;
     normal: number;
@@ -49,11 +57,12 @@ export interface VideoTheme {
 
 export interface VideoPlayerConfig {
   autoHideControls: boolean;
+  autoPlay: boolean;
   autoHideDelay: number;
   showTimeRemaining: boolean;
   enableGestures: boolean;
   enableFullscreen: boolean;
   enableVolumeControl: boolean;
   playbackRates: number[];
-  skin: 'default' | 'minimal' | 'netflix' | 'custom';
+  skin: 'default' | 'minimal' | 'netflix' | 'youtube';
 }

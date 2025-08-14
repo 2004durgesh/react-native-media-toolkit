@@ -5,9 +5,9 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "newArchEnabled": true,
+    "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,8 +20,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true,
-      "package": "mediatoolkit.example"
+      "package": "videoplayer.example"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -30,12 +29,11 @@
       [
         "react-native-video",
         {
-          "enableAndroidPictureInPicture": true,
-          "enableNotificationControls": false,
+          "enableNotificationControls": true,
           "androidExtensions": {
             "useExoplayerRtsp": false,
-            "useExoplayerSmoothStreaming": true,
-            "useExoplayerHls": true,
+            "useExoplayerSmoothStreaming": false,
+            "useExoplayerHls": false,
             "useExoplayerDash": false
           }
         }

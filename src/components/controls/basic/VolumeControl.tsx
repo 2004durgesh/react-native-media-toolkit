@@ -1,7 +1,7 @@
 import { View, StyleSheet } from 'react-native';
-import { useVideo } from '@/store/videoStore';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { runOnJS } from 'react-native-reanimated';
+import { useVideo } from '../../../store/videoStore';
+import { useSharedValue } from 'react-native-reanimated';
+import { Slider } from 'react-native-awesome-slider';
 
 export interface VolumeControlProps {
   orientation?: 'horizontal' | 'vertical';
@@ -29,35 +29,29 @@ export const VolumeControl = ({
     setVolume(newVolume);
   };
 
-  const panGesture = Gesture.Pan().onUpdate((event) => {
-    const newVolume =
-      orientation === 'horizontal'
-        ? Math.max(0, Math.min(1, event.x / width))
-        : Math.max(0, Math.min(1, 1 - event.y / width));
-    runOnJS(updateVolume)(newVolume);
-  });
-
-  const isHorizontal = orientation === 'horizontal';
-  const containerStyle = isHorizontal ? { width, height: height + 20 } : { width: height + 20, height: width };
-  const trackStyle = {
-    width: isHorizontal ? width : height,
-    height: isHorizontal ? height : width,
-    backgroundColor: trackColor || theme.colors.secondary,
-  };
-  const progressStyle = {
-    width: isHorizontal ? volume * width : height,
-    height: isHorizontal ? height : volume * width,
-    backgroundColor: progressColor || theme.colors.primary,
-  };
-
+  // Shared values for the slider
+  const progress = useSharedValue(volume);
+  const min = useSharedValue(0);
+  const max = useSharedValue(100);
   return (
-    <View style={[styles.volumeContainer, containerStyle, style]}>
-      <GestureDetector gesture={panGesture}>
-        <View style={styles.volumeBar}>
-          <View style={[styles.volumeTrack, trackStyle]} />
-          <View style={[styles.volumeProgress, progressStyle]} />
-        </View>
-      </GestureDetector>
+    <View style={[styles.volumeContainer, style]}>
+      <Slider
+        style={{ height: 40 }}
+        progress={progress}
+        minimumValue={min}
+        maximumValue={max}
+        onValueChange={updateVolume}
+        theme={{
+          minimumTrackTintColor: theme.colors.primary,
+          maximumTrackTintColor: theme.colors.secondary,
+          bubbleBackgroundColor: theme.colors.primary,
+        }}
+        thumbWidth={theme.sizing.md}
+        containerStyle={{
+          height,
+          borderRadius: height / 2,
+        }}
+      />
     </View>
   );
 };

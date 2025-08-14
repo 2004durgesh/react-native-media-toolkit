@@ -2,28 +2,13 @@ import { create } from 'zustand';
 import { withTiming } from 'react-native-reanimated';
 import type { SharedValue } from 'react-native-reanimated';
 import type { VideoState, VideoTheme, VideoPlayerConfig } from '../types/video';
+import { defaultTheme } from '../themes/presets/defaultTheme';
 
-// Default theme and config are now managed inside the store
-const defaultTheme: VideoTheme = {
-  colors: {
-    primary: '#007AFF',
-    secondary: '#8E8E93',
-    accent: '#FF9500',
-    background: '#000000',
-    overlay: 'rgba(0, 0, 0, 0.6)',
-    text: '#FFFFFF',
-    textSecondary: '#8E8E93',
-    error: '#FF3B30',
-  },
-  spacing: { xs: 4, sm: 8, md: 16, lg: 24, xl: 32 },
-  borderRadius: 8,
-  fonts: { regular: 'System', medium: 'System', bold: 'System' },
-  animations: { fast: 150, normal: 300, slow: 500 },
-};
 
 const defaultConfig: VideoPlayerConfig = {
   autoHideControls: true,
-  autoHideDelay: 3000,
+  autoHideDelay: 5000,
+  autoPlay:true,
   showTimeRemaining: false,
   enableGestures: true,
   enableFullscreen: true,
@@ -59,8 +44,7 @@ interface VideoStore extends VideoState {
 }
 
 export const useVideoStore = create<VideoStore>((set, get) => ({
-  // Initial State from types/index.ts
-  isPlaying: false,
+  isPlaying: defaultConfig.autoPlay,
   currentTime: 0,
   duration: 0,
   buffering: false,
@@ -87,8 +71,10 @@ export const useVideoStore = create<VideoStore>((set, get) => ({
         ...defaultTheme,
         ...theme,
         colors: { ...defaultTheme.colors, ...theme.colors },
-        spacing: { ...defaultTheme.spacing, ...theme.spacing },
+        sizing: { ...defaultTheme.sizing, ...theme.sizing },
         fonts: { ...defaultTheme.fonts, ...theme.fonts },
+        fontSizes: { ...defaultTheme.fontSizes, ...theme.fontSizes },
+        borderRadius: defaultTheme.borderRadius??theme.borderRadius,
         animations: { ...defaultTheme.animations, ...theme.animations },
       },
       config: { ...defaultConfig, ...config },

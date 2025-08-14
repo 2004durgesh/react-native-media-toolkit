@@ -1,13 +1,8 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+
 
 import React from 'react';
 import { StatusBar, StyleSheet, useColorScheme, View, Text, SafeAreaView } from 'react-native';
-import { VideoPlayer, MinimalSkin } from '../../src';
+import { VideoPlayer, MinimalSkin } from '../../../src';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';

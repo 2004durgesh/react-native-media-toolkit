@@ -1,5 +1,5 @@
 import { Text, StyleSheet, View } from 'react-native';
-import { useVideo } from '@/store/videoStore';
+import { useVideo } from '../../../store/videoStore';
 
 export interface TimeDisplayProps {
   showRemaining?: boolean;

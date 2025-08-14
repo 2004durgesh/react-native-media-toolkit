@@ -1,32 +1,31 @@
 {
   "name": "react-native-media-toolkit-expo-example",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "expo/AppEntry.js",
   "scripts": {
-    "start": "expo start --localhost",
+    "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web"
   },
   "dependencies": {
-    "@expo/config-plugins": "^10.1.2",
     "@expo/metro-runtime": "~5.0.4",
-    "expo": "~53.0.20",
-    "expo-dev-client": "^5.2.4",
-    "expo-modules-core": "^2.5.0",
+    "expo": "^53.0.16",
     "expo-status-bar": "~2.2.3",
+    "lucide-react-native": "^0.539.0",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "react-native": "0.79.5",
-    "react-native-gesture-handler": "^2.24.0",
-    "react-native-media-toolkit": "workspace:*",
-    "react-native-reanimated": "^3.17.4",
-    "react-native-video": "6.12.0",
-    "react-native-web": "~0.20.0"
+    "react-native-gesture-handler": "2.24.0",
+    "react-native-media-toolkit": "workspace:^",
+    "react-native-reanimated": "~3.17.4",
+    "react-native-video": "6.14.0",
+    "react-native-web": "^0.20.0",
+    "zustand": "^5.0.7"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "react-native-builder-bob": "^0.40.8"
+    "react-native-builder-bob": "^0.31.0"
   },
   "private": true
 }

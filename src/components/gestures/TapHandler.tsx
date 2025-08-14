@@ -1,7 +1,7 @@
 import React, { useMemo, type FC } from 'react';
 import { View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { useVideo } from '@/store';
+import { useVideo } from '../../store';
 import { runOnJS } from 'react-native-reanimated';
 
 interface TapHandlerProps {

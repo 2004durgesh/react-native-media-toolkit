@@ -4,8 +4,8 @@ import { PlayButton } from './controls/basic/PlayButton';
 import { ProgressBar } from './controls/basic/ProgressBar';
 import { TimeDisplay } from './controls/basic/TimeDisplay';
 import { VolumeControl } from './controls/basic/VolumeControl';
-import type { VideoPlayerConfig, VideoSource, VideoTheme } from '@/types/video';
-import { useVideoStore } from '@/store/videoStore';
+import type { VideoPlayerConfig, VideoSource, VideoTheme } from '../types';
+import { useVideoStore } from '../store';
 import { VideoOverlay } from './core/VideoOverlay';
 import { VideoSurface } from './core/VideoSurface';
 
@@ -57,42 +57,6 @@ export const VideoPlayer = Object.assign(VideoPlayerComponent, {
   VolumeControl,
 });
 
-// Pre-built skins (no changes needed)
-export const DefaultSkin = () => (
-  <VideoPlayer.Controls>
-    <View style={skinStyles.centerControls}>
-      <VideoPlayer.PlayButton size={60} />
-    </View>
-    <View style={skinStyles.bottomControls}>
-      <VideoPlayer.ProgressBar />
-      <View style={skinStyles.bottomRow}>
-        <VideoPlayer.PlayButton size={30} />
-        <VideoPlayer.TimeDisplay />
-        <View style={skinStyles.spacer} />
-        <VideoPlayer.VolumeControl width={80} />
-      </View>
-    </View>
-  </VideoPlayer.Controls>
-);
-
-export const MinimalSkin = () => (
-  <VideoPlayer.Controls>
-    <View style={skinStyles.centerControls}>
-      <VideoPlayer.PlayButton size={50} />
-    </View>
-    <View style={skinStyles.bottomMinimal}>
-      <VideoPlayer.ProgressBar height={2} />
-    </View>
-  </VideoPlayer.Controls>
-);
-
-const skinStyles = StyleSheet.create({
-  centerControls: { flex: 1, justifyContent: 'center', alignItems: 'center' },
-  bottomControls: { position: 'absolute', bottom: 0, left: 0, right: 0, padding: 16 },
-  bottomRow: { flexDirection: 'row', alignItems: 'center', marginTop: 8 },
-  spacer: { flex: 1 },
-  bottomMinimal: { position: 'absolute', bottom: 0, left: 0, right: 0, paddingHorizontal: 16, paddingBottom: 8 },
-});
 
 const styles = StyleSheet.create({
   container: {

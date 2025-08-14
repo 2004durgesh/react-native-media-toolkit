@@ -1,21 +1,6 @@
 {
-  "extends": "expo/tsconfig.base",
+  "extends": "../../tsconfig",
   "compilerOptions": {
-    "strict": true,
-    "baseUrl": "..",
-    "paths": {
-      "react-native-media-toolkit": [
-        "./src/index"
-      ],
-      "@/*": [
-        "./src/*"
-      ]
-    }
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "../src/**/*.ts",
-    "../src/**/*.tsx"
-  ]
+    // Avoid expo-cli auto-generating a tsconfig
+  }
 }

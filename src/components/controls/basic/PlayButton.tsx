@@ -1,5 +1,5 @@
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import { useVideo } from '@/store/videoStore';
+import { useVideo } from '../../../store';
 
 export interface PlayButtonProps {
   size?: number;

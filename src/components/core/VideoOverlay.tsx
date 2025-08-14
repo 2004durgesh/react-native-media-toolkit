@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { useVideo } from '@/store/videoStore';
+import { useVideo } from '../../store';
 import type { FC, ReactNode } from 'react';
 import Animated, { useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
 import { useEffect } from 'react';

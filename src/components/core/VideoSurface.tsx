@@ -1,8 +1,8 @@
 import RNVideo from 'react-native-video';
 import { useEffect, useRef, type FC } from 'react';
 import { StyleSheet } from 'react-native';
-import type { VideoSource } from '@/types/video';
-import { useVideo } from '@/store/videoStore';
+import type { VideoSource } from '../../types';
+import { useVideo } from '../../store';
 
 interface VideoSurfaceProps {
   source: VideoSource;
@@ -13,7 +13,6 @@ interface VideoSurfaceProps {
 
 export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, resizeMode = 'contain', poster }) => {
   const internalVideoRef = useRef(null);
-
   // Use separate selectors to avoid creating new objects
   const isPlaying = useVideo((state) => state.isPlaying);
   const muted = useVideo((state) => state.muted);
@@ -40,6 +39,7 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, resizeMode 
   }, [showControls]);
 
   const handleLoad = (data: any) => {
+    console.log(data);
     setDuration(data.duration);
     setBuffering(false);
   };
@@ -63,6 +63,7 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, resizeMode 
       volume={muted ? 0 : volume}
       rate={playbackRate}
       onLoad={handleLoad}
+      onPlaybackStateChanged={(e) => console.log(e)}
       onProgress={handleProgress}
       onBuffer={handleBuffer}
       onError={handleError}

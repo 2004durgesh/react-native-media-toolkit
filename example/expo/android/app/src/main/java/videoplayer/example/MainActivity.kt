@@ -1,4 +1,4 @@
-package mediatoolkit.example
+package videoplayer.example
 
 import android.os.Build
 import android.os.Bundle
