@@ -1,11 +1,10 @@
-import React, { type ReactNode, useEffect } from 'react';
+import React, { type ReactNode } from 'react';
 import { View, StyleSheet } from 'react-native';
 import { PlayButton } from './controls/basic/PlayButton';
 import { ProgressBar } from './controls/basic/ProgressBar';
 import { TimeDisplay } from './controls/basic/TimeDisplay';
 import { VolumeControl } from './controls/basic/VolumeControl';
 import type { VideoPlayerConfig, VideoSource, VideoTheme } from '../types';
-import { useVideoStore } from '../store';
 import { VideoOverlay } from './core/VideoOverlay';
 import { VideoSurface } from './core/VideoSurface';
 
@@ -19,15 +18,7 @@ interface VideoPlayerProps {
   poster?: string;
 }
 
-const VideoPlayerComponent = ({ source, children, style, resizeMode, poster, theme, config }: VideoPlayerProps) => {
-  // Get the initializer from the store
-  const initialize = useVideoStore((state) => state.initialize);
-
-  // Initialize store with props on mount and when props change
-  useEffect(() => {
-    initialize({ theme, config });
-  }, [theme, config, initialize]);
-
+const VideoPlayerComponent = ({ source, children, style, resizeMode, poster }: VideoPlayerProps) => {
   // this is the root of all the project :)
   return (
     <View style={[styles.container, style]}>
@@ -56,7 +47,6 @@ export const VideoPlayer = Object.assign(VideoPlayerComponent, {
   TimeDisplay,
   VolumeControl,
 });
-
 
 const styles = StyleSheet.create({
   container: {

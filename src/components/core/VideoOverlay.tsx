@@ -1,10 +1,11 @@
 import { StyleSheet } from 'react-native';
-import { useVideo } from '../../store';
 import type { FC, ReactNode } from 'react';
 import Animated, { useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
 import { useEffect } from 'react';
 import TapHandler from '../gestures/TapHandler';
 import DoubleTapGesture from '../gestures/DoubleTapHandler';
+import { useVideo } from '../../components/providers/VideoProvider';
+import { useControlsVisibility } from '../../hooks/media/useControlsVisibility';
 
 interface VideoOverlayProps {
   children?: ReactNode;
@@ -17,15 +18,17 @@ export const VideoOverlay: FC<VideoOverlayProps> = ({ children, style, overlay =
   const opacity = useSharedValue(1);
 
   // Get theme and store functions
-  const theme = useVideo((state) => state.theme);
-  const setControlsOpacity = useVideo((state) => state.setControlsOpacity);
+  const {
+    state: { theme },
+  } = useVideo();
+  const { setOpacity } = useControlsVisibility();
 
   // Only set the opacity shared value in the store if this is a controls overlay
   useEffect(() => {
     if (overlay) {
-      setControlsOpacity(opacity);
+      setOpacity(opacity);
     }
-  }, [opacity, setControlsOpacity, overlay]);
+  }, [opacity, setOpacity, overlay]);
 
   const baseStyle = overlay ? styles.overlayControls : styles.controls;
 
@@ -39,9 +42,9 @@ export const VideoOverlay: FC<VideoOverlayProps> = ({ children, style, overlay =
 
   return (
     <Animated.View style={[baseStyle, animatedStyle, style]} pointerEvents="box-none">
-      <DoubleTapGesture>
+      {/* <DoubleTapGesture> */}
         <TapHandler>{children}</TapHandler>
-      </DoubleTapGesture>
+      {/* </DoubleTapGesture> */}
     </Animated.View>
   );
 };

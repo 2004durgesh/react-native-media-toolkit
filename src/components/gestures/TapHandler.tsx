@@ -1,7 +1,7 @@
 import React, { useMemo, type FC } from 'react';
 import { View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-import { useVideo } from '../../store';
+import { useControlsVisibility } from '../../hooks/media/useControlsVisibility';
 import { runOnJS } from 'react-native-reanimated';
 
 interface TapHandlerProps {
@@ -9,7 +9,7 @@ interface TapHandlerProps {
 }
 
 const TapHandler: FC<TapHandlerProps> = ({ children }) => {
-  const toggleControls = useVideo((state) => state.toggleControls);
+  const { toggleControls } = useControlsVisibility();
   const singleTapGesture = useMemo(
     () =>
       Gesture.Tap()

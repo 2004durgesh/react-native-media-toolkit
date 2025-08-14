@@ -1,5 +1,6 @@
 import { Text, StyleSheet, View } from 'react-native';
-import { useVideo } from '../../../store/videoStore';
+import { useProgress } from '../../../hooks/media/useProgress';
+import { useVideo } from '../../../components/providers/VideoProvider';
 
 export interface TimeDisplayProps {
   showRemaining?: boolean;
@@ -9,11 +10,10 @@ export interface TimeDisplayProps {
 }
 
 export const TimeDisplay = ({ showRemaining, fontSize = 14, color, style }: TimeDisplayProps) => {
-  // Use separate selectors to avoid creating new objects
-  const currentTime = useVideo((state) => state.currentTime);
-  const duration = useVideo((state) => state.duration);
-  const config = useVideo((state) => state.config);
-  const theme = useVideo((state) => state.theme);
+  const { currentTime, duration } = useProgress();
+  const {
+    state: { config, theme },
+  } = useVideo();
 
   const textColor = color || theme.colors.text;
 

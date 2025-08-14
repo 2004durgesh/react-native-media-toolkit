@@ -1,5 +1,6 @@
 import { View, StyleSheet } from 'react-native';
-import { useVideo } from '../../../store/videoStore';
+import { useVolume } from '../../../hooks/media/useVolume';
+import { useVideo } from '../../../components/providers/VideoProvider';
 import { useSharedValue } from 'react-native-reanimated';
 import { Slider } from 'react-native-awesome-slider';
 
@@ -19,11 +20,11 @@ export const VolumeControl = ({
   trackColor,
   progressColor,
   style,
-}:VolumeControlProps) => {
-  // Use separate selectors to avoid creating new objects
-  const volume = useVideo((state) => state.volume);
-  const theme = useVideo((state) => state.theme);
-  const setVolume = useVideo((state) => state.setVolume);
+}: VolumeControlProps) => {
+  const { volume, setVolume } = useVolume();
+  const {
+    state: { theme },
+  } = useVideo();
 
   const updateVolume = (newVolume: number) => {
     setVolume(newVolume);

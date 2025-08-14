@@ -1,6 +1,8 @@
 import { View, StyleSheet, Text, SafeAreaView } from 'react-native';
-import { DefaultSkin, MinimalSkin, Test, VideoPlayer } from '../../../src';
+import { DefaultSkin, VideoPlayer } from '../../../src';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { VideoProvider } from '../../../src/components/providers/VideoProvider';
+
 export default function App() {
   const videoSource = {
     uri: 'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8',
@@ -12,9 +14,11 @@ export default function App() {
         <View style={styles.content}>
           <Text style={styles.title}>React Native Media Toolkit Example</Text>
           <View style={styles.videoContainer}>
-            <VideoPlayer source={videoSource} style={styles.videoPlayer}>
-              <DefaultSkin />
-            </VideoPlayer>
+            <VideoProvider>
+              <VideoPlayer source={videoSource} style={styles.videoPlayer}>
+                <DefaultSkin />
+              </VideoPlayer>
+            </VideoProvider>
           </View>
         </View>
       </SafeAreaView>

@@ -1,2 +1,2 @@
-export  {DefaultSkin}  from './DefaultSkin';
-export {MinimalSkin} from './MinimalSkin';
+export { DefaultSkin } from './DefaultSkin';
+export { MinimalSkin } from './MinimalSkin';

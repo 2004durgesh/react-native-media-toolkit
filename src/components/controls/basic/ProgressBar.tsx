@@ -1,8 +1,10 @@
-import { useState } from 'react';
 import { View, StyleSheet, type ViewStyle } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
 import { Slider } from 'react-native-awesome-slider';
-import { useVideo } from '../../../store';
+import { useProgress } from '../../../hooks/media/useProgress';
+import { useControlsVisibility } from '../../../hooks/media/useControlsVisibility';
+import { useBuffering } from '../../../hooks/media/useBuffering';
+import { useVideo } from '../../../components/providers/VideoProvider';
 
 export interface ProgressBarProps {
   height?: number;
@@ -21,12 +23,12 @@ export const ProgressBar = ({
   thumbColor,
   style,
 }: ProgressBarProps) => {
-  const currentTime = useVideo((state) => state.currentTime);
-  const duration = useVideo((state) => state.duration);
-  const buffering = useVideo((state) => state.buffering);
-  const theme = useVideo((state) => state.theme);
-  const seek = useVideo((state) => state.seek);
-  const showControls = useVideo((state) => state.showControls);
+  const { currentTime, duration, seek } = useProgress();
+  const { showControls } = useControlsVisibility();
+  const { buffering } = useBuffering();
+  const {
+    state: { theme },
+  } = useVideo();
 
   // Shared values for the slider
   const progress = useSharedValue(currentTime);

@@ -1,4 +1,4 @@
-import { useVideo } from '../../store';
+import { useVideo } from '../../components/providers/VideoProvider';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { Dimensions, StyleSheet, View } from 'react-native';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
@@ -28,7 +28,7 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
   onSeekEnd,
   children,
 }) => {
-  const videoRef = useVideo((state) => state.videoRef);
+  const { state: { videoRef } } = useVideo();
   const [isDoubleTap, setIsDoubleTap] = useState(false);
   const [doubleTapValue, setDoubleTapValue] = useState({ forward: 0, backward: 0 });
   console.log(isDoubleTap, doubleTapValue);

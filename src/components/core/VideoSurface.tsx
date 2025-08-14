@@ -2,7 +2,12 @@ import RNVideo from 'react-native-video';
 import { useEffect, useRef, type FC } from 'react';
 import { StyleSheet } from 'react-native';
 import type { VideoSource } from '../../types';
-import { useVideo } from '../../store';
+import { useVideo } from '../../components/providers/VideoProvider';
+import { usePlayback } from '../../hooks/media/usePlayback';
+import { useVolume } from '../../hooks/media/useVolume';
+import { useProgress } from '../../hooks/media/useProgress';
+import { useBuffering } from '../../hooks/media/useBuffering';
+import { useControlsVisibility } from '../../hooks/media/useControlsVisibility';
 
 interface VideoSurfaceProps {
   source: VideoSource;
@@ -13,30 +18,24 @@ interface VideoSurfaceProps {
 
 export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, resizeMode = 'contain', poster }) => {
   const internalVideoRef = useRef(null);
-  // Use separate selectors to avoid creating new objects
-  const isPlaying = useVideo((state) => state.isPlaying);
-  const muted = useVideo((state) => state.muted);
-  const volume = useVideo((state) => state.volume);
-  const playbackRate = useVideo((state) => state.playbackRate);
-  const setPlaying = useVideo((state) => state.setPlaying);
-  const setCurrentTime = useVideo((state) => state.setCurrentTime);
-  const setDuration = useVideo((state) => state.setDuration);
-  const setBuffering = useVideo((state) => state.setBuffering);
-  const setError = useVideo((state) => state.setError);
-  const showControls = useVideo((state) => state.showControls);
-  const setVideoRef = useVideo((state) => state.setVideoRef);
-  const seek = useVideo((state) => state.seek);
+  const { dispatch, state } = useVideo();
+  const { isPlaying, setPlaying } = usePlayback();
+  const { muted, volume } = useVolume();
+  const { setCurrentTime, setDuration, seek } = useProgress();
+  const { setBuffering } = useBuffering();
+  const { showControls } = useControlsVisibility();
+  const { playbackRate } = state;
 
   // Set the ref in the store once it's created
   useEffect(() => {
     if (internalVideoRef.current) {
-      setVideoRef(internalVideoRef);
+      dispatch({ type: 'SET_VIDEO_REF', payload: internalVideoRef });
     }
-  }, [setVideoRef]);
+  }, [dispatch]);
 
   useEffect(() => {
     showControls();
-  }, [showControls]);
+  }, []);
 
   const handleLoad = (data: any) => {
     console.log(data);
@@ -45,7 +44,8 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, resizeMode 
   };
   const handleProgress = (data: any) => setCurrentTime(data.currentTime);
   const handleBuffer = (data: any) => setBuffering(data.isBuffering);
-  const handleError = (error: any) => setError(error?.error?.errorString || 'An unknown error occurred');
+  const handleError = (error: any) =>
+    dispatch({ type: 'SET_ERROR', payload: error?.error?.errorString || 'An unknown error occurred' });
   const handleEnd = () => {
     setPlaying(false);
     seek(0);

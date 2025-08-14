@@ -4,11 +4,10 @@ import type { SharedValue } from 'react-native-reanimated';
 import type { VideoState, VideoTheme, VideoPlayerConfig } from '../types/video';
 import { defaultTheme } from '../themes/presets/defaultTheme';
 
-
 const defaultConfig: VideoPlayerConfig = {
   autoHideControls: true,
   autoHideDelay: 5000,
-  autoPlay:true,
+  autoPlay: true,
   showTimeRemaining: false,
   enableGestures: true,
   enableFullscreen: true,
@@ -74,7 +73,7 @@ export const useVideoStore = create<VideoStore>((set, get) => ({
         sizing: { ...defaultTheme.sizing, ...theme.sizing },
         fonts: { ...defaultTheme.fonts, ...theme.fonts },
         fontSizes: { ...defaultTheme.fontSizes, ...theme.fontSizes },
-        borderRadius: defaultTheme.borderRadius??theme.borderRadius,
+        borderRadius: defaultTheme.borderRadius ?? theme.borderRadius,
         animations: { ...defaultTheme.animations, ...theme.animations },
       },
       config: { ...defaultConfig, ...config },

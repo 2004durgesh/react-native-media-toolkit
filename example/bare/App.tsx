@@ -1,7 +1,12 @@
-
-
 import React from 'react';
-import { StatusBar, StyleSheet, useColorScheme, View, Text, SafeAreaView } from 'react-native';
+import {
+  StatusBar,
+  StyleSheet,
+  useColorScheme,
+  View,
+  Text,
+  SafeAreaView,
+} from 'react-native';
 import { VideoPlayer, MinimalSkin } from '../../../src';
 
 function App(): React.JSX.Element {

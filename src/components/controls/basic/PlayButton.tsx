@@ -1,5 +1,6 @@
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import { useVideo } from '../../../store';
+import { usePlayback } from '../../../hooks/media/usePlayback';
+import { useVideo } from '../../../components/providers/VideoProvider';
 
 export interface PlayButtonProps {
   size?: number;
@@ -10,10 +11,10 @@ export interface PlayButtonProps {
 }
 
 export const PlayButton = ({ size = 50, color, style, renderPlayIcon, renderPauseIcon }: PlayButtonProps) => {
-  // Use separate selectors to avoid creating new objects
-  const isPlaying = useVideo((state) => state.isPlaying);
-  const theme = useVideo((state) => state.theme);
-  const togglePlayPause = useVideo((state) => state.togglePlayPause);
+  const { isPlaying, togglePlayPause } = usePlayback();
+  const {
+    state: { theme },
+  } = useVideo();
 
   const iconColor = color || theme.colors.text;
 

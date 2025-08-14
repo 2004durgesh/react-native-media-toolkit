@@ -14,4 +14,3 @@ export const MinimalSkin = () => {
     </VideoPlayer.Controls>
   );
 };
-
