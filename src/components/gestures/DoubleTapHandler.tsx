@@ -28,7 +28,9 @@ export const DoubleTapGesture: React.FC<DoubleTapGestureProps> = ({
   onSeekEnd,
   children,
 }) => {
-  const { state: { videoRef } } = useVideo();
+  const {
+    state: { videoRef },
+  } = useVideo();
   const [isDoubleTap, setIsDoubleTap] = useState(false);
   const [doubleTapValue, setDoubleTapValue] = useState({ forward: 0, backward: 0 });
   console.log(isDoubleTap, doubleTapValue);

@@ -17,7 +17,7 @@ export type {
 } from './components/controls/basic';
 
 // Store
-export { useVideoStore, useVideo } from './store/videoStore';
+export { useVideo } from './components/providers/VideoProvider';
 
 // Types
 export type * from './types';

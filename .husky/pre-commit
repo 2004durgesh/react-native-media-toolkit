@@ -1,4 +1,5 @@
+#!/bin/sh
 
 set -e
 
-npx lint-staged
+yarn typecheck && yarn prettier --write . && yarn lint --fix . && git add .

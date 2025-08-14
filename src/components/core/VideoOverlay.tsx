@@ -3,7 +3,6 @@ import type { FC, ReactNode } from 'react';
 import Animated, { useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
 import { useEffect } from 'react';
 import TapHandler from '../gestures/TapHandler';
-import DoubleTapGesture from '../gestures/DoubleTapHandler';
 import { useVideo } from '../../components/providers/VideoProvider';
 import { useControlsVisibility } from '../../hooks/media/useControlsVisibility';
 
@@ -43,7 +42,7 @@ export const VideoOverlay: FC<VideoOverlayProps> = ({ children, style, overlay =
   return (
     <Animated.View style={[baseStyle, animatedStyle, style]} pointerEvents="box-none">
       {/* <DoubleTapGesture> */}
-        <TapHandler>{children}</TapHandler>
+      <TapHandler>{children}</TapHandler>
       {/* </DoubleTapGesture> */}
     </Animated.View>
   );

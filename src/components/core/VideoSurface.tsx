@@ -35,6 +35,7 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, resizeMode 
 
   useEffect(() => {
     showControls();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleLoad = (data: any) => {

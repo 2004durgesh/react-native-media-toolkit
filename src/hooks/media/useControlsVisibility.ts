@@ -44,9 +44,12 @@ export const useControlsVisibility = () => {
     }
   }, [controlsOpacity, hideControls, showControls]);
 
-  const setOpacity = useCallback((opacity: SharedValue<number>) => {
-    dispatch({ type: 'SET_CONTROLS_OPACITY', payload: opacity });
-  }, [dispatch]);
+  const setOpacity = useCallback(
+    (opacity: SharedValue<number>) => {
+      dispatch({ type: 'SET_CONTROLS_OPACITY', payload: opacity });
+    },
+    [dispatch]
+  );
 
   return {
     showControls,

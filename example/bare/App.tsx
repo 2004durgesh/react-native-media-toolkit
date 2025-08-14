@@ -7,6 +7,7 @@ import {
   Text,
   SafeAreaView,
 } from 'react-native';
+// @ts-ignore
 import { VideoPlayer, MinimalSkin } from '../../../src';
 
 function App(): React.JSX.Element {

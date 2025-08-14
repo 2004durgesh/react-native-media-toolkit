@@ -17,10 +17,13 @@ export const usePlayback = () => {
       showControls();
     }
   }, [dispatch, state.isPlaying, state.hideTimeoutRef, showControls]);
-  
-  const setPlaying = useCallback((isPlaying: boolean) => {
-    dispatch({ type: 'SET_PLAYING', payload: isPlaying });
-  }, [dispatch]);
+
+  const setPlaying = useCallback(
+    (isPlaying: boolean) => {
+      dispatch({ type: 'SET_PLAYING', payload: isPlaying });
+    },
+    [dispatch]
+  );
 
   return {
     isPlaying: state.isPlaying,
