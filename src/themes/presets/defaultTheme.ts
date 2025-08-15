@@ -15,6 +15,11 @@ export const defaultTheme: VideoTheme = {
     focus: '#FFD166', // Bright yellow for focus ring (keyboard navigation)
   },
   sizing: { xs: 4, sm: 8, md: 16, lg: 24, xl: 32 },
+  iconSizes: {
+    sm: 16,
+    md: 24,
+    lg: 32,
+  },
   borderRadius: 8,
   fonts: { regular: 'System', medium: 'System', bold: 'System' },
   fontSizes: {

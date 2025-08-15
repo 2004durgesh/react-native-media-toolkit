@@ -37,6 +37,11 @@ export interface VideoTheme {
     lg: number;
     xl: number;
   };
+  iconSizes: {
+    sm: number;
+    md: number;
+    lg: number;
+  };
   borderRadius: number;
   fonts: {
     regular: string;

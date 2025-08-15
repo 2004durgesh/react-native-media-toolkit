@@ -1,6 +1,7 @@
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useVolume } from '../../hooks';
-import { useVideo } from '../../providers';
+import { Volume2, VolumeX } from 'lucide-react-native';
+import { BaseIconButton } from '../../components/common/BaseIconButton';
 
 export interface MuteButtonProps {
   size?: number;
@@ -10,36 +11,20 @@ export interface MuteButtonProps {
   renderUnmuteIcon?: () => React.ReactNode;
 }
 
-export const MuteButton = ({ size = 30, color, style, renderMuteIcon, renderUnmuteIcon }: MuteButtonProps) => {
+export const MuteButton = ({ size, color, style, renderMuteIcon, renderUnmuteIcon }: MuteButtonProps) => {
   const { muted, toggleMute } = useVolume();
-  const {
-    state: { theme },
-  } = useVideo();
 
-  const iconColor = color || theme.colors.text;
-
-  const MuteIcon = () =>
-    renderMuteIcon ? (
-      renderMuteIcon()
-    ) : (
-      <View style={[styles.icon, { borderColor: iconColor, width: size, height: size }]}>
-        <View style={[styles.line, { backgroundColor: iconColor }]} />
-      </View>
-    );
-  const UnmuteIcon = () =>
-    renderUnmuteIcon ? (
-      renderUnmuteIcon()
-    ) : (
-      <View style={[styles.icon, { borderColor: iconColor, width: size, height: size }]} />
-    );
+  const MuteIcon = renderMuteIcon || VolumeX;
+  const UnmuteIcon = renderUnmuteIcon || Volume2;
 
   return (
-    <TouchableOpacity
+    <BaseIconButton
+      IconComponent={muted ? MuteIcon : UnmuteIcon}
+      size={size}
+      color={color}
       onPress={toggleMute}
-      style={[styles.muteButton, { width: size, height: size }, style]}
-      activeOpacity={0.8}>
-      {muted ? <MuteIcon /> : <UnmuteIcon />}
-    </TouchableOpacity>
+      style={[styles.muteButton, style]}
+    />
   );
 };
 
@@ -48,17 +33,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
-  },
-  icon: {
-    borderWidth: 2,
-    borderRadius: 5,
-  },
-  line: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    width: '120%',
-    height: 2,
-    transform: [{ translateX: -15 }, { translateY: -1 }, { rotate: '45deg' }],
   },
 });

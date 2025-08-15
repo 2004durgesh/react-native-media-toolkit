@@ -1,6 +1,7 @@
-import { TouchableOpacity, View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { usePlayback } from '../../hooks';
-import { useVideo } from '../../providers';
+import { Pause, Play } from 'lucide-react-native';
+import { BaseIconButton } from '../../components/common/BaseIconButton';
 
 export interface PlayButtonProps {
   size?: number;
@@ -10,33 +11,20 @@ export interface PlayButtonProps {
   renderPauseIcon?: () => React.ReactNode;
 }
 
-export const PlayButton = ({ size = 50, color, style, renderPlayIcon, renderPauseIcon }: PlayButtonProps) => {
+export const PlayButton = ({ size, color, style, renderPlayIcon, renderPauseIcon }: PlayButtonProps) => {
   const { isPlaying, togglePlayPause } = usePlayback();
-  const {
-    state: { theme },
-  } = useVideo();
 
-  const iconColor = color || theme.colors.text;
-
-  const PlayIcon = () =>
-    renderPlayIcon ? renderPlayIcon() : <View style={[styles.triangle, { borderLeftColor: iconColor }]} />;
-  const PauseIcon = () =>
-    renderPauseIcon ? (
-      renderPauseIcon()
-    ) : (
-      <View style={styles.pauseContainer}>
-        <View style={[styles.pauseBar, { backgroundColor: iconColor }]} />
-        <View style={[styles.pauseBar, { backgroundColor: iconColor }]} />
-      </View>
-    );
+  const PlayIcon = renderPlayIcon || Play;
+  const PauseIcon = renderPauseIcon || Pause;
 
   return (
-    <TouchableOpacity
+    <BaseIconButton
+      IconComponent={isPlaying ? PauseIcon : PlayIcon}
+      size={size}
+      color={color}
       onPress={togglePlayPause}
-      style={[styles.playButton, { width: size, height: size }, style]}
-      activeOpacity={0.8}>
-      {isPlaying ? <PauseIcon /> : <PlayIcon />}
-    </TouchableOpacity>
+      style={[styles.playButton, style]}
+    />
   );
 };
 
@@ -45,26 +33,5 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
-  },
-  triangle: {
-    width: 0,
-    height: 0,
-    borderTopWidth: 15,
-    borderBottomWidth: 15,
-    borderLeftWidth: 20,
-    borderTopColor: 'transparent',
-    borderBottomColor: 'transparent',
-    marginLeft: 3, // Slight offset to center the triangle
-  },
-  pauseContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 3,
-  },
-  pauseBar: {
-    width: 4,
-    height: 18,
-    borderRadius: 1,
   },
 });

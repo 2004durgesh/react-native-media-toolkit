@@ -1,29 +1,20 @@
-import { View, StyleSheet, type ViewStyle } from 'react-native';
+import { View, StyleSheet, type ViewStyle, type StyleProp } from 'react-native';
 import { useSharedValue } from 'react-native-reanimated';
 import { Slider } from 'react-native-awesome-slider';
-import { useProgress, useControlsVisibility, useBuffering } from '../../hooks';
+import { useProgress, useControlsVisibility } from '../../hooks';
 import { useVideo } from '../../providers';
 
 export interface ProgressBarProps {
   height?: number;
   trackColor?: string;
   progressColor?: string;
-  thumbColor?: string;
-  thumbSize?: number;
-  style?: ViewStyle;
+  thumbWidth?: number;
+  style?: StyleProp<ViewStyle>;
 }
 
-export const ProgressBar = ({
-  height = 4,
-  trackColor,
-  progressColor,
-  thumbSize = 12,
-  thumbColor,
-  style,
-}: ProgressBarProps) => {
+export const ProgressBar = ({ height = 4, trackColor, progressColor, thumbWidth = 12, style }: ProgressBarProps) => {
   const { currentTime, duration, seek } = useProgress();
   const { showControls } = useControlsVisibility();
-  const { buffering } = useBuffering();
   const {
     state: { theme },
   } = useVideo();
@@ -39,7 +30,6 @@ export const ProgressBar = ({
 
   const trackBg = trackColor ?? theme.colors.secondary;
   const progressBg = progressColor ?? theme.colors.primary;
-  const thumbBg = thumbColor ?? theme.colors.primary;
 
   const handleSlidingStart = () => {
     showControls();
@@ -52,7 +42,6 @@ export const ProgressBar = ({
   return (
     <View style={[styles.container, style]}>
       <Slider
-        style={{ height: 40 }}
         progress={progress}
         minimumValue={min}
         maximumValue={max}
@@ -63,13 +52,12 @@ export const ProgressBar = ({
           maximumTrackTintColor: trackBg,
           bubbleBackgroundColor: progressBg,
         }}
-        thumbWidth={thumbSize}
+        thumbWidth={thumbWidth}
         containerStyle={{
           height,
           borderRadius: height / 2,
         }}
       />
-      {buffering && <View style={[styles.bufferingIndicator, { backgroundColor: theme.colors.accent }]} />}
     </View>
   );
 };
@@ -77,16 +65,7 @@ export const ProgressBar = ({
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    paddingVertical: 12,
     justifyContent: 'center',
-  },
-  bufferingIndicator: {
-    position: 'absolute',
-    top: '50%',
-    right: 8,
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    transform: [{ translateY: -4 }],
+    paddingVertical: 10,
   },
 });

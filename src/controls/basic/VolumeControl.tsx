@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, type StyleProp, type ViewStyle } from 'react-native';
 import { useVolume } from '../../hooks';
 import { useVideo } from '../../providers';
 import { useSharedValue } from 'react-native-reanimated';
@@ -8,15 +8,17 @@ export interface VolumeControlProps {
   orientation?: 'horizontal' | 'vertical';
   width?: number;
   height?: number;
+  thumbWidth?: number;
   trackColor?: string;
   progressColor?: string;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
 }
 
 export const VolumeControl = ({
   orientation = 'horizontal',
   width = 100,
   height = 4,
+  thumbWidth = 12,
   trackColor,
   progressColor,
   style,
@@ -35,9 +37,8 @@ export const VolumeControl = ({
   const min = useSharedValue(0);
   const max = useSharedValue(100);
   return (
-    <View style={[styles.volumeContainer, style]}>
+    <View style={style}>
       <Slider
-        style={{ height: 40 }}
         progress={progress}
         minimumValue={min}
         maximumValue={max}
@@ -45,34 +46,15 @@ export const VolumeControl = ({
         theme={{
           minimumTrackTintColor: theme.colors.primary,
           maximumTrackTintColor: theme.colors.secondary,
-          bubbleBackgroundColor: theme.colors.primary,
         }}
-        thumbWidth={theme.sizing.md}
+        renderBubble={() => null}
+        thumbWidth={thumbWidth}
         containerStyle={{
           height,
+          width,
           borderRadius: height / 2,
         }}
       />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  volumeContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  volumeBar: {
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  volumeTrack: {
-    borderRadius: 2,
-    position: 'absolute',
-  },
-  volumeProgress: {
-    borderRadius: 2,
-    position: 'absolute',
-  },
-});

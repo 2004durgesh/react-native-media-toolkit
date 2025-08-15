@@ -1,9 +1,14 @@
 import React, { type ReactNode } from 'react';
 import { View, StyleSheet } from 'react-native';
-import { PlayButton } from '../controls/basic/PlayButton';
-import { ProgressBar } from '../controls/basic/ProgressBar';
-import { TimeDisplay } from '../controls/basic/TimeDisplay';
-import { VolumeControl } from '../controls/basic/VolumeControl';
+import {
+  PlayButton,
+  ProgressBar,
+  TimeDisplay,
+  VolumeControl,
+  FullscreenButton,
+  MuteButton,
+  LoadingSpinner,
+} from '../controls/basic';
 import type { VideoPlayerConfig, VideoSource, VideoTheme } from '../types';
 import { VideoOverlay } from './core/VideoOverlay';
 import { VideoSurface } from './core/VideoSurface';
@@ -46,6 +51,9 @@ export const VideoPlayer = Object.assign(VideoPlayerComponent, {
   ProgressBar,
   TimeDisplay,
   VolumeControl,
+  FullscreenButton,
+  MuteButton,
+  LoadingSpinner,
 });
 
 const styles = StyleSheet.create({

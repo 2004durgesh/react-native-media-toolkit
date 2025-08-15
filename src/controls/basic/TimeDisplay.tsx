@@ -1,4 +1,4 @@
-import { Text, StyleSheet, View } from 'react-native';
+import { Text, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { useProgress } from '../../hooks';
 import { useVideo } from '../../providers';
 
@@ -6,7 +6,7 @@ export interface TimeDisplayProps {
   showRemaining?: boolean;
   fontSize?: number;
   color?: string;
-  style?: any;
+  style?: StyleProp<ViewStyle>;
 }
 
 export const TimeDisplay = ({ showRemaining, fontSize = 14, color, style }: TimeDisplayProps) => {
