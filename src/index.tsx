@@ -5,7 +5,7 @@ export { VideoPlayer } from './components/VideoPlayer';
 export { DefaultLayout, MinimalLayout } from './layouts';
 
 // Core components
-export { VideoOverlay, VideoSurface } from './components/core';
+export { VideoSurface } from './components/core';
 
 // Basic controls and their types
 export * from './controls';

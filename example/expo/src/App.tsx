@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import { DefaultLayout, VideoPlayer, VideoProvider } from '../../../src';
+import { DefaultLayout, MinimalLayout, VideoPlayer, VideoProvider } from '../../../src';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 type Sample = {
@@ -37,7 +37,7 @@ const SampleSelector: React.FC<SampleSelectorProps> = ({ samples, currentUri, on
 export default function App() {
   const samples: Sample[] = [
     {
-      type: 'video/mp4',
+      type: 'mp4',
       uri: 'https://live-hls-abr-cdn.livepush.io/vod/bigbuckbunnyclip.mp4',
     },
     {
@@ -64,7 +64,7 @@ export default function App() {
           <View style={styles.videoContainer}>
             <VideoProvider>
               <VideoPlayer source={videoSource} containerStyle={styles.videoPlayer}>
-                <DefaultLayout />
+                <MinimalLayout />
               </VideoPlayer>
             </VideoProvider>
           </View>

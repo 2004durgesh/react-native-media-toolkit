@@ -10,8 +10,9 @@ import {
   LoadingSpinner,
 } from '../controls/basic';
 import type { VideoSource } from '../types';
-import { VideoOverlay, VideoSurface } from './core';
+import { VideoSurface } from './core';
 import type { ReactVideoProps } from 'react-native-video';
+import { TapHandler } from 'src/gestures';
 
 interface VideoPlayerProps {
   source: VideoSource;
@@ -24,21 +25,19 @@ const VideoPlayerComponent = ({ source, children, containerStyle, videoProps }: 
   // this is the root of all the things :)
   return (
     <View style={[styles.container, containerStyle]}>
-      <VideoOverlay style={styles.videoContainer} overlay={false}>
-        <VideoSurface {...videoProps} source={source} />
-        {children}
-      </VideoOverlay>
+      <TapHandler>
+        <View style={styles.videoContainer}>
+          <VideoSurface {...videoProps} source={source} />
+          {children}
+        </View>
+      </TapHandler>
     </View>
   );
 };
 
 // VideoControls component that wraps VideoOverlay for controls
 const VideoControls: React.FC<{ children?: ReactNode; style?: any }> = ({ children, style }) => {
-  return (
-    <VideoOverlay style={style} overlay={true}>
-      {children}
-    </VideoOverlay>
-  );
+  return <View style={[styles.controlsContainer, style]}>{children}</View>;
 };
 
 // Compound component pattern remains the same
@@ -62,5 +61,8 @@ const styles = StyleSheet.create({
   },
   videoContainer: {
     flex: 1,
+  },
+  controlsContainer: {
+    ...StyleSheet.absoluteFillObject,
   },
 });
