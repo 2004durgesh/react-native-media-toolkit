@@ -9,9 +9,17 @@ export interface FullscreenButtonProps {
   style?: any;
   renderEnterIcon?: () => React.ReactNode;
   renderExitIcon?: () => React.ReactNode;
+  onPress?: () => void;
 }
 
-export const FullscreenButton = ({ size, color, style, renderEnterIcon, renderExitIcon }: FullscreenButtonProps) => {
+export const FullscreenButton = ({
+  size,
+  color,
+  style,
+  renderEnterIcon,
+  renderExitIcon,
+  onPress,
+}: FullscreenButtonProps) => {
   const { fullscreen, toggleFullscreen } = useFullscreen();
 
   const EnterIcon = renderEnterIcon || Maximize;
@@ -22,7 +30,10 @@ export const FullscreenButton = ({ size, color, style, renderEnterIcon, renderEx
       IconComponent={fullscreen ? ExitIcon : EnterIcon}
       size={size}
       color={color}
-      onPress={toggleFullscreen}
+      // Using the onPress prop to allow external handling, while also toggling fullscreen, also the react-native-video has events to handle much more low-level fullscreen handling
+      onPress={() => {
+        (toggleFullscreen(), onPress && onPress());
+      }}
       style={[styles.fullscreenButton, style]}
     />
   );

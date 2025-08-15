@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, type StyleProp, type ViewStyle } from 'react-native';
 import {
   PlayButton,
   ProgressBar,
@@ -9,26 +9,23 @@ import {
   MuteButton,
   LoadingSpinner,
 } from '../controls/basic';
-import type { VideoPlayerConfig, VideoSource, VideoTheme } from '../types';
-import { VideoOverlay } from './core/VideoOverlay';
-import { VideoSurface } from './core/VideoSurface';
+import type { VideoSource } from '../types';
+import { VideoOverlay, VideoSurface } from './core';
+import type { ReactVideoProps } from 'react-native-video';
 
 interface VideoPlayerProps {
   source: VideoSource;
   children?: ReactNode;
-  style?: any;
-  theme?: Partial<VideoTheme>;
-  config?: Partial<VideoPlayerConfig>;
-  resizeMode?: 'contain' | 'cover' | 'stretch';
-  poster?: string;
+  containerStyle?: StyleProp<ViewStyle>;
+  videoProps?: ReactVideoProps;
 }
 
-const VideoPlayerComponent = ({ source, children, style, resizeMode, poster }: VideoPlayerProps) => {
-  // this is the root of all the project :)
+const VideoPlayerComponent = ({ source, children, containerStyle, videoProps }: VideoPlayerProps) => {
+  // this is the root of all the things :)
   return (
-    <View style={[styles.container, style]}>
+    <View style={[styles.container, containerStyle]}>
       <VideoOverlay style={styles.videoContainer} overlay={false}>
-        <VideoSurface source={source} resizeMode={resizeMode} poster={poster} />
+        <VideoSurface {...videoProps} source={source} />
         {children}
       </VideoOverlay>
     </View>
@@ -61,7 +58,7 @@ const styles = StyleSheet.create({
     position: 'relative',
     width: '100%',
     height: '100%',
-    backgroundColor: '#000000',
+    backgroundColor: 'green',
   },
   videoContainer: {
     flex: 1,

@@ -1,18 +1,17 @@
-import RNVideo from 'react-native-video';
+import RNVideo, { ResizeMode, type ReactVideoProps } from 'react-native-video';
 import { useEffect, useRef, type FC } from 'react';
 import { StyleSheet } from 'react-native';
 import type { VideoSource } from '../../types';
 import { useVideo } from '../../providers';
 import { usePlayback, useVolume, useProgress, useBuffering, useControlsVisibility } from '../../hooks';
 
-interface VideoSurfaceProps {
+interface VideoSurfaceProps extends ReactVideoProps {
   source: VideoSource;
-  style?: any;
-  resizeMode?: 'contain' | 'cover' | 'stretch';
-  poster?: string;
+  style?: ReactVideoProps['style'];
+  props?: ReactVideoProps;
 }
 
-export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, resizeMode = 'contain', poster }) => {
+export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, props }) => {
   const internalVideoRef = useRef(null);
   const { dispatch, state } = useVideo();
   const { isPlaying, setPlaying } = usePlayback();
@@ -35,7 +34,6 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, resizeMode 
   }, []);
 
   const handleLoad = (data: any) => {
-    console.log(data);
     setDuration(data.duration);
     setBuffering(false);
   };
@@ -54,18 +52,17 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, resizeMode 
       ref={internalVideoRef}
       source={source}
       style={[styles.video, style]}
-      resizeMode={resizeMode}
-      poster={poster}
+      resizeMode={ResizeMode.CONTAIN}
       paused={!isPlaying}
       volume={muted ? 0 : volume}
       rate={playbackRate}
       onLoad={handleLoad}
-      onPlaybackStateChanged={(e) => console.log(e)}
       onProgress={handleProgress}
       onBuffer={handleBuffer}
       onError={handleError}
       onEnd={handleEnd}
       progressUpdateInterval={500}
+      {...props}
     />
   );
 };

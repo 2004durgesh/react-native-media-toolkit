@@ -64,7 +64,6 @@ export interface VideoPlayerConfig {
   autoHideControls: boolean;
   autoPlay: boolean;
   autoHideDelay: number;
-  showTimeRemaining: boolean;
   enableGestures: boolean;
   enableFullscreen: boolean;
   enableVolumeControl: boolean;

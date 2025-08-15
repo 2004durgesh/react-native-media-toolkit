@@ -9,9 +9,10 @@ export interface PlayButtonProps {
   style?: any;
   renderPlayIcon?: () => React.ReactNode;
   renderPauseIcon?: () => React.ReactNode;
+  onPress?: () => void;
 }
 
-export const PlayButton = ({ size, color, style, renderPlayIcon, renderPauseIcon }: PlayButtonProps) => {
+export const PlayButton = ({ size, color, style, renderPlayIcon, renderPauseIcon, onPress }: PlayButtonProps) => {
   const { isPlaying, togglePlayPause } = usePlayback();
 
   const PlayIcon = renderPlayIcon || Play;
@@ -22,7 +23,10 @@ export const PlayButton = ({ size, color, style, renderPlayIcon, renderPauseIcon
       IconComponent={isPlaying ? PauseIcon : PlayIcon}
       size={size}
       color={color}
-      onPress={togglePlayPause}
+      // Using the onPress prop to allow external handling, while also toggling play/pause
+      onPress={() => {
+        (togglePlayPause(), onPress && onPress());
+      }}
       style={[styles.playButton, style]}
     />
   );

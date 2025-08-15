@@ -1,7 +1,6 @@
 import { View, Text } from 'react-native';
 import { VideoPlayer } from '../components/VideoPlayer';
 import { layoutStyles } from './CommonStyles';
-import { defaultTheme } from '../themes/presets/defaultTheme';
 import { useBuffering } from '../hooks';
 
 export const DefaultLayout = () => {
@@ -18,10 +17,7 @@ export const DefaultLayout = () => {
         <View style={[layoutStyles.bottomControls]}>
           <VideoPlayer.ProgressBar />
           <View style={layoutStyles.row}>
-            <View style={[layoutStyles.row]}>
-              <VideoPlayer.PlayButton size={defaultTheme.iconSizes.sm} />
-              <VideoPlayer.TimeDisplay style={{ marginLeft: 10 }} />
-            </View>
+            <VideoPlayer.TimeDisplay />
             <View style={layoutStyles.spacer} />
             <View style={[layoutStyles.row]}>
               <VideoPlayer.FullscreenButton />

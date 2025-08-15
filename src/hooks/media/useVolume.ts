@@ -22,7 +22,7 @@ export const useVolume = () => {
       clearTimeout(state.hideTimeoutRef!);
       showControls();
     }
-  }, [dispatch, , state.muted, state.hideTimeoutRef, showControls]);
+  }, [dispatch, state.muted, state.hideTimeoutRef, showControls]);
 
   return {
     volume: state.volume,

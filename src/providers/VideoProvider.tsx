@@ -8,7 +8,6 @@ const defaultConfig: VideoPlayerConfig = {
   autoHideControls: true,
   autoHideDelay: 5000,
   autoPlay: true,
-  showTimeRemaining: false,
   enableGestures: true,
   enableFullscreen: true,
   enableVolumeControl: true,

@@ -22,6 +22,7 @@ export const MuteButton = ({ size, color, style, renderMuteIcon, renderUnmuteIco
       IconComponent={muted ? MuteIcon : UnmuteIcon}
       size={size}
       color={color}
+      // I dont think as no one will use extra onPress functionality here, but ill add in future if needed
       onPress={toggleMute}
       style={[styles.muteButton, style]}
     />

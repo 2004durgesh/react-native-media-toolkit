@@ -3,16 +3,16 @@ import { useProgress } from '../../hooks';
 import { useVideo } from '../../providers';
 
 export interface TimeDisplayProps {
-  showRemaining?: boolean;
+  type?: 'current' | 'duration' | 'both';
   fontSize?: number;
   color?: string;
   style?: StyleProp<ViewStyle>;
 }
 
-export const TimeDisplay = ({ showRemaining, fontSize = 14, color, style }: TimeDisplayProps) => {
+export const TimeDisplay = ({ type = 'both', fontSize = 14, color, style }: TimeDisplayProps) => {
   const { currentTime, duration } = useProgress();
   const {
-    state: { config, theme },
+    state: { theme },
   } = useVideo();
 
   const textColor = color || theme.colors.text;
@@ -21,20 +21,28 @@ export const TimeDisplay = ({ showRemaining, fontSize = 14, color, style }: Time
     `${Math.floor(s / 60)}:${Math.floor(s % 60)
       .toString()
       .padStart(2, '0')}`;
-  const useRemaining = showRemaining ?? config.showTimeRemaining;
 
-  return (
-    <View style={[styles.timeContainer, style]}>
-      <Text style={[styles.timeText, { fontSize, color: textColor }]}>{formatTime(currentTime)}</Text>
-      <Text style={[styles.separator, { fontSize, color: textColor }]}>{useRemaining ? ' - ' : ' / '}</Text>
-      <Text style={[styles.timeText, { fontSize, color: textColor }]}>
-        {useRemaining ? formatTime(duration - currentTime) : formatTime(duration)}
-      </Text>
-    </View>
-  );
+  const renderTime = () => {
+    switch (type) {
+      case 'current':
+        return <Text style={[styles.timeText, { fontSize, color: textColor }]}>{formatTime(currentTime)}</Text>;
+      case 'duration':
+        return <Text style={[styles.timeText, { fontSize, color: textColor }]}>{formatTime(duration)}</Text>;
+      default:
+        return (
+          <>
+            <Text style={[styles.timeText, { fontSize, color: textColor }]}>{formatTime(currentTime)}</Text>
+            <Text style={[styles.separator, { fontSize, color: textColor }]}>{' / '}</Text>
+            <Text style={[styles.timeText, { fontSize, color: textColor }]}>{formatTime(duration)}</Text>
+          </>
+        );
+    }
+  };
+
+  return <View style={[styles.timeContainer, style]}>{renderTime()}</View>;
 };
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   timeContainer: {
     flexDirection: 'row',
     alignItems: 'center',
