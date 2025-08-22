@@ -1,6 +1,9 @@
 // Main VideoPlayer component and compound components
 export { VideoPlayer } from './components/VideoPlayer';
 
+//Export the MediaToolkit module
+export { NativeMediaToolkit } from './NativeMediaToolkit';
+
 // Export Layouts components
 export { DefaultLayout, MinimalLayout } from './layouts';
 

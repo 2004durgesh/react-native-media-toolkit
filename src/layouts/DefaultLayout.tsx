@@ -1,6 +1,6 @@
 import { View, Text } from 'react-native';
 import { VideoPlayer } from '../components/VideoPlayer';
-import { layoutStyles } from './CommonStyles';
+import { layoutStyles } from '../components/common/CommonStyles';
 import { useBuffering } from '../hooks';
 
 export const DefaultLayout = () => {

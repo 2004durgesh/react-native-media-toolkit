@@ -46,7 +46,7 @@
     "typecheck": "tsc",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
-    "prepare": "husky install && bob build",
+    "prepare": "bob build && npx react-native codegen",
     "release": "release-it --only-version",
     "prettier": "prettier --write ."
   },
@@ -73,6 +73,7 @@
     "@eslint/compat": "^1.2.7",
     "@eslint/eslintrc": "^3.3.0",
     "@eslint/js": "^9.22.0",
+    "@react-native-community/cli": "latest",
     "@react-native/eslint-config": "^0.73.1",
     "@release-it/conventional-changelog": "^9.0.2",
     "@types/jest": "^29.5.5",
@@ -90,12 +91,14 @@
     "react": "19.0.0",
     "react-native": "0.79.5",
     "react-native-builder-bob": "^0.31.0",
+    "react-native-edge-to-edge": "^1.6.2",
     "react-native-gesture-handler": "2.24.0",
     "react-native-reanimated": "3.17.4",
     "react-native-svg": "^15.12.1",
     "react-native-video": "6.14.0",
     "release-it": "^17.10.0",
-    "typescript": "^5.2.2"
+    "turbo": "^1.10.7",
+    "typescript": "^5.8.3"
   },
   "resolutions": {
     "@types/react": "^18.2.44"
@@ -104,6 +107,7 @@
     "lucide-react-native": ">=0.539.0",
     "react": "*",
     "react-native": "*",
+    "react-native-edge-to-edge": ">=1.6.0",
     "react-native-gesture-handler": ">=2.0.0",
     "react-native-reanimated": ">=3.0.0",
     "react-native-svg": ">=15.0.0",
@@ -118,7 +122,8 @@
   "jest": {
     "preset": "react-native",
     "modulePathIgnorePatterns": [
-      "<rootDir>/example/node_modules",
+      "<rootDir>/example/expo/node_modules",
+      "<rootDir>/example/bare/node_modules",
       "<rootDir>/docs/node_modules",
       "<rootDir>/lib/"
     ]
@@ -168,12 +173,21 @@
       ]
     ]
   },
+  "codegenConfig": {
+    "name": "MediaToolkitSpec",
+    "type": "modules",
+    "jsSrcsDir": "src",
+    "android": {
+      "javaPackageName": "com.mediatoolkit"
+    }
+  },
   "create-react-native-library": {
-    "languages": "js",
-    "type": "library",
-    "version": "0.43.0"
+    "languages": "kotlin-objc",
+    "type": "turbo-module",
+    "version": "0.52.1"
   },
   "dependencies": {
-    "react-native-awesome-slider": "^2.9.0"
+    "react-native-awesome-slider": "^2.9.0",
+    "react-native-orientation-director": "^2.6.1"
   }
 }

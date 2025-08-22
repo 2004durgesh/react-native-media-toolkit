@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { VideoPlayer } from '../components/VideoPlayer';
-import { layoutStyles } from './CommonStyles';
+import { layoutStyles } from '../components/common/CommonStyles';
 import { useBuffering, useControlsVisibility } from '../hooks';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { useVideo } from 'src/providers';

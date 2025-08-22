@@ -2,6 +2,7 @@ import React, { createContext, useReducer, useContext, useEffect } from 'react';
 import type { SharedValue } from 'react-native-reanimated';
 import type { VideoPlayerConfig, VideoState, VideoTheme } from 'src/types';
 import { defaultTheme } from 'src/themes/presets/defaultTheme';
+import { type LayoutRectangle } from 'react-native';
 
 // Default Configuration
 const defaultConfig: VideoPlayerConfig = {
@@ -22,6 +23,7 @@ interface VideoProviderState extends VideoState {
   videoRef: React.RefObject<any> | null;
   controlsOpacity: SharedValue<number> | null;
   hideTimeoutRef: NodeJS.Timeout | null;
+  videoLayout: LayoutRectangle;
 }
 
 type Action =
@@ -40,7 +42,8 @@ type Action =
   | { type: 'SET_DURATION'; payload: number }
   | { type: 'SET_BUFFERING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null }
-  | { type: 'SET_HIDE_TIMEOUT'; payload: NodeJS.Timeout | null };
+  | { type: 'SET_HIDE_TIMEOUT'; payload: NodeJS.Timeout | null }
+  | { type: 'SET_VIDEO_LAYOUT'; payload: LayoutRectangle };
 
 const initialState: VideoProviderState = {
   isPlaying: defaultConfig.autoPlay,
@@ -57,6 +60,7 @@ const initialState: VideoProviderState = {
   videoRef: null,
   controlsOpacity: null,
   hideTimeoutRef: null,
+  videoLayout: { x: 0, y: 0, width: 0, height: 0 },
 };
 
 const VideoContext = createContext<
@@ -109,6 +113,9 @@ function videoReducer(state: VideoProviderState, action: Action): VideoProviderS
       return { ...state, fullscreen: !state.fullscreen };
     case 'SET_HIDE_TIMEOUT':
       return { ...state, hideTimeoutRef: action.payload };
+
+    case 'SET_VIDEO_LAYOUT':
+      return { ...state, videoLayout: action.payload };
     default:
       return state;
   }

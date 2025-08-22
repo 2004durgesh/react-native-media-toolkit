@@ -12,7 +12,8 @@ import {
 import type { VideoSource } from '../types';
 import { VideoSurface } from './core';
 import type { ReactVideoProps } from 'react-native-video';
-import { TapHandler } from 'src/gestures';
+import { TapHandler } from '../gestures';
+import { useVideo } from '../providers';
 
 interface VideoPlayerProps {
   source: VideoSource;
@@ -23,10 +24,15 @@ interface VideoPlayerProps {
 
 const VideoPlayerComponent = ({ source, children, containerStyle, videoProps }: VideoPlayerProps) => {
   // this is the root of all the things :)
+  const { state } = useVideo();
   return (
-    <View style={[styles.container, containerStyle]}>
+    <View
+      style={[
+        { position: 'relative', height: state.fullscreen ? state.videoLayout.width : state.videoLayout.height },
+        containerStyle,
+      ]}>
       <TapHandler>
-        <View style={styles.videoContainer}>
+        <View style={{ overflow: 'hidden' }}>
           <VideoSurface {...videoProps} source={source} />
           {children}
         </View>
@@ -53,15 +59,6 @@ export const VideoPlayer = Object.assign(VideoPlayerComponent, {
 });
 
 const styles = StyleSheet.create({
-  container: {
-    position: 'relative',
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'green',
-  },
-  videoContainer: {
-    flex: 1,
-  },
   controlsContainer: {
     ...StyleSheet.absoluteFillObject,
   },

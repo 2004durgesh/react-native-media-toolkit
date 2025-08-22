@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { DefaultLayout, MinimalLayout, VideoPlayer, VideoProvider } from '../../../src';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { StatusBar } from 'expo-status-bar';
 
 type Sample = {
   type: string;
@@ -16,6 +17,8 @@ interface SampleSelectorProps {
 
 const SampleSelector: React.FC<SampleSelectorProps> = ({ samples, currentUri, onSelect }) => (
   <View style={styles.sampleSelector}>
+    {/* giving red color so i can make sure this hides */}
+    <StatusBar style="light" backgroundColor="red" />
     <Text style={styles.sampleSelectorTitle}>Choose a Sample</Text>
     {samples.map((sample, index) => {
       const isActive = sample.uri === currentUri;
@@ -57,36 +60,20 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.content}>
-          <Text style={styles.title}>React Native Media Toolkit Example</Text>
-
-          <View style={styles.videoContainer}>
-            <VideoProvider>
-              <VideoPlayer source={videoSource} containerStyle={styles.videoPlayer}>
-                <MinimalLayout />
-              </VideoPlayer>
-            </VideoProvider>
-          </View>
-
-          <SampleSelector samples={samples} currentUri={uri} onSelect={setUri} />
-        </View>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
+        <StatusBar style="light" backgroundColor="red" />
+        <VideoProvider>
+          <VideoPlayer source={videoSource} containerStyle={styles.videoPlayer}>
+            <MinimalLayout />
+          </VideoPlayer>
+        </VideoProvider>
+        <SampleSelector samples={samples} currentUri={uri} onSelect={setUri} />
       </SafeAreaView>
     </GestureHandlerRootView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
   title: {
     color: '#fff',
     fontSize: 18,
@@ -100,7 +87,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
   videoPlayer: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: 'red',
   },
   sampleSelector: {
