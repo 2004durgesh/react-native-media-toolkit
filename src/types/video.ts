@@ -67,6 +67,7 @@ export interface VideoPlayerConfig {
   enableGestures: boolean;
   enableFullscreen: boolean;
   enableVolumeControl: boolean;
+  enableScreenRotation: boolean;
   playbackRates: number[];
   layout: 'default' | 'minimal' | 'netflix' | 'youtube';
 }

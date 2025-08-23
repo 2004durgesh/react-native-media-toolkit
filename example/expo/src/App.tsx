@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, Text, SafeAreaView, TouchableOpacity } from 'react-native';
-import { DefaultLayout, MinimalLayout, VideoPlayer, VideoProvider } from '../../../src';
+import { View, StyleSheet, Text, TouchableOpacity, Button } from 'react-native';
+import { DefaultLayout, MinimalLayout, VideoPlayer, VideoProvider, useFullscreen } from '../../../src';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { StatusBar } from 'expo-status-bar';
-
 type Sample = {
   type: string;
   uri: string; // string for remote, number for require()
@@ -37,7 +36,7 @@ const SampleSelector: React.FC<SampleSelectorProps> = ({ samples, currentUri, on
   </View>
 );
 
-export default function App() {
+const Main = () => {
   const samples: Sample[] = [
     {
       type: 'mp4',
@@ -52,23 +51,29 @@ export default function App() {
       uri: 'https://dash.akamaized.net/dash264/TestCasesUHD/2b/11/MultiRate.mpd',
     },
     { type: 'asset', uri: require('../assets/test.mp4') },
+    { type: 'asset-vertical', uri: require('../assets/vertical.mp4') },
   ];
-
+  const { fullscreen } = useFullscreen();
   const [uri, setUri] = useState<string>(samples[1]?.uri!);
-
   const videoSource = { uri };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
-        <StatusBar style="light" backgroundColor="red" />
-        <VideoProvider>
-          <VideoPlayer source={videoSource} containerStyle={styles.videoPlayer}>
-            <MinimalLayout />
-          </VideoPlayer>
-        </VideoProvider>
-        <SampleSelector samples={samples} currentUri={uri} onSelect={setUri} />
-      </SafeAreaView>
+    <>
+      <VideoPlayer source={videoSource} containerStyle={styles.videoPlayer}>
+        <MinimalLayout />
+      </VideoPlayer>
+      {/* <Button title="pres me" onPress={()=>{SystemBars}}/> */}
+      {!fullscreen && <SampleSelector samples={samples} currentUri={uri} onSelect={setUri} />}
+    </>
+  );
+};
+
+export default function App() {
+  return (
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'black' }}>
+      <VideoProvider config={{ enableScreenRotation: true }}>
+        <Main />
+      </VideoProvider>
     </GestureHandlerRootView>
   );
 }

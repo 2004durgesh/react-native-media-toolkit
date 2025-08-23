@@ -8,23 +8,27 @@ export const useFullscreen = () => {
   const { state, dispatch } = useVideo();
   const { showControls } = useControlsVisibility();
 
-  const toggleFullscreen = useCallback(() => {
+  const toggleFullscreen = useCallback(async () => {
     dispatch({ type: 'TOGGLE_FULLSCREEN' });
     const newFullscreenState = !state.fullscreen;
 
     if (newFullscreenState) {
       showControls();
-      RNOrientationDirector.lockTo(Orientation.landscape);
-      console.log(state.videoLayout);
+      if (state.config.enableScreenRotation) {
+        RNOrientationDirector.lockTo(Orientation.landscape);
+      }
       NativeMediaToolkit.enterFullscreen();
+      console.log('Entering ', await NativeMediaToolkit.isFullscreen());
     } else if (state.hideTimeoutRef) {
+      if (state.config.enableScreenRotation) {
+        RNOrientationDirector.lockTo(Orientation.portrait);
+      }
+      console.log('exiting', await NativeMediaToolkit.isFullscreen());
       NativeMediaToolkit.exitFullscreen();
-      RNOrientationDirector.lockTo(Orientation.portrait);
-      console.log(state.videoLayout);
       clearTimeout(state.hideTimeoutRef!);
       showControls();
     }
-  }, [dispatch, state.fullscreen, state.hideTimeoutRef, showControls, state.videoLayout]);
+  }, [dispatch, state.fullscreen, state.hideTimeoutRef, showControls, state.config.enableScreenRotation]);
 
   return {
     fullscreen: state.fullscreen,

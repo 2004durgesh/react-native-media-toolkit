@@ -1,5 +1,5 @@
 import RNVideo, { ResizeMode, type ReactVideoProps } from 'react-native-video';
-import { useEffect, useMemo, useRef, useState, type FC } from 'react';
+import { useEffect, useMemo, useRef, type FC } from 'react';
 import { Dimensions, View, type StyleProp, type ViewStyle } from 'react-native';
 import type { VideoSource } from '../../types';
 import { useVideo } from '../../providers';
@@ -30,13 +30,12 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, props }) =>
 
   useEffect(() => {
     showControls();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
-  const [dimensions, setDimensions] = useState({
-    width: Dimensions.get('screen').width,
-    height: Dimensions.get('screen').height,
-  });
+    const subscription = Dimensions.addEventListener('change', ({ window }) => {
+      dispatch({ type: 'SET_DIMENSIONS', payload: { width: window.width, height: window.height } });
+    });
+    return () => subscription.remove();
+  }, [dispatch, showControls]);
 
   const handleLoad = (data: any) => {
     setDuration(data.duration);
@@ -58,8 +57,8 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, props }) =>
   const isFullscreen = state.fullscreen;
   const videoStyle = useMemo<StyleProp<ViewStyle>>(
     () => ({
-      width: isFullscreen ? dimensions.width : '100%',
-      height: isFullscreen ? dimensions.height : undefined,
+      width: isFullscreen ? state.dimensions.width : '100%',
+      height: isFullscreen ? state.dimensions.height : undefined,
       aspectRatio: isFullscreen ? undefined : 16 / 9,
       backgroundColor: 'black',
       position: 'absolute' as const,
@@ -67,7 +66,7 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, props }) =>
       left: 0,
       right: 0,
     }),
-    [isFullscreen, dimensions]
+    [isFullscreen, state.dimensions]
   );
 
   return (

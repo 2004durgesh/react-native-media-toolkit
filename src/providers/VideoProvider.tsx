@@ -2,7 +2,7 @@ import React, { createContext, useReducer, useContext, useEffect } from 'react';
 import type { SharedValue } from 'react-native-reanimated';
 import type { VideoPlayerConfig, VideoState, VideoTheme } from 'src/types';
 import { defaultTheme } from 'src/themes/presets/defaultTheme';
-import { type LayoutRectangle } from 'react-native';
+import { type LayoutRectangle, Dimensions } from 'react-native';
 
 // Default Configuration
 const defaultConfig: VideoPlayerConfig = {
@@ -12,6 +12,7 @@ const defaultConfig: VideoPlayerConfig = {
   enableGestures: true,
   enableFullscreen: true,
   enableVolumeControl: true,
+  enableScreenRotation: false,
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
   layout: 'default',
 };
@@ -24,6 +25,7 @@ interface VideoProviderState extends VideoState {
   controlsOpacity: SharedValue<number> | null;
   hideTimeoutRef: NodeJS.Timeout | null;
   videoLayout: LayoutRectangle;
+  dimensions: { width: number; height: number };
 }
 
 type Action =
@@ -43,7 +45,8 @@ type Action =
   | { type: 'SET_BUFFERING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null }
   | { type: 'SET_HIDE_TIMEOUT'; payload: NodeJS.Timeout | null }
-  | { type: 'SET_VIDEO_LAYOUT'; payload: LayoutRectangle };
+  | { type: 'SET_VIDEO_LAYOUT'; payload: LayoutRectangle }
+  | { type: 'SET_DIMENSIONS'; payload: { width: number; height: number } };
 
 const initialState: VideoProviderState = {
   isPlaying: defaultConfig.autoPlay,
@@ -61,6 +64,7 @@ const initialState: VideoProviderState = {
   controlsOpacity: null,
   hideTimeoutRef: null,
   videoLayout: { x: 0, y: 0, width: 0, height: 0 },
+  dimensions: { width: Dimensions.get('window').width, height: Dimensions.get('window').height },
 };
 
 const VideoContext = createContext<
@@ -116,6 +120,8 @@ function videoReducer(state: VideoProviderState, action: Action): VideoProviderS
 
     case 'SET_VIDEO_LAYOUT':
       return { ...state, videoLayout: action.payload };
+    case 'SET_DIMENSIONS':
+      return { ...state, dimensions: action.payload };
     default:
       return state;
   }

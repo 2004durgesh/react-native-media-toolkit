@@ -1,5 +1,7 @@
 # react-native-media-toolkit
 
+> **Note:** This package is currently under active development. The APIs are subject to change, and some features may not be fully implemented. At the moment, the `MinimalLayout` is the most stable and functional component.
+
 **A powerful, flexible, and customizable video player UI toolkit for React Native apps. Inspired by Vidstack, designed for mobile and TV experiences.**
 
 <!-- ![npm version](https://img.shields.io/npm/v/react-native-media-toolkit) -->
@@ -15,7 +17,6 @@
 - 🎛️ **Modular component architecture** (plug & play controls and gestures)
 - 💡 **Pre-built skins** like Netflix, YouTube, and Minimal (Planned can't guarantee)
 - 📱 **Optimized for mobile**, responsive across screen sizes
-- 🧠 Built-in **Zustand**-based state management
 - 🔁 Gesture handling with `react-native-gesture-handler` & `reanimated`
 - ⚙️ Ready for integration with Expo, React Navigation
 
