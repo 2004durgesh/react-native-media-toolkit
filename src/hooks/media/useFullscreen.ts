@@ -18,6 +18,7 @@ export const useFullscreen = () => {
         RNOrientationDirector.lockTo(Orientation.landscape);
       }
       NativeMediaToolkit.enterFullscreen();
+      state.config.onEnterFullscreen?.();
       console.log('Entering ', await NativeMediaToolkit.isFullscreen());
     } else if (state.hideTimeoutRef) {
       if (state.config.enableScreenRotation) {
@@ -25,10 +26,11 @@ export const useFullscreen = () => {
       }
       console.log('exiting', await NativeMediaToolkit.isFullscreen());
       NativeMediaToolkit.exitFullscreen();
+      state.config.onExitFullscreen?.();
       clearTimeout(state.hideTimeoutRef!);
       showControls();
     }
-  }, [dispatch, state.fullscreen, state.hideTimeoutRef, showControls, state.config.enableScreenRotation]);
+  }, [dispatch, state.fullscreen, state.hideTimeoutRef, showControls, state.config]);
 
   return {
     fullscreen: state.fullscreen,

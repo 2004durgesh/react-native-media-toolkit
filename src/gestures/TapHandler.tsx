@@ -1,7 +1,7 @@
 import { useControlsVisibility } from '../hooks';
 import React, { useCallback, useMemo, useRef, useState, type FC } from 'react';
 import { Dimensions, StyleSheet, Text, View, type StyleProp, type ViewStyle } from 'react-native';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { GestureDetector, Gesture, type ComposedGesture, type TapGesture } from 'react-native-gesture-handler';
 import Animated, {
   measure,
   useAnimatedRef,
@@ -50,6 +50,7 @@ export const TapHandler: FC<TapHandlerProps> = ({
 }) => {
   const {
     state: { videoRef },
+    state,
   } = useVideo();
   const [isDoubleTap, setIsDoubleTap] = useState(false);
   const [doubleTapValue, setDoubleTapValue] = useState({ forward: 0, backward: 0 });
@@ -304,8 +305,15 @@ export const TapHandler: FC<TapHandlerProps> = ({
         }),
     [toggleControls]
   );
+
+  let composedGesture: ComposedGesture | TapGesture;
+  if (state.config.enableDoubleTapGestures) {
+    composedGesture = Gesture.Exclusive(doubleTapGesture, singleTapGesture);
+  } else {
+    composedGesture = singleTapGesture;
+  }
   return (
-    <GestureDetector gesture={Gesture.Race(doubleTapGesture, singleTapGesture)}>
+    <GestureDetector gesture={composedGesture}>
       <View style={StyleSheet.absoluteFill}>
         <OverlayedView ref={backwardRippleRef} style={{ left: 0 }}>
           <Animated.View style={[backwardAnimatedRipple]}>

@@ -16,8 +16,6 @@ interface SampleSelectorProps {
 
 const SampleSelector: React.FC<SampleSelectorProps> = ({ samples, currentUri, onSelect }) => (
   <View style={styles.sampleSelector}>
-    {/* giving red color so i can make sure this hides */}
-    <StatusBar style="light" backgroundColor="red" />
     <Text style={styles.sampleSelectorTitle}>Choose a Sample</Text>
     {samples.map((sample, index) => {
       const isActive = sample.uri === currentUri;
@@ -71,7 +69,14 @@ const Main = () => {
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'black' }}>
-      <VideoProvider config={{ enableScreenRotation: true }}>
+      <VideoProvider
+        config={{
+          enableScreenRotation: true,
+          onEnterFullscreen: () => console.log('Entered fullscreen'),
+          onExitFullscreen: () => console.log('Exited fullscreen'),
+          onHideControls: () => console.log('Controls hidden'),
+          onShowControls: () => console.log('Controls shown'),
+        }}>
         <Main />
       </VideoProvider>
     </GestureHandlerRootView>

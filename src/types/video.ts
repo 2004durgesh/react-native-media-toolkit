@@ -64,10 +64,14 @@ export interface VideoPlayerConfig {
   autoHideControls: boolean;
   autoPlay: boolean;
   autoHideDelay: number;
-  enableGestures: boolean;
+  enableDoubleTapGestures: boolean;
   enableFullscreen: boolean;
   enableVolumeControl: boolean;
   enableScreenRotation: boolean;
   playbackRates: number[];
   layout: 'default' | 'minimal' | 'netflix' | 'youtube';
+  onEnterFullscreen?: () => void;
+  onExitFullscreen?: () => void;
+  onHideControls?: () => void;
+  onShowControls?: () => void;
 }

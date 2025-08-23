@@ -12,7 +12,8 @@ export const useControlsVisibility = () => {
         duration: theme.animations.normal,
       });
     }
-  }, [controlsOpacity, theme]);
+    state.config.onHideControls?.();
+  }, [controlsOpacity, theme, state.config]);
 
   const showControls = useCallback(() => {
     if (hideTimeoutRef) {
@@ -29,7 +30,8 @@ export const useControlsVisibility = () => {
       const newTimeout = setTimeout(() => hideControls(), config.autoHideDelay);
       dispatch({ type: 'SET_HIDE_TIMEOUT', payload: newTimeout });
     }
-  }, [hideTimeoutRef, controlsOpacity, theme, config, isPlaying, dispatch, hideControls]);
+    state.config.onShowControls?.();
+  }, [hideTimeoutRef, controlsOpacity, theme, config, isPlaying, dispatch, hideControls, state.config]);
 
   const toggleControls = useCallback(() => {
     if (controlsOpacity) {

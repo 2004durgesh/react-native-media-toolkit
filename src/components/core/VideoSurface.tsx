@@ -8,10 +8,9 @@ import { usePlayback, useVolume, useProgress, useBuffering, useControlsVisibilit
 interface VideoSurfaceProps extends ReactVideoProps {
   source: VideoSource;
   style?: ReactVideoProps['style'];
-  props?: ReactVideoProps;
 }
 
-export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, props }) => {
+export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, ...rest }) => {
   const internalVideoRef = useRef(null);
   const { dispatch, state } = useVideo();
   const { isPlaying, setPlaying } = usePlayback();
@@ -30,12 +29,12 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, props }) =>
 
   useEffect(() => {
     showControls();
-
     const subscription = Dimensions.addEventListener('change', ({ window }) => {
       dispatch({ type: 'SET_DIMENSIONS', payload: { width: window.width, height: window.height } });
     });
     return () => subscription.remove();
-  }, [dispatch, showControls]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   const handleLoad = (data: any) => {
     setDuration(data.duration);
@@ -85,8 +84,8 @@ export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, props }) =>
         onError={handleError}
         onEnd={handleEnd}
         progressUpdateInterval={500}
-        {...props}
         onLayout={handleLayout}
+        {...rest}
       />
     </View>
   );

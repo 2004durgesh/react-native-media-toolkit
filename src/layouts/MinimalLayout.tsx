@@ -1,10 +1,12 @@
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { VideoPlayer } from '../components/VideoPlayer';
 import { layoutStyles } from '../components/common/CommonStyles';
 import { useBuffering, useControlsVisibility } from '../hooks';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { useVideo } from 'src/providers';
 import { useEffect } from 'react';
+import { Title } from 'src/components/info/Title';
+import { Subtitle } from 'src/components/info/Subtitle';
 
 export const MinimalLayout = () => {
   const { buffering } = useBuffering();
@@ -13,6 +15,7 @@ export const MinimalLayout = () => {
   // Get theme and store functions
   const {
     state: { theme },
+    state,
   } = useVideo();
   const { setOpacity } = useControlsVisibility();
 
@@ -30,9 +33,14 @@ export const MinimalLayout = () => {
   return (
     <Animated.View style={[styles.baseStyle, animatedStyle]} pointerEvents="box-none">
       <VideoPlayer.Controls>
-        <View style={[layoutStyles.column, { justifyContent: 'space-between', height: '100%' }]}>
+        <View
+          style={[
+            layoutStyles.column,
+            { justifyContent: 'space-between', height: '100%', paddingHorizontal: state.fullscreen ? 25 : 15 },
+          ]}>
           <View style={layoutStyles.topControls}>
-            <Text style={{ color: 'white' }}>Dummy Text</Text>
+            <Title text="Video Title" />
+            <Subtitle text="Video Subtitle" />
           </View>
           <View style={layoutStyles.centerControls}>
             {!buffering ? <VideoPlayer.PlayButton /> : <VideoPlayer.LoadingSpinner />}
