@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Button } from 'react-native';
-import { DefaultLayout, MinimalLayout, VideoPlayer, VideoProvider, useFullscreen } from '../../../src';
+import { VideoPlayer, VideoProvider, useFullscreen } from 'react-native-media-toolkit';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { StatusBar } from 'expo-status-bar';
+import { Link } from 'expo-router';
+
 type Sample = {
   type: string;
   uri: string; // string for remote, number for require()
@@ -31,10 +32,23 @@ const SampleSelector: React.FC<SampleSelectorProps> = ({ samples, currentUri, on
         </TouchableOpacity>
       );
     })}
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        padding: 10,
+      }}>
+      <Link href="/" asChild>
+        <Button title="Minimal" />
+      </Link>
+      <Link href="/default" asChild>
+        <Button title="Default" />
+      </Link>
+    </View>
   </View>
 );
 
-const Main = () => {
+const Main = ({ layout }: { layout: React.ReactNode }) => {
   const samples: Sample[] = [
     {
       type: 'mp4',
@@ -48,8 +62,8 @@ const Main = () => {
       type: 'dash',
       uri: 'https://dash.akamaized.net/dash264/TestCasesUHD/2b/11/MultiRate.mpd',
     },
-    { type: 'asset', uri: require('../assets/test.mp4') },
-    { type: 'asset-vertical', uri: require('../assets/vertical.mp4') },
+    { type: 'asset', uri: require('../../assets/test.mp4') },
+    { type: 'asset-vertical', uri: require('../../assets/vertical.mp4') },
   ];
   const { fullscreen } = useFullscreen();
   const [uri, setUri] = useState<string>(samples[1]?.uri!);
@@ -58,15 +72,14 @@ const Main = () => {
   return (
     <>
       <VideoPlayer source={videoSource} containerStyle={styles.videoPlayer}>
-        <MinimalLayout />
+        {layout}
       </VideoPlayer>
-      {/* <Button title="pres me" onPress={()=>{SystemBars}}/> */}
       {!fullscreen && <SampleSelector samples={samples} currentUri={uri} onSelect={setUri} />}
     </>
   );
 };
 
-export default function App() {
+export const ScreenLayout = ({ layout }: { layout: React.ReactNode }) => {
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'black' }}>
       <VideoProvider
@@ -77,11 +90,11 @@ export default function App() {
           onHideControls: () => console.log('Controls hidden'),
           onShowControls: () => console.log('Controls shown'),
         }}>
-        <Main />
+        <Main layout={layout} />
       </VideoProvider>
     </GestureHandlerRootView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   title: {
@@ -97,7 +110,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#000',
   },
   videoPlayer: {
-    // flex: 1,
     backgroundColor: 'red',
   },
   sampleSelector: {
