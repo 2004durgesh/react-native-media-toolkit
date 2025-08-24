@@ -1,0 +1,80 @@
+---
+sidebar_position: 1
+---
+
+# Getting Started
+
+Welcome to `react-native-media-toolkit`! This guide will help you get started with installing and using the video player component in your React Native application.
+
+## Installation
+
+To install the library, run the following command in your project:
+
+```bash
+yarn add react-native-media-toolkit react-native-video react-native-gesture-handler react-native-reanimated react-native-svg react-native-orientation-director
+```
+
+Or if you are using npm:
+
+```bash
+npm install react-native-media-toolkit react-native-video react-native-gesture-handler react-native-reanimated react-native-svg react-native-orientation-director
+```
+
+:::note
+
+react-native-media-toolkit works with new architecture (Fabric + TurboModules) enabled projects. If you are using an older version of React Native, please ensure that you have upgraded to at least React Native 0.76.
+
+:::
+
+
+### iOS
+
+:::danger
+
+Due to lack of mac machine, I am unable to add TurboModules support for iOS. S, contributions are welcome. for iOS support 🙏
+
+:::
+
+### Android
+
+No additional steps are typically required for Android after `npm install` or `yarn add`.
+
+## Basic Usage
+
+Here's a basic example of how to use the `VideoPlayer` component:
+
+```tsx
+import React from 'react';
+import { SafeAreaView, StyleSheet, View } from 'react-native';
+import { VideoPlayer, DefaultLayout } from 'react-native-media-toolkit';
+
+function App(): React.JSX.Element {
+  const videoSource = {
+    uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+  };
+
+  return (
+    <SafeAreaView style={styles.container}>
+      <View style={styles.videoContainer}>
+        <VideoPlayer source={videoSource}>
+          <DefaultLayout />
+        </VideoPlayer>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#000',
+  },
+  videoContainer: {
+    width: '100%',
+    height: 200,
+    backgroundColor: '#000',
+  },
+});
+
+export default App;
+```

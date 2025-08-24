@@ -43,7 +43,7 @@
     "example:expo": "yarn workspace react-native-media-toolkit-expo-example",
     "example:bare": "yarn workspace react-native-media-toolkit-bare-example",
     "test": "jest",
-    "typecheck": "tsc",
+    "typecheck": "yarn workspaces foreach --verbose --topological --exclude docs run typecheck && yarn workspace docs typecheck",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli lib",
     "prepare": "bob build && npx react-native codegen",
@@ -114,7 +114,7 @@
   "workspaces": [
     "example/expo",
     "example/bare",
-    "docs"
+    "docs/"
   ],
   "packageManager": "yarn@3.6.1",
   "jest": {

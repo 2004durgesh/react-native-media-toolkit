@@ -28,7 +28,7 @@ export const useControlsVisibility = () => {
 
     if (config.autoHideControls && isPlaying) {
       const newTimeout = setTimeout(() => hideControls(), config.autoHideDelay);
-      dispatch({ type: 'SET_HIDE_TIMEOUT', payload: newTimeout });
+      dispatch({ type: 'SET_HIDE_TIMEOUT', payload: newTimeout as unknown as NodeJS.Timeout });
     }
     state.config.onShowControls?.();
   }, [hideTimeoutRef, controlsOpacity, theme, config, isPlaying, dispatch, hideControls, state.config]);

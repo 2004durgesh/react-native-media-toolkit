@@ -1,0 +1,42 @@
+---
+sidebar_position: 3
+---
+
+# Providers
+
+### `VideoProvider`
+
+Manages the video player's state and configuration. All components that interact with the video state should be descendants of `VideoProvider`.
+
+```tsx
+<VideoProvider
+  config={
+    {
+      /* ... */
+    }
+  }
+  theme={
+    {
+      /* ... */
+    }
+  }>
+  {/* VideoPlayer and other components */}
+</VideoProvider>
+```
+
+**Props:**
+
+- `config`: Optional configuration object for the video player (e.g., `autoHideControls`, `enableScreenRotation`).
+- `theme`: Optional theme object to override default styling.
+
+### `ThemeProvider`
+
+Provides a custom theme to its children components. Can be used independently or within `VideoProvider`.
+
+```tsx
+<ThemeProvider theme={customTheme}>{/* Components that will use the custom theme */}</ThemeProvider>
+```
+
+**Props:**
+
+- `theme`: (required) Your custom theme object.

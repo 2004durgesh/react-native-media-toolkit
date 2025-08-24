@@ -1,0 +1,62 @@
+---
+sidebar_position: 1
+---
+
+# Components
+
+### `VideoPlayer`
+
+The core video player component. It wraps the video surface and provides a context for all other player controls and UI elements.
+
+```tsx
+<VideoPlayer
+  source={videoSource}
+  containerStyle={
+    {
+      /* ... */
+    }
+  }
+  videoProps={
+    {
+      /* ... */
+    }
+  }>
+  {/* Children components, e.g., layouts or custom UI */}
+</VideoPlayer>
+```
+
+**Props:**
+
+- `source`: (required) An object containing the video URI (e.g., `{ uri: string }`).
+- `children`: React nodes to be rendered inside the player (e.g., `DefaultLayout`, `MinimalLayout`, or custom UI).
+- `containerStyle`: Style for the main player container view.
+- `videoProps`: Props passed directly to the underlying `react-native-video` component.
+
+### `VideoPlayer.Controls`
+
+A compound component used to wrap and position your custom control elements within the `VideoPlayer`.
+
+```tsx
+<VideoPlayer.Controls
+  style={
+    {
+      /* ... */
+    }
+  }>
+  {/* Your control components */}
+</VideoPlayer.Controls>
+```
+
+### Basic Controls
+
+The library provides a set of ready-to-use basic control components:
+
+- `VideoPlayer.PlayButton`
+- `VideoPlayer.ProgressBar`
+- `VideoPlayer.TimeDisplay`
+- `VideoPlayer.VolumeControl`
+- `VideoPlayer.FullscreenButton`
+- `VideoPlayer.MuteButton`
+- `VideoPlayer.LoadingSpinner`
+
+These can be used directly within `VideoPlayer.Controls` or any custom layout.
