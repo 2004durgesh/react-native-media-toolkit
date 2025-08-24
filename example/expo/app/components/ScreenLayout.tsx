@@ -44,6 +44,9 @@ const SampleSelector: React.FC<SampleSelectorProps> = ({ samples, currentUri, on
       <Link href="/default" asChild>
         <Button title="Default" />
       </Link>
+      <Link href="/custom" asChild>
+        <Button title="Custom" />
+      </Link>
     </View>
   </View>
 );
@@ -85,10 +88,6 @@ export const ScreenLayout = ({ layout }: { layout: React.ReactNode }) => {
       <VideoProvider
         config={{
           enableScreenRotation: true,
-          onEnterFullscreen: () => console.log('Entered fullscreen'),
-          onExitFullscreen: () => console.log('Exited fullscreen'),
-          onHideControls: () => console.log('Controls hidden'),
-          onShowControls: () => console.log('Controls shown'),
         }}>
         <Main layout={layout} />
       </VideoProvider>

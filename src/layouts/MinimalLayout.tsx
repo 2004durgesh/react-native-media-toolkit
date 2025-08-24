@@ -3,21 +3,24 @@ import { VideoPlayer } from '../components/VideoPlayer';
 import { layoutStyles } from '../components/common/CommonStyles';
 import { useBuffering, useControlsVisibility } from '../hooks';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
-import { useVideo } from 'src/providers';
 import { useEffect } from 'react';
 import { Title } from 'src/components/info/Title';
 import { Subtitle } from 'src/components/info/Subtitle';
+import { minimalTheme } from '../themes';
+import { useVideo } from 'src/providers';
 
 export const MinimalLayout = () => {
   const { buffering } = useBuffering();
   const opacity = useSharedValue(1);
+  const { state, setTheme } = useVideo();
 
   // Get theme and store functions
-  const {
-    state: { theme },
-    state,
-  } = useVideo();
   const { setOpacity } = useControlsVisibility();
+
+  useEffect(() => {
+    setTheme(minimalTheme);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     setOpacity(opacity);
@@ -25,22 +28,18 @@ export const MinimalLayout = () => {
 
   const animatedStyle = useAnimatedStyle(
     () => ({
-      backgroundColor: theme.colors.overlay,
+      backgroundColor: state.theme.colors.overlay,
       opacity: opacity.value,
     }),
-    [theme.colors.overlay]
+    [state.theme.colors.overlay]
   );
   return (
     <Animated.View style={[styles.baseStyle, animatedStyle]} pointerEvents="box-none">
       <VideoPlayer.Controls>
-        <View
-          style={[
-            layoutStyles.column,
-            { justifyContent: 'space-between', height: '100%', paddingHorizontal: state.fullscreen ? 25 : 15 },
-          ]}>
+        <View style={[layoutStyles.column, { justifyContent: 'space-between', height: '100%', paddingHorizontal: 15 }]}>
           <View style={layoutStyles.topControls}>
-            <Title text="Video Title" />
-            <Subtitle text="Video Subtitle" />
+            <Title text="Minimal Title" />
+            <Subtitle text="Minimal Subtitle" />
           </View>
           <View style={layoutStyles.centerControls}>
             {!buffering ? <VideoPlayer.PlayButton /> : <VideoPlayer.LoadingSpinner />}

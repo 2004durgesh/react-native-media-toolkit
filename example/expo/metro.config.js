@@ -11,8 +11,18 @@ const root = path.resolve(__dirname, '../..');
  *
  * @type {import('metro-config').MetroConfig}
  */
-module.exports = getConfig(getDefaultConfig(__dirname), {
+const baseConfig = getConfig(getDefaultConfig(__dirname), {
   root,
   pkg,
   project: __dirname,
 });
+
+// Merge in custom resolver options
+module.exports = {
+  ...baseConfig,
+  resolver: {
+    ...(baseConfig.resolver || {}),
+    platforms: ['native', 'android', 'ios', 'web'],
+    sourceExts: ['js', 'json', 'ts', 'tsx'],
+  },
+};

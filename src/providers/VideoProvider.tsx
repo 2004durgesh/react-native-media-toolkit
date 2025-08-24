@@ -1,7 +1,7 @@
 import React, { createContext, useReducer, useContext, useEffect } from 'react';
 import type { SharedValue } from 'react-native-reanimated';
-import type { VideoPlayerConfig, VideoState, VideoTheme } from 'src/types';
-import { defaultTheme } from 'src/themes/presets/defaultTheme';
+import type { VideoPlayerConfig, VideoState, Theme } from 'src/types';
+import { defaultTheme } from 'src/themes';
 import { type LayoutRectangle, Dimensions } from 'react-native';
 
 // Default Configuration
@@ -14,13 +14,12 @@ const defaultConfig: VideoPlayerConfig = {
   enableVolumeControl: true,
   enableScreenRotation: false,
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
-  layout: 'default',
 };
 
 // State and Context
 interface VideoProviderState extends VideoState {
   config: VideoPlayerConfig;
-  theme: VideoTheme;
+  theme: Theme;
   videoRef: React.RefObject<any> | null;
   controlsOpacity: SharedValue<number> | null;
   hideTimeoutRef: NodeJS.Timeout | null;
@@ -29,7 +28,8 @@ interface VideoProviderState extends VideoState {
 }
 
 type Action =
-  | { type: 'INITIALIZE'; payload: { theme?: Partial<VideoTheme>; config?: Partial<VideoPlayerConfig> } }
+  | { type: 'INITIALIZE'; payload: { theme?: Partial<Theme>; config?: Partial<VideoPlayerConfig> } }
+  | { type: 'SET_THEME'; payload: Partial<Theme> }
   | { type: 'SET_CONTROLS_OPACITY'; payload: SharedValue<number> }
   | { type: 'SET_VIDEO_REF'; payload: React.RefObject<any> }
   | { type: 'SHOW_CONTROLS' }
@@ -93,6 +93,20 @@ function videoReducer(state: VideoProviderState, action: Action): VideoProviderS
         },
         config: { ...defaultConfig, ...action.payload.config },
       };
+    case 'SET_THEME':
+      return {
+        ...state,
+        theme: {
+          ...state.theme,
+          ...action.payload,
+          colors: { ...state.theme.colors, ...action.payload.colors },
+          sizing: { ...state.theme.sizing, ...action.payload.sizing },
+          fonts: { ...state.theme.fonts, ...action.payload.fonts },
+          fontSizes: { ...state.theme.fontSizes, ...action.payload.fontSizes },
+          borderRadius: action.payload.borderRadius ?? state.theme.borderRadius,
+          animations: { ...state.theme.animations, ...action.payload.animations },
+        },
+      };
     case 'SET_CONTROLS_OPACITY':
       return { ...state, controlsOpacity: action.payload };
     case 'SET_VIDEO_REF':
@@ -131,7 +145,7 @@ function videoReducer(state: VideoProviderState, action: Action): VideoProviderS
 export const VideoProvider: React.FC<{
   children: React.ReactNode;
   config?: Partial<VideoPlayerConfig>;
-  theme?: Partial<VideoTheme>;
+  theme?: Partial<Theme>;
 }> = ({ children, config, theme }) => {
   const [state, dispatch] = useReducer(videoReducer, initialState);
 
@@ -148,5 +162,10 @@ export const useVideo = () => {
   if (context === undefined) {
     throw new Error('useVideo must be used within a VideoProvider');
   }
-  return context;
+
+  const setTheme = (theme: Partial<Theme>) => {
+    context.dispatch({ type: 'SET_THEME', payload: theme });
+  };
+
+  return { ...context, setTheme };
 };

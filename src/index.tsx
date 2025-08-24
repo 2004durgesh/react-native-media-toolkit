@@ -15,10 +15,13 @@ export * from './controls';
 export * from './gestures';
 
 // Store
-export { useVideo, VideoProvider } from './providers';
+export { useVideo, VideoProvider, useTheme, ThemeProvider } from './providers';
 
 // Types
 export type * from './types';
 
 //Hooks
 export * from './hooks';
+
+//Themes
+export * from './themes';

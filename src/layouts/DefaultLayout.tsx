@@ -1,15 +1,28 @@
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { VideoPlayer } from '../components/VideoPlayer';
 import { layoutStyles } from '../components/common/CommonStyles';
 import { useBuffering } from '../hooks';
+import { Title } from 'src/components/info/Title';
+import { Subtitle } from 'src/components/info/Subtitle';
+import { defaultTheme } from '../themes';
+import { useEffect } from 'react';
+import { useVideo } from 'src/providers';
 
 export const DefaultLayout = () => {
   const { buffering } = useBuffering();
+  const { setTheme } = useVideo();
+
+  useEffect(() => {
+    setTheme(defaultTheme);
+    //eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <VideoPlayer.Controls>
       <View style={[layoutStyles.column, { justifyContent: 'space-between', height: '100%' }]}>
         <View style={layoutStyles.topControls}>
-          <Text style={{ color: 'white' }}>Dummy Text</Text>
+          <Title text="Default Title" />
+          <Subtitle text="Deafult Subtitle" />
         </View>
         <View style={layoutStyles.centerControls}>
           {!buffering ? <VideoPlayer.PlayButton /> : <VideoPlayer.LoadingSpinner />}
