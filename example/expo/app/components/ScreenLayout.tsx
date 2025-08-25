@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Text, TouchableOpacity, Button } from 'react-native';
-import { VideoPlayer, VideoProvider, useFullscreen } from 'react-native-media-toolkit';
+import { VideoPlayer, VideoProvider, useFullscreen } from 'react-native-video-toolkit';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Link } from 'expo-router';
 

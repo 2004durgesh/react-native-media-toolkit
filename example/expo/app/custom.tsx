@@ -11,7 +11,7 @@ import {
   LoadingSpinner,
   useVideo,
   VideoProvider,
-} from 'react-native-media-toolkit';
+} from 'react-native-video-toolkit';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 const customTheme = {

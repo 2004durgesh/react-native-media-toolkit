@@ -1,7 +1,7 @@
 /// <reference lib="dom" />
 /**
- * @file NativeMediaToolkit.web.ts
- * @description This file provides a web implementation of the NativeMediaToolkit module.
+ * @file NativeVideoToolkit.web.ts
+ * @description This file provides a web implementation of the NativeVideoToolkit module.
  */
 
 export interface Spec {
@@ -10,7 +10,7 @@ export interface Spec {
   isFullscreen(): Promise<boolean>;
 }
 
-export const NativeMediaToolkit: Spec = {
+export const NativeVideoToolkit: Spec = {
   enterFullscreen: async (): Promise<boolean> => {
     try {
       if (document.documentElement.requestFullscreen) {
@@ -40,4 +40,4 @@ export const NativeMediaToolkit: Spec = {
   },
 };
 
-export default NativeMediaToolkit;
+export default NativeVideoToolkit;

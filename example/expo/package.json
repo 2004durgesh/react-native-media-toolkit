@@ -1,5 +1,5 @@
 {
-  "name": "react-native-media-toolkit-expo-example",
+  "name": "react-native-video-toolkit-expo-example",
   "version": "1.0.0",
   "main": "expo-router/entry",
   "scripts": {
@@ -9,8 +9,8 @@
     "web": "expo start --web"
   },
   "react-native": {
-    "./NativeMediaToolkit": "./NativeMediaToolkit.ts",
-    "./NativeMediaToolkit.web": "./NativeMediaToolkit.web.ts"
+    "./NativeVideoToolkit": "./NativeVideoToolkit.ts",
+    "./NativeVideoToolkit.web": "./NativeVideoToolkit.web.ts"
   },
   "dependencies": {
     "@expo/metro-runtime": "~5.0.4",
@@ -24,13 +24,13 @@
     "react-dom": "19.0.0",
     "react-native": "0.79.5",
     "react-native-gesture-handler": "2.24.0",
-    "react-native-media-toolkit": "workspace:*",
     "react-native-orientation-director": "^2.6.1",
     "react-native-reanimated": "~3.17.4",
     "react-native-safe-area-context": "5.4.0",
     "react-native-screens": "~4.11.1",
     "react-native-svg": "15.11.2",
     "react-native-video": "6.14.0",
+    "react-native-video-toolkit": "workspace:*",
     "react-native-web": "^0.20.0"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { DefaultLayout } from 'react-native-media-toolkit';
+import { DefaultLayout } from 'react-native-video-toolkit';
 import { ScreenLayout } from './components/ScreenLayout';
 
 export default function Defualt() {

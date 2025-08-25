@@ -1,6 +1,6 @@
 /**
- * @file NativeMediaToolkit.ts
- * @description This file defines the interface and implementation for the NativeMediaToolkit module,
+ * @file NativeVideoToolkit.ts
+ * @description This file defines the interface and implementation for the NativeVideoToolkit module,
  * which provides methods to manage fullscreen mode in a React Native application.
  * It uses React Native's TurboModule system to interact with native code.
  * The module includes methods to enter and exit fullscreen mode, as well as to check if the
@@ -16,5 +16,5 @@ export interface Spec extends TurboModule {
   isFullscreen(): Promise<boolean>;
 }
 
-export const NativeMediaToolkit = TurboModuleRegistry.getEnforcing<Spec>('MediaToolkit');
-export default NativeMediaToolkit;
+export const NativeVideoToolkit = TurboModuleRegistry.getEnforcing<Spec>('VideoToolkit');
+export default NativeVideoToolkit;

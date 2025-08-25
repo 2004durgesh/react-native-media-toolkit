@@ -3,7 +3,7 @@
     "rootDir": ".",
     "baseUrl": ".",
     "paths": {
-      "react-native-media-toolkit": ["./src/index"]
+      "react-native-video-toolkit": ["./src/index"]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,

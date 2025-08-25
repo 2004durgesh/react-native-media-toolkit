@@ -1,13 +1,13 @@
-# react-native-media-toolkit
+# react-native-video-toolkit
 
 > **Note:** This package is currently under active development. The APIs are subject to change, and some features may not be fully implemented. At the moment, the `MinimalLayout` is the most stable and functional component.
 
 **A powerful, flexible, and customizable video player UI toolkit for React Native apps. Inspired by Vidstack, designed for mobile and TV experiences.**
 
-<!-- ![npm version](https://img.shields.io/npm/v/react-native-media-toolkit) -->
-<!-- ![license](https://img.shields.io/github/license/2004durgesh/react-native-media-toolkit) -->
+<!-- ![npm version](https://img.shields.io/npm/v/react-native-video-toolkit) -->
+<!-- ![license](https://img.shields.io/github/license/2004durgesh/react-native-video-toolkit) -->
 ![platform](https://img.shields.io/badge/platform-react--native-blue)
-<!-- ![issues](https://img.shields.io/github/issues/2004durgesh/react-native-media-toolkit) -->
+<!-- ![issues](https://img.shields.io/github/issues/2004durgesh/react-native-video-toolkit) -->
 
 ---
 
@@ -27,9 +27,9 @@
 > Coming soon on npm...
 
 ```bash
-npm install react-native-media-toolkit
+npm install react-native-video-toolkit
 # or
-yarn add react-native-media-toolkit
+yarn add react-native-video-toolkit
 ```
 
 ## Contributing

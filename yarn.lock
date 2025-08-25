@@ -11194,9 +11194,9 @@ __metadata:
   linkType: hard
 
 "fast-uri@npm:^3.0.1":
-  version: 3.0.6
-  resolution: "fast-uri@npm:3.0.6"
-  checksum: 7161ba2a7944778d679ba8e5f00d6a2bb479a2142df0982f541d67be6c979b17808f7edbb0ce78161c85035974bde3fa52b5137df31da46c0828cb629ba67c4e
+  version: 3.1.0
+  resolution: "fast-uri@npm:3.1.0"
+  checksum: daab0efd3548cc53d0db38ecc764d125773f8bd70c34552ff21abdc6530f26fa4cb1771f944222ca5e61a0a1a85d01a104848ff88c61736de445d97bd616ea7e
   languageName: node
   linkType: hard
 
@@ -19443,112 +19443,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-media-toolkit-bare-example@workspace:example/bare":
-  version: 0.0.0-use.local
-  resolution: "react-native-media-toolkit-bare-example@workspace:example/bare"
-  dependencies:
-    "@babel/core": ^7.25.2
-    "@babel/preset-env": ^7.25.3
-    "@babel/runtime": ^7.25.0
-    "@react-native-community/cli": 20.0.0
-    "@react-native-community/cli-platform-android": 20.0.0
-    "@react-native-community/cli-platform-ios": 20.0.0
-    "@react-native/babel-preset": 0.81.0
-    "@react-native/eslint-config": 0.81.0
-    "@react-native/metro-config": 0.81.0
-    "@react-native/typescript-config": 0.81.0
-    "@types/jest": ^29.5.13
-    "@types/react": ^19.1.0
-    "@types/react-test-renderer": ^19.1.0
-    eslint: ^8.19.0
-    jest: ^29.6.3
-    prettier: 2.8.8
-    react: 19.1.0
-    react-native: 0.79.5
-    react-native-builder-bob: ^0.31.0
-    react-native-gesture-handler: 2.24.0
-    react-native-media-toolkit: "workspace:*"
-    react-native-reanimated: ~3.17.4
-    react-native-video: 6.14.0
-    react-test-renderer: 19.1.0
-    typescript: ^5.8.3
-  languageName: unknown
-  linkType: soft
-
-"react-native-media-toolkit-expo-example@workspace:example/expo":
-  version: 0.0.0-use.local
-  resolution: "react-native-media-toolkit-expo-example@workspace:example/expo"
-  dependencies:
-    "@babel/core": ^7.20.0
-    "@expo/metro-runtime": ~5.0.4
-    expo: ^53.0.16
-    expo-constants: ~17.1.7
-    expo-linking: ~7.1.7
-    expo-router: ~5.1.5
-    expo-status-bar: ~2.2.3
-    lucide-react-native: ^0.539.0
-    react: 19.0.0
-    react-dom: 19.0.0
-    react-native: 0.79.5
-    react-native-builder-bob: ^0.31.0
-    react-native-gesture-handler: 2.24.0
-    react-native-media-toolkit: "workspace:*"
-    react-native-orientation-director: ^2.6.1
-    react-native-reanimated: ~3.17.4
-    react-native-safe-area-context: 5.4.0
-    react-native-screens: ~4.11.1
-    react-native-svg: 15.11.2
-    react-native-video: 6.14.0
-    react-native-web: ^0.20.0
-  languageName: unknown
-  linkType: soft
-
-"react-native-media-toolkit@workspace:*, react-native-media-toolkit@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "react-native-media-toolkit@workspace:."
-  dependencies:
-    "@commitlint/config-conventional": ^17.0.2
-    "@eslint/compat": ^1.2.7
-    "@eslint/eslintrc": ^3.3.0
-    "@eslint/js": ^9.22.0
-    "@react-native-community/cli": latest
-    "@react-native/eslint-config": ^0.73.1
-    "@release-it/conventional-changelog": ^9.0.2
-    "@types/jest": ^29.5.5
-    "@types/react": ^19.0.0
-    commitlint: ^17.0.2
-    del-cli: ^5.1.0
-    eslint: ^9.22.0
-    eslint-config-prettier: ^10.1.1
-    eslint-plugin-prettier: ^5.2.3
-    eslint-plugin-unused-imports: ^4.1.4
-    husky: ^9.1.7
-    jest: ^29.7.0
-    lucide-react-native: ^0.539.0
-    prettier: ^3.0.3
-    react: 19.0.0
-    react-native: 0.79.5
-    react-native-awesome-slider: ^2.9.0
-    react-native-builder-bob: ^0.31.0
-    react-native-gesture-handler: 2.24.0
-    react-native-orientation-director: ^2.6.1
-    react-native-reanimated: 3.17.4
-    react-native-svg: ^15.12.1
-    react-native-video: 6.14.0
-    release-it: ^17.10.0
-    turbo: ^1.10.7
-    typescript: ^5.8.3
-  peerDependencies:
-    lucide-react-native: ">=0.539.0"
-    react: "*"
-    react-native: "*"
-    react-native-gesture-handler: ">=2.0.0"
-    react-native-reanimated: ">=3.0.0"
-    react-native-svg: ">=15.0.0"
-    react-native-video: ">=6.0.0"
-  languageName: unknown
-  linkType: soft
-
 "react-native-orientation-director@npm:^2.6.1":
   version: 2.6.1
   resolution: "react-native-orientation-director@npm:2.6.1"
@@ -19662,6 +19556,112 @@ __metadata:
   checksum: 5761d3b37e5adb4e58945146b210009decf0a436c194fc3dc5c025581aa5c602b5698d7eea493ddf9d31b4d90433fa54eaf1ed0cec721ab820cf895e1cf9614a
   languageName: node
   linkType: hard
+
+"react-native-video-toolkit-bare-example@workspace:example/bare":
+  version: 0.0.0-use.local
+  resolution: "react-native-video-toolkit-bare-example@workspace:example/bare"
+  dependencies:
+    "@babel/core": ^7.25.2
+    "@babel/preset-env": ^7.25.3
+    "@babel/runtime": ^7.25.0
+    "@react-native-community/cli": 20.0.0
+    "@react-native-community/cli-platform-android": 20.0.0
+    "@react-native-community/cli-platform-ios": 20.0.0
+    "@react-native/babel-preset": 0.81.0
+    "@react-native/eslint-config": 0.81.0
+    "@react-native/metro-config": 0.81.0
+    "@react-native/typescript-config": 0.81.0
+    "@types/jest": ^29.5.13
+    "@types/react": ^19.1.0
+    "@types/react-test-renderer": ^19.1.0
+    eslint: ^8.19.0
+    jest: ^29.6.3
+    prettier: 2.8.8
+    react: 19.1.0
+    react-native: 0.79.5
+    react-native-builder-bob: ^0.31.0
+    react-native-gesture-handler: 2.24.0
+    react-native-reanimated: ~3.17.4
+    react-native-video: 6.14.0
+    react-native-video-toolkit: "workspace:*"
+    react-test-renderer: 19.1.0
+    typescript: ^5.8.3
+  languageName: unknown
+  linkType: soft
+
+"react-native-video-toolkit-expo-example@workspace:example/expo":
+  version: 0.0.0-use.local
+  resolution: "react-native-video-toolkit-expo-example@workspace:example/expo"
+  dependencies:
+    "@babel/core": ^7.20.0
+    "@expo/metro-runtime": ~5.0.4
+    expo: ^53.0.16
+    expo-constants: ~17.1.7
+    expo-linking: ~7.1.7
+    expo-router: ~5.1.5
+    expo-status-bar: ~2.2.3
+    lucide-react-native: ^0.539.0
+    react: 19.0.0
+    react-dom: 19.0.0
+    react-native: 0.79.5
+    react-native-builder-bob: ^0.31.0
+    react-native-gesture-handler: 2.24.0
+    react-native-orientation-director: ^2.6.1
+    react-native-reanimated: ~3.17.4
+    react-native-safe-area-context: 5.4.0
+    react-native-screens: ~4.11.1
+    react-native-svg: 15.11.2
+    react-native-video: 6.14.0
+    react-native-video-toolkit: "workspace:*"
+    react-native-web: ^0.20.0
+  languageName: unknown
+  linkType: soft
+
+"react-native-video-toolkit@workspace:*, react-native-video-toolkit@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "react-native-video-toolkit@workspace:."
+  dependencies:
+    "@commitlint/config-conventional": ^17.0.2
+    "@eslint/compat": ^1.2.7
+    "@eslint/eslintrc": ^3.3.0
+    "@eslint/js": ^9.22.0
+    "@react-native-community/cli": latest
+    "@react-native/eslint-config": ^0.73.1
+    "@release-it/conventional-changelog": ^9.0.2
+    "@types/jest": ^29.5.5
+    "@types/react": ^19.0.0
+    commitlint: ^17.0.2
+    del-cli: ^5.1.0
+    eslint: ^9.22.0
+    eslint-config-prettier: ^10.1.1
+    eslint-plugin-prettier: ^5.2.3
+    eslint-plugin-unused-imports: ^4.1.4
+    husky: ^9.1.7
+    jest: ^29.7.0
+    lucide-react-native: ^0.539.0
+    prettier: ^3.0.3
+    react: 19.0.0
+    react-native: 0.79.5
+    react-native-awesome-slider: ^2.9.0
+    react-native-builder-bob: ^0.31.0
+    react-native-gesture-handler: 2.24.0
+    react-native-orientation-director: ^2.6.1
+    react-native-reanimated: 3.17.4
+    react-native-svg: ^15.12.1
+    react-native-video: 6.14.0
+    release-it: ^17.10.0
+    turbo: ^1.10.7
+    typescript: ^5.8.3
+  peerDependencies:
+    lucide-react-native: ">=0.539.0"
+    react: "*"
+    react-native: "*"
+    react-native-gesture-handler: ">=2.0.0"
+    react-native-reanimated: ">=3.0.0"
+    react-native-svg: ">=15.0.0"
+    react-native-video: ">=6.0.0"
+  languageName: unknown
+  linkType: soft
 
 "react-native-video@npm:6.14.0":
   version: 6.14.0

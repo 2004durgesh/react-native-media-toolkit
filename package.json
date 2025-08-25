@@ -1,5 +1,5 @@
 {
-  "name": "react-native-media-toolkit",
+  "name": "react-native-video-toolkit",
   "version": "0.1.0",
   "description": "A powerful, flexible, and customizable video player UI toolkit for React Native apps. Inspired by Vidstack, designed for mobile and TV experiences.",
   "source": "./src/index.tsx",
@@ -39,14 +39,14 @@
     "!**/.*"
   ],
   "scripts": {
-    "example": "yarn workspace react-native-media-toolkit-expo-example",
-    "example:expo": "yarn workspace react-native-media-toolkit-expo-example",
-    "example:bare": "yarn workspace react-native-media-toolkit-bare-example",
+    "example": "yarn workspace react-native-video-toolkit-expo-example",
+    "example:expo": "yarn workspace react-native-video-toolkit-expo-example",
+    "example:bare": "yarn workspace react-native-video-toolkit-bare-example",
     "docs": "yarn workspace docs",
     "test": "jest",
     "typecheck": "yarn workspaces foreach --verbose --topological --exclude docs run typecheck && yarn workspace docs typecheck",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "clean": "del-cli lib",
+    "clean": "del-cli android/build lib \"example/*/android/.gradle\" \"example/*/android/build\" \"example/*/android/app/build\" \"example/*/ios/build\" \"example/*/ios/Pods\"",
     "prepare": "bob build",
     "codegen": "bob build && npx react-native codegen",
     "release": "release-it --only-version",
@@ -59,14 +59,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/2004durgesh/react-native-media-toolkit.git"
+    "url": "git+https://github.com/2004durgesh/react-native-video-toolkit.git"
   },
   "author": "Durgesh Kumar Dwivedi <durgeshdwivedi81@gmail.com> (https://github.com/2004durgesh)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/2004durgesh/react-native-media-toolkit/issues"
+    "url": "https://github.com/2004durgesh/react-native-video-toolkit/issues"
   },
-  "homepage": "https://github.com/2004durgesh/react-native-media-toolkit#readme",
+  "homepage": "https://github.com/2004durgesh/react-native-video-toolkit#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
@@ -174,11 +174,11 @@
     ]
   },
   "codegenConfig": {
-    "name": "MediaToolkitSpec",
+    "name": "VideoToolkitSpec",
     "type": "modules",
     "jsSrcsDir": "src",
     "android": {
-      "javaPackageName": "com.mediatoolkit"
+      "javaPackageName": "com.videotoolkit"
     }
   },
   "create-react-native-library": {

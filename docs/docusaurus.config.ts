@@ -18,12 +18,12 @@ const config: Config = {
   url: 'https://2004durgesh.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/react-native-media-toolkit/',
+  baseUrl: '/react-native-video-toolkit/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: '2004durgesh', // Usually your GitHub org/user name.
-  projectName: 'react-native-media-toolkit', // Usually your repo name.
+  projectName: 'react-native-video-toolkit', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -43,7 +43,7 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           remarkPlugins: [[require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]],
-          editUrl: 'https://github.com/2004durgesh/react-native-media-toolkit/tree/main/docs/',
+          editUrl: 'https://github.com/2004durgesh/react-native-video-toolkit/tree/main/docs/',
         },
         blog: {
           showReadingTime: true,
@@ -52,7 +52,7 @@ const config: Config = {
             xslt: true,
           },
           remarkPlugins: [[require('@docusaurus/remark-plugin-npm2yarn'), { sync: true }]],
-          editUrl: 'https://github.com/2004durgesh/react-native-media-toolkit/tree/main/docs/',
+          editUrl: 'https://github.com/2004durgesh/react-native-video-toolkit/tree/main/docs/',
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -84,7 +84,7 @@ const config: Config = {
           label: 'Documentation',
         },
         {
-          href: 'https://github.com/2004durgesh/react-native-media-toolkit',
+          href: 'https://github.com/2004durgesh/react-native-video-toolkit',
           label: 'GitHub',
           position: 'right',
         },
@@ -92,7 +92,7 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
-      copyright: `Copyright © ${new Date().getFullYear()} react-native-media-toolkit.`,
+      copyright: `Copyright © ${new Date().getFullYear()} react-native-video-toolkit.`,
     },
     prism: {
       theme: prismThemes.github,

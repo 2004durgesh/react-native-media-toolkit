@@ -1,5 +1,5 @@
 {
-  "name": "react-native-media-toolkit-bare-example",
+  "name": "react-native-video-toolkit-bare-example",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -13,9 +13,9 @@
     "react": "19.1.0",
     "react-native": "0.79.5",
     "react-native-gesture-handler": "2.24.0",
-    "react-native-media-toolkit": "workspace:*",
     "react-native-reanimated": "~3.17.4",
-    "react-native-video": "6.14.0"
+    "react-native-video": "6.14.0",
+    "react-native-video-toolkit": "workspace:*"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

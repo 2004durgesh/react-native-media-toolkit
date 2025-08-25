@@ -1,7 +1,7 @@
 import { useVideo } from '../../providers';
 import { useCallback } from 'react';
 import { useControlsVisibility } from './useControlsVisibility';
-import { NativeMediaToolkit } from '../../NativeMediaToolkit';
+import { NativeVideoToolkit } from '../../NativeVideoToolkit';
 import RNOrientationDirector, { Orientation } from 'react-native-orientation-director';
 
 export const useFullscreen = () => {
@@ -17,15 +17,15 @@ export const useFullscreen = () => {
       if (state.config.enableScreenRotation) {
         RNOrientationDirector.lockTo(Orientation.landscape);
       }
-      NativeMediaToolkit.enterFullscreen();
+      NativeVideoToolkit.enterFullscreen();
       state.config.onEnterFullscreen?.();
-      console.log('Entering ', await NativeMediaToolkit.isFullscreen());
+      console.log('Entering ', await NativeVideoToolkit.isFullscreen());
     } else if (state.hideTimeoutRef) {
       if (state.config.enableScreenRotation) {
         RNOrientationDirector.lockTo(Orientation.portrait);
       }
-      console.log('exiting', await NativeMediaToolkit.isFullscreen());
-      NativeMediaToolkit.exitFullscreen();
+      console.log('exiting', await NativeVideoToolkit.isFullscreen());
+      NativeVideoToolkit.exitFullscreen();
       state.config.onExitFullscreen?.();
       clearTimeout(state.hideTimeoutRef!);
       showControls();

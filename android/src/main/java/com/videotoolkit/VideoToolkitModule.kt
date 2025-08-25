@@ -1,4 +1,4 @@
-package com.mediatoolkit
+package com.videotoolkit
 
 import android.app.Activity
 import android.os.Build
@@ -13,14 +13,14 @@ import com.facebook.react.bridge.ReactMethod
 import com.facebook.react.bridge.UiThreadUtil
 import com.facebook.react.module.annotations.ReactModule
 
-@ReactModule(name = MediaToolkitModule.NAME)
-class MediaToolkitModule(reactContext: ReactApplicationContext) :
-  NativeMediaToolkitSpec(reactContext) {
+@ReactModule(name = VideoToolkitModule.NAME)
+class VideoToolkitModule(reactContext: ReactApplicationContext) :
+  NativeVideoToolkitSpec(reactContext) {
 
   private var isCurrentlyFullscreen = false
 
   companion object {
-    const val NAME = "MediaToolkit"
+    const val NAME = "VideoToolkit"
     private const val INSETS_TYPE_HIDE = 0
     private const val INSETS_TYPE_SHOW = 1
     private const val INSETS_TYPE_BEHAVIOR = 2
@@ -146,7 +146,7 @@ class MediaToolkitModule(reactContext: ReactApplicationContext) :
           promise.resolve(false)
         }
       } catch (e: Exception) {
-        android.util.Log.e("MediaToolkit", "Error setting system insets controller", e)
+        android.util.Log.e("VideoToolkit", "Error setting system insets controller", e)
         promise.resolve(false)
       }
     }
@@ -165,7 +165,7 @@ class MediaToolkitModule(reactContext: ReactApplicationContext) :
         currentActivity.window.decorView.systemUiVisibility = flags
         promise.resolve(true)
       } catch (e: Exception) {
-        android.util.Log.e("MediaToolkit", "Error setting system UI flags", e)
+        android.util.Log.e("VideoToolkit", "Error setting system UI flags", e)
         promise.resolve(false)
       }
     }
@@ -192,7 +192,7 @@ class MediaToolkitModule(reactContext: ReactApplicationContext) :
         }
         promise.resolve(isFullscreen)
       } catch (e: Exception) {
-        android.util.Log.e("MediaToolkit", "Error checking fullscreen status", e)
+        android.util.Log.e("VideoToolkit", "Error checking fullscreen status", e)
         promise.resolve(isCurrentlyFullscreen)
       }
     }
