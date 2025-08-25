@@ -4,21 +4,15 @@ sidebar_position: 1
 
 # Getting Started
 
-Welcome to `react-native-media-toolkit`! This guide will help you get started with installing and using the video player component in your React Native application.
+Welcome to `react-native-media-toolkit` . This guide will help you get started with installing and using the video player component in your React Native application.
 
 ## Installation
 
 To install the library, run the following command in your project:
 
-```bash
-yarn add react-native-media-toolkit react-native-video react-native-gesture-handler react-native-reanimated react-native-svg react-native-orientation-director
-```
-
-Or if you are using npm:
-
-```bash
-npm install react-native-media-toolkit react-native-video react-native-gesture-handler react-native-reanimated react-native-svg react-native-orientation-director
-```
+    ```bash npm2yarn
+    npm install react-native-media-toolkit react-native-video react-native-gesture-handler react-native-reanimated react-native-svg react-native-orientation-director
+    ```
 
 :::note
 
@@ -26,12 +20,11 @@ react-native-media-toolkit works with new architecture (Fabric + TurboModules) e
 
 :::
 
-
 ### iOS
 
 :::danger
 
-Due to lack of mac machine, I am unable to add TurboModules support for iOS. S, contributions are welcome. for iOS support 🙏
+Due to lack of mac machine, I am unable to add TurboModules support for iOS. So, contributions are welcome. for iOS support 🙏
 
 :::
 
@@ -54,13 +47,15 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    /* Don't wrap with SafeAreaView as it adds,
+     extra padding which breaks the layout in fullscreen mode*/
+    <VideoProvider>
       <View style={styles.videoContainer}>
         <VideoPlayer source={videoSource}>
           <DefaultLayout />
         </VideoPlayer>
       </View>
-    </SafeAreaView>
+    </VideoProvider>
   );
 }
 

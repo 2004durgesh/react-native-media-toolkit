@@ -11,34 +11,19 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
-    description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and used to get your website up and running
-        quickly.
-      </>
-    ),
+    title: 'Fully Customizable UI',
+    Svg: require('@site/static/img/sliders.svg').default,
+    description: <>Build your own video player with a flexible compound component pattern.</>,
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
-    description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go ahead and move your docs into the{' '}
-        <code>docs</code> directory.
-      </>
-    ),
+    title: 'Theming Support',
+    Svg: require('@site/static/img/palette.svg').default,
+    description: <>Easily customize the look and feel of your player to match your app's design.</>,
   },
   {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can be extended while reusing the same
-        header and footer.
-      </>
-    ),
+    title: 'Gesture Control',
+    Svg: require('@site/static/img/gesture.svg').default,
+    description: <>Out-of-the-box support for gestures like double-tap to seek and tap to toggle controls.</>,
   },
 ];
 
