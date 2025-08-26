@@ -12,7 +12,7 @@ import Animated, {
   withTiming,
   runOnJS,
 } from 'react-native-reanimated';
-import { useVideo } from 'src/providers';
+import { useVideo } from '../providers';
 import type { Component } from 'react';
 
 interface TapHandlerProps {
@@ -163,6 +163,7 @@ export const TapHandler: FC<TapHandlerProps> = ({
         .numberOfTaps(2)
         .maxDuration(250)
         .onStart((event) => {
+          'worklet';
           if (isLocked) return;
 
           const now = Date.now();
@@ -198,7 +199,6 @@ export const TapHandler: FC<TapHandlerProps> = ({
             runOnJS(onSeekEnd)();
           }
           rippleOpacity.value = withTiming(0, { duration: 500 });
-          console.log('double tap');
         })
         .runOnJS(true),
     [

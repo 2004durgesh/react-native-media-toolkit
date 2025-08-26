@@ -4,10 +4,10 @@ import { layoutStyles } from '../components/common/CommonStyles';
 import { useBuffering, useControlsVisibility } from '../hooks';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { useEffect } from 'react';
-import { Title } from 'src/components/info/Title';
-import { Subtitle } from 'src/components/info/Subtitle';
+import { Title } from '../components/info/Title';
+import { Subtitle } from '../components/info/Subtitle';
 import { minimalTheme } from '../themes';
-import { useVideo } from 'src/providers';
+import { useVideo } from '../providers';
 
 export const MinimalLayout = () => {
   const { buffering } = useBuffering();

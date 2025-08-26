@@ -1,8 +1,10 @@
-const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
+const { getDefaultConfig } = require('@react-native/metro-config');
 const path = require('path');
 const { getConfig } = require('react-native-builder-bob/metro-config');
 const pkg = require('../../package.json');
-
+const {
+  wrapWithReanimatedMetroConfig,
+} = require('react-native-reanimated/metro-config');
 const root = path.resolve(__dirname, '../..');
 /**
  * Metro configuration
@@ -11,8 +13,18 @@ const root = path.resolve(__dirname, '../..');
  * @type {import('@react-native/metro-config').MetroConfig}
  */
 
-module.exports = mergeConfig(getDefaultConfig(__dirname), {
+const baseConfig = wrapWithReanimatedMetroConfig(getConfig(getDefaultConfig(__dirname), {
   root,
   pkg,
   project: __dirname,
-});
+}));
+
+// Merge in custom resolver options
+module.exports = {
+  ...baseConfig,
+  resolver: {
+    ...(baseConfig.resolver || {}),
+    platforms: ['native', 'android', 'ios', 'web'],
+    sourceExts: ['js', 'json', 'ts', 'tsx'],
+  },
+};

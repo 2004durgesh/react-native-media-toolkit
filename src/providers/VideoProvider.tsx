@@ -1,8 +1,9 @@
 import React, { createContext, useReducer, useContext, useEffect } from 'react';
 import type { SharedValue } from 'react-native-reanimated';
-import type { VideoPlayerConfig, VideoState, Theme } from 'src/types';
-import { defaultTheme } from 'src/themes';
+import type { VideoPlayerConfig, VideoState, Theme } from '../types';
+import { defaultTheme } from '../themes';
 import { type LayoutRectangle, Dimensions } from 'react-native';
+import { ThemeProvider } from './ThemeProvider';
 
 // Default Configuration
 const defaultConfig: VideoPlayerConfig = {
@@ -97,14 +98,14 @@ function videoReducer(state: VideoProviderState, action: Action): VideoProviderS
       return {
         ...state,
         theme: {
-          ...state.theme,
+          ...defaultTheme,
           ...action.payload,
-          colors: { ...state.theme.colors, ...action.payload.colors },
-          sizing: { ...state.theme.sizing, ...action.payload.sizing },
-          fonts: { ...state.theme.fonts, ...action.payload.fonts },
-          fontSizes: { ...state.theme.fontSizes, ...action.payload.fontSizes },
-          borderRadius: action.payload.borderRadius ?? state.theme.borderRadius,
-          animations: { ...state.theme.animations, ...action.payload.animations },
+          colors: { ...defaultTheme.colors, ...action.payload.colors },
+          sizing: { ...defaultTheme.sizing, ...action.payload.sizing },
+          fonts: { ...defaultTheme.fonts, ...action.payload.fonts },
+          fontSizes: { ...defaultTheme.fontSizes, ...action.payload.fontSizes },
+          borderRadius: action.payload.borderRadius ?? defaultTheme.borderRadius,
+          animations: { ...defaultTheme.animations, ...action.payload.animations },
         },
       };
     case 'SET_CONTROLS_OPACITY':
@@ -153,7 +154,11 @@ export const VideoProvider: React.FC<{
     dispatch({ type: 'INITIALIZE', payload: { config, theme } });
   }, [config, theme]);
 
-  return <VideoContext.Provider value={{ state, dispatch }}>{children}</VideoContext.Provider>;
+  return (
+    <VideoContext.Provider value={{ state, dispatch }}>
+      <ThemeProvider theme={state.theme}>{children}</ThemeProvider>
+    </VideoContext.Provider>
+  );
 };
 
 // Hook to use the context

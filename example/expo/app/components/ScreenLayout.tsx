@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity, Button } from 'react-native';
 import { VideoPlayer, VideoProvider, useFullscreen } from 'react-native-video-toolkit';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Link } from 'expo-router';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 type Sample = {
   type: string;
@@ -85,12 +86,14 @@ const Main = ({ layout }: { layout: React.ReactNode }) => {
 export const ScreenLayout = ({ layout }: { layout: React.ReactNode }) => {
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'black' }}>
-      <VideoProvider
-        config={{
-          enableScreenRotation: true,
-        }}>
-        <Main layout={layout} />
-      </VideoProvider>
+      <SafeAreaView edges={['top']}>
+        <VideoProvider
+          config={{
+            enableScreenRotation: true,
+          }}>
+          <Main layout={layout} />
+        </VideoProvider>
+      </SafeAreaView>
     </GestureHandlerRootView>
   );
 };

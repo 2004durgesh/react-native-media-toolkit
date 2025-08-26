@@ -34,28 +34,33 @@ No additional steps are typically required for Android after `npm install` or `y
 
 ## Basic Usage
 
-Here's a basic example of how to use the `VideoPlayer` component:
+Here's a basic example of how to use the `VideoPlayer` component \
+For more [examples](https://github.com/2004durgesh/react-native-video-toolkit/tree/main/example) check the example folder.
+
+:::note
+if using react-native-safe-area-context add `edges={['top']}` mainly in expo, else if you are using SafeAreaView from react-native no extra steps, this prevents the video content from being obscured by device notches or status bars.
+:::
 
 ```tsx
 import React from 'react';
-import { SafeAreaView, StyleSheet, View } from 'react-native';
-import { VideoPlayer, DefaultLayout } from 'react-native-video-toolkit';
-
+import { StyleSheet, View } from 'react-native';
+import { VideoPlayer, DefaultLayout, VideoProvider, defaultTheme } from 'react-native-video-toolkit';
+import { SafeAreaView } from 'react-native-safe-area-context'; // Import SafeAreaView from react-native-safe-area-context
 function App(): React.JSX.Element {
   const videoSource = {
     uri: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
   };
 
   return (
-    /* Don't wrap with SafeAreaView as it adds,
-     extra padding which breaks the layout in fullscreen mode*/
-    <VideoProvider>
-      <View style={styles.videoContainer}>
-        <VideoPlayer source={videoSource}>
-          <DefaultLayout />
-        </VideoPlayer>
-      </View>
-    </VideoProvider>
+    <SafeAreaView edges={['top']}>
+      <VideoProvider theme={defaultTheme}>
+        <View style={styles.videoContainer}>
+          <VideoPlayer source={videoSource}>
+            <DefaultLayout />
+          </VideoPlayer>
+        </View>
+      </VideoProvider>
+    </SafeAreaView>
   );
 }
 

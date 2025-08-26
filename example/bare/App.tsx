@@ -7,8 +7,14 @@ import {
   Text,
   SafeAreaView,
 } from 'react-native';
-// @ts-ignore
-import { VideoPlayer, MinimalSkin } from '../../../src';
+import {
+  VideoPlayer,
+  MinimalLayout,
+  VideoProvider,
+  DefaultLayout,
+  minimalTheme,
+} from '../../src/index';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
@@ -18,17 +24,19 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <View style={styles.content}>
-        <Text style={styles.title}>React Native Media Toolkit Example</Text>
-        <View style={styles.videoContainer}>
-          <VideoPlayer source={videoSource} style={styles.videoPlayer}>
-            <MinimalSkin />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <VideoProvider
+        theme={minimalTheme}
+        config={{ enableScreenRotation: true }}
+      >
+        <SafeAreaView style={styles.container}>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <VideoPlayer source={videoSource} containerStyle={styles.videoPlayer}>
+            <MinimalLayout />
           </VideoPlayer>
-        </View>
-      </View>
-    </SafeAreaView>
+        </SafeAreaView>
+      </VideoProvider>
+    </GestureHandlerRootView>
   );
 }
 

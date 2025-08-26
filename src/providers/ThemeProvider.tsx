@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react';
-import type { Theme } from 'src/types';
+import type { Theme } from '../types';
 
 const ThemeContext = createContext<Theme | undefined>(undefined);
 

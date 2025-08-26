@@ -5,7 +5,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: 'React Native Media Toolkit',
+  title: 'React Native Video Toolkit',
   tagline: 'Video playback and handling toolkit for React Native',
   favicon: 'img/icon.png',
 
