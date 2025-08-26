@@ -11,9 +11,10 @@ const defaultConfig: VideoPlayerConfig = {
   autoHideDelay: 5000,
   autoPlay: true,
   enableDoubleTapGestures: true,
+  enablePanGestures: true,
   enableFullscreen: true,
   enableVolumeControl: true,
-  enableScreenRotation: false,
+  enableScreenRotation: true,
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
 };
 

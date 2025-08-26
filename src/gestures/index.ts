@@ -1,1 +1,1 @@
-export { TapHandler } from './TapHandler';
+export { GestureHandler } from './GestureHandler';

@@ -9,10 +9,10 @@ import {
   MuteButton,
   LoadingSpinner,
 } from '../controls/basic';
-import type { VideoSource } from '../types';
+import type { GestureHandlerProps, VideoSource } from '../types';
 import { VideoSurface } from './core';
 import type { ReactVideoProps } from 'react-native-video';
-import { TapHandler } from '../gestures';
+import { GestureHandler } from '../gestures';
 import { useVideo } from '../providers';
 
 interface VideoPlayerProps {
@@ -20,9 +20,10 @@ interface VideoPlayerProps {
   children?: ReactNode;
   containerStyle?: StyleProp<ViewStyle>;
   videoProps?: ReactVideoProps;
+  gestureProps?: GestureHandlerProps;
 }
 
-const VideoPlayerComponent = ({ source, children, containerStyle, videoProps }: VideoPlayerProps) => {
+const VideoPlayerComponent = ({ source, children, containerStyle, videoProps, gestureProps }: VideoPlayerProps) => {
   // this is the root of all the things :)
   const { state } = useVideo();
   return (
@@ -31,12 +32,12 @@ const VideoPlayerComponent = ({ source, children, containerStyle, videoProps }: 
         { position: 'relative', height: state.fullscreen ? state.videoLayout.width : state.videoLayout.height },
         containerStyle,
       ]}>
-      <TapHandler>
+      <GestureHandler {...gestureProps}>
         <View style={{ overflow: 'hidden' }}>
           <VideoSurface {...videoProps} source={source} />
           {children}
         </View>
-      </TapHandler>
+      </GestureHandler>
     </View>
   );
 };

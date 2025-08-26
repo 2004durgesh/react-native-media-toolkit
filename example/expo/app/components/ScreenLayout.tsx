@@ -75,7 +75,20 @@ const Main = ({ layout }: { layout: React.ReactNode }) => {
 
   return (
     <>
-      <VideoPlayer source={videoSource} containerStyle={styles.videoPlayer}>
+      <VideoPlayer
+        source={videoSource}
+        containerStyle={styles.videoPlayer}
+        gestureProps={{
+          onLeftVerticalPan(e) {
+            console.log('left pan', e);
+          },
+          onRightVerticalPan(e) {
+            console.log('right pan', e);
+          },
+          onGlobalVerticalPan(e) {
+            console.log('global pan', e);
+          },
+        }}>
         {layout}
       </VideoPlayer>
       {!fullscreen && <SampleSelector samples={samples} currentUri={uri} onSelect={setUri} />}
@@ -87,10 +100,7 @@ export const ScreenLayout = ({ layout }: { layout: React.ReactNode }) => {
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'black' }}>
       <SafeAreaView edges={['top']}>
-        <VideoProvider
-          config={{
-            enableScreenRotation: true,
-          }}>
+        <VideoProvider>
           <Main layout={layout} />
         </VideoProvider>
       </SafeAreaView>

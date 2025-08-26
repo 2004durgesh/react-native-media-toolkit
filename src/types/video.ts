@@ -23,6 +23,7 @@ export interface VideoPlayerConfig {
   enableDoubleTapGestures: boolean;
   enableFullscreen: boolean;
   enableVolumeControl: boolean;
+  enablePanGestures: boolean;
   enableScreenRotation: boolean;
   playbackRates: number[];
   onEnterFullscreen?: () => void;
