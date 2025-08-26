@@ -1,0 +1,117 @@
+# Theme Types
+
+This document outlines the types related to player theming.
+
+## `Theme`
+
+The `Theme` interface defines the styling tokens for the video player, allowing for consistent and customizable designs.
+
+```typescript
+export interface Theme {
+  colors: {
+    primary: string;
+    secondary: string;
+    accent: string;
+    background: string;
+    overlay: string;
+    text: string;
+    textSecondary: string;
+    error: string;
+    success: string;
+    border: string;
+    focus: string;
+  };
+  sizing: {
+    xs: number;
+    sm: number;
+    md: number;
+    lg: number;
+    xl: number;
+  };
+  iconSizes: {
+    sm: number;
+    md: number;
+    lg: number;
+  };
+  borderRadius: number;
+  fonts: {
+    regular: string;
+    medium: string;
+    bold: string;
+  };
+  fontSizes: {
+    sm: number;
+    md: number;
+    lg: number;
+  };
+  animations: {
+    fast: number;
+    normal: number;
+    slow: number;
+  };
+}
+```
+
+### `colors`
+
+| Property        | Type     | Description                     |
+| --------------- | -------- | ------------------------------- |
+| `primary`       | `string` | Main action color.              |
+| `secondary`     | `string` | Secondary UI color.             |
+| `accent`        | `string` | Highlight or progress color.    |
+| `background`    | `string` | Main background color.          |
+| `overlay`       | `string` | Semi-transparent overlay color. |
+| `text`          | `string` | Primary text color.             |
+| `textSecondary` | `string` | Secondary text color.           |
+| `error`         | `string` | Color for error states.         |
+| `success`       | `string` | Color for success states.       |
+| `border`        | `string` | Border or outline color.        |
+| `focus`         | `string` | Keyboard focus indicator color. |
+
+### `sizing`
+
+| Property | Type     | Description                 |
+| -------- | -------- | --------------------------- |
+| `xs`     | `number` | Extra small spacing (4px).  |
+| `sm`     | `number` | Small spacing (8px).        |
+| `md`     | `number` | Medium spacing (16px).      |
+| `lg`     | `number` | Large spacing (24px).       |
+| `xl`     | `number` | Extra large spacing (32px). |
+
+### `iconSizes`
+
+| Property | Type     | Description   |
+| -------- | -------- | ------------- |
+| `sm`     | `number` | Small icons.  |
+| `md`     | `number` | Medium icons. |
+| `lg`     | `number` | Large icons.  |
+
+### `borderRadius`
+
+| Property       | Type     | Description                 |
+| -------------- | -------- | --------------------------- |
+| `borderRadius` | `number` | Global border radius (8px). |
+
+### `fonts`
+
+| Property  | Type     | Description                |
+| --------- | -------- | -------------------------- |
+| `regular` | `string` | Regular font family.       |
+| `medium`  | `string` | Medium weight font family. |
+| `bold`    | `string` | Bold font family.          |
+
+### `fontSizes`
+
+| Property | Type     | Description       |
+| -------- | -------- | ----------------- |
+| `sm`     | `number` | Small text size.  |
+| `md`     | `number` | Medium text size. |
+| `lg`     | `number` | Large text size.  |
+
+### `animations`
+
+| Property | Type     | Description                        |
+| -------- | -------- | ---------------------------------- |
+| `fast`   | `number` | Fast animation duration (100ms).   |
+| `normal` | `number` | Normal animation duration (200ms). |
+| `slow`   | `number` | Slow animation duration (300ms).   |

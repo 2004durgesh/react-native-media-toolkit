@@ -19,12 +19,10 @@ export const useFullscreen = () => {
       }
       NativeVideoToolkit.enterFullscreen();
       state.config.onEnterFullscreen?.();
-      console.log('Entering ', await NativeVideoToolkit.isFullscreen());
     } else if (state.hideTimeoutRef) {
       if (state.config.enableScreenRotation) {
         RNOrientationDirector.lockTo(Orientation.portrait);
       }
-      console.log('exiting', await NativeVideoToolkit.isFullscreen());
       NativeVideoToolkit.exitFullscreen();
       state.config.onExitFullscreen?.();
       clearTimeout(state.hideTimeoutRef!);

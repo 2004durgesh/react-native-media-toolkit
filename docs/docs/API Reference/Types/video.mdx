@@ -1,0 +1,98 @@
+# Video Types
+
+This document outlines the types related to the video player.
+
+## `VideoSource`
+
+The `VideoSource` interface defines the source of the video to be played.
+
+```typescript
+export interface VideoSource {
+  uri: string;
+  type?: string;
+  headers?: Record<string, string>;
+}
+```
+
+:::note
+The `uri` is the only required property. The `type` and `headers` are optional and can be used to provide more information about the video source.
+:::
+
+## `VideoState`
+
+The `VideoState` interface represents the current state of the video player.
+
+```typescript
+export interface VideoState {
+  isPlaying: boolean;
+  currentTime: number;
+  duration: number;
+  buffering: boolean;
+  muted: boolean;
+  volume: number;
+  playbackRate: number;
+  fullscreen: boolean;
+  error: string | null;
+}
+```
+
+## `VideoPlayerConfig`
+
+The `VideoPlayerConfig` interface allows you to configure the behavior of the video player.
+
+| Property                  | Type         | Description                                                                 |
+| ------------------------- | ------------ | --------------------------------------------------------------------------- |
+| `autoHideControls`        | `boolean`    | If `true`, the controls will automatically hide after a certain delay.      |
+| `autoPlay`                | `boolean`    | If `true`, the video will start playing automatically.                      |
+| `autoHideDelay`           | `number`     | The delay in milliseconds before the controls are hidden.                   |
+| `enableDoubleTapGestures` | `boolean`    | If `true`, the user can double-tap to seek forward or backward.             |
+| `enableFullscreen`        | `boolean`    | If `true`, the user can enter and exit fullscreen mode.                     |
+| `enableVolumeControl`     | `boolean`    | If `true`, the user can control the volume of the video.                    |
+| `enablePanGestures`       | `boolean`    | If `true`, the user can use pan gestures to control volume and brightness.  |
+| `enableScreenRotation`    | `boolean`    | If `true`, the screen will rotate automatically when the device is rotated. |
+| `playbackRates`           | `number[]`   | An array of playback rates to be displayed in the settings menu.            |
+| `onEnterFullscreen`       | `() => void` | A callback function that is called when the player enters fullscreen mode.  |
+| `onExitFullscreen`        | `() => void` | A callback function that is called when the player exits fullscreen mode.   |
+| `onHideControls`          | `() => void` | A callback function that is called when the controls are hidden.            |
+| `onShowControls`          | `() => void` | A callback function that is called when the controls are shown.             |
+
+<details>
+  <summary>Full TypeScript definition</summary>
+
+```typescript
+export interface VideoSource {
+  uri: string;
+  type?: string;
+  headers?: Record<string, string>;
+}
+
+export interface VideoState {
+  isPlaying: boolean;
+  currentTime: number;
+  duration: number;
+  buffering: boolean;
+  muted: boolean;
+  volume: number;
+  playbackRate: number;
+  fullscreen: boolean;
+  error: string | null;
+}
+
+export interface VideoPlayerConfig {
+  autoHideControls: boolean;
+  autoPlay: boolean;
+  autoHideDelay: number;
+  enableDoubleTapGestures: boolean;
+  enableFullscreen: boolean;
+  enableVolumeControl: boolean;
+  enablePanGestures: boolean;
+  enableScreenRotation: boolean;
+  playbackRates: number[];
+  onEnterFullscreen?: () => void;
+  onExitFullscreen?: () => void;
+  onHideControls?: () => void;
+  onShowControls?: () => void;
+}
+```
+
+</details>

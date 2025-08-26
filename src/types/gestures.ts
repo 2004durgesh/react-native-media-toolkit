@@ -13,7 +13,6 @@ export interface UsePanGestureProps {
   onGlobalVerticalPan?: (e: GestureUpdateEvent<PanGestureHandlerEventPayload>) => void;
 }
 
-// DRY: compose the two
 export interface GestureHandlerProps extends Partial<UseDoubleTapGestureProps>, Partial<UsePanGestureProps> {
   children?: React.ReactNode;
 }

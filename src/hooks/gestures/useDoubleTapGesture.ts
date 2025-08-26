@@ -14,6 +14,7 @@ import {
   type SharedValue,
 } from 'react-native-reanimated';
 import type { UseDoubleTapGestureProps } from '../../types';
+import { useVideo } from '../../providers';
 
 export const useDoubleTapGesture = ({
   videoRef,
@@ -21,6 +22,7 @@ export const useDoubleTapGesture = ({
   onDoubleTapSeekStart,
   onDoubleTapSeekEnd,
 }: UseDoubleTapGestureProps) => {
+  const { dispatch } = useVideo();
   const [isDoubleTap, setIsDoubleTap] = useState(false);
   const tapCount = useSharedValue(0);
   const lastTap = useRef(0);
@@ -112,6 +114,7 @@ export const useDoubleTapGesture = ({
         const newPosition = Math.max(currentTime + seekAmount, 0);
 
         videoRef.current.seek(newPosition);
+        runOnJS(dispatch)({ type: 'SET_CURRENT_TIME', payload: newPosition });
 
         if (isConsecutive) {
           consecutiveTapCount.current[direction]++;
@@ -140,7 +143,7 @@ export const useDoubleTapGesture = ({
         console.error('Seek failed:', error);
       }
     },
-    [videoRef, doubleTapSeekInterval, showTapAnimation]
+    [videoRef, doubleTapSeekInterval, showTapAnimation, dispatch]
   );
 
   const doubleTapGesture = useMemo(
@@ -189,7 +192,6 @@ export const useDoubleTapGesture = ({
             runOnJS(onDoubleTapSeekEnd)();
           }
           rippleOpacity.value = withTiming(0, { duration: 500 });
-          console.log('double tap');
         })
         .runOnJS(true),
     [

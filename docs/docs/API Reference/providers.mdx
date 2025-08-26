@@ -1,42 +1,37 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # Providers
 
-### `VideoProvider`
+This document provides an overview of the providers available in `react-native-video-toolkit`.
 
-Manages the video player's state and configuration. All components that interact with the video state should be descendants of `VideoProvider`.
+## `VideoProvider`
 
-```tsx
-<VideoProvider
-  config={
-    {
-      /* ... */
-    }
-  }
-  theme={
-    {
-      /* ... */
-    }
-  }>
-  {/* VideoPlayer and other components */}
-</VideoProvider>
-```
-
-**Props:**
-
-- `config`: Optional configuration object for the video player (e.g., `autoHideControls`, `enableScreenRotation`).
-- `theme`: Optional theme object to override default styling.
-
-### `ThemeProvider`
-
-Provides a custom theme to its children components. Can be used independently or within `VideoProvider`.
+The `VideoProvider` is a context provider that manages the state of the video player and makes it available to all child components. It is the root component of the video player and should wrap your entire player implementation.
 
 ```tsx
-<ThemeProvider theme={customTheme}>{/* Components that will use the custom theme */}</ThemeProvider>
+import { VideoProvider } from 'react-native-video-toolkit';
+
+const App = () => {
+  return (
+    <VideoProvider
+      config={{ ... }}
+      theme={{ ... }}
+    >
+      {/* Your video player components */}
+    </VideoProvider>
+  );
+};
 ```
 
-**Props:**
+### Props
 
-- `theme`: (required) Your custom theme object.
+| Property | Type                                                                    | Description                                                |
+| -------- | ----------------------------------------------------------------------- | ---------------------------------------------------------- |
+| `config` | [`VideoPlayerConfig`](../API%20Reference/Types/video#videoplayerconfig) | An object to configure the behavior of the video player.   |
+| `theme`  | [`Theme`](../API%20Reference/Types/theme#theme)                         | An object to customize the appearance of the video player. |
+
+## `ThemeProvider`
+
+The `ThemeProvider` is a context provider that makes the theme object available to all child components. It is used internally by the `VideoProvider` to apply the theme to the video player. You generally won't need to use this component directly, as the `VideoProvider` handles it for you.

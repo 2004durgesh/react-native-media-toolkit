@@ -90,12 +90,11 @@ export default CustomPlayerExample;
 
 ## Theming
 
-The library provides a flexible theming system to easily customize colors, fonts, sizing, and other visual elements.
-Custom themes should be of type [`Theme`](../../src/types/theme.ts)
+The library provides a flexible theming system to easily customize colors, fonts, sizing, and other visual elements. Custom themes should be of type [`Theme`](./API%20Reference/Types/theme).
 
 ```tsx
 import React from 'react';
-import { VideoPlayer, ThemeProvider } from 'react-native-video-toolkit';
+import { VideoPlayer, VideoProvider } from 'react-native-video-toolkit';
 
 const customTheme = {
   colors: {
@@ -125,7 +124,7 @@ export default ThemedPlayer;
 
 ## Configuration Options
 
-The `VideoPlayer` component accepts various props to configure its behavior. Here are some commonly used options:
+The `VideoPlayer` component accepts various props to configure its behavior. The `theme` prop is of type [`Theme`](./API%20Reference/Types/theme) and the `config` prop is of type [`VideoPlayerConfig`](./API%20Reference/Types/video#videoplayerconfig).
 
 ```tsx
 <VideoProvider
@@ -145,6 +144,23 @@ The `VideoPlayer` component accepts various props to configure its behavior. Her
 
 ## Gestures
 
-The `VideoPlayer` includes built-in gesture support for common interactions like double-tapping to seek and tapping to toggle controls. You can also integrate custom gestures using `react-native-gesture-handler`.
+The `VideoPlayer` includes built-in gesture support for common interactions like double-tapping to seek and tapping to toggle controls. You can leverage more complex gestures by passing `gestureProps` to the `VideoPlayer` component. This prop accepts [`GestureHandlerProps`](./API%20Reference/Types/gestures#gesturehandlerprops).
 
-For more advanced gesture customization, refer to the `useGestures` hook and `TapHandler`/`PanHandler` components in the source code.
+```tsx
+<VideoPlayer
+  source={videoSource}
+  containerStyle={styles.videoPlayer}
+  gestureProps={{
+    onLeftVerticalPan(e) {
+      console.log('left pan', e);
+    },
+    onRightVerticalPan(e) {
+      console.log('right pan', e);
+    },
+    onGlobalVerticalPan(e) {
+      console.log('global pan', e);
+    },
+  }}>
+  <MinimalLayout />
+</VideoPlayer>
+```
