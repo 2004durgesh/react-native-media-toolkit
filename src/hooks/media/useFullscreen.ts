@@ -4,10 +4,20 @@ import { useControlsVisibility } from './useControlsVisibility';
 import { NativeVideoToolkit } from '../../NativeVideoToolkit';
 import RNOrientationDirector, { Orientation } from 'react-native-orientation-director';
 
+/**
+ * A hook for controlling fullscreen mode.
+ *
+ * @returns An object with the following properties:
+ * - `fullscreen`: A boolean indicating whether the video is in fullscreen mode.
+ * - `toggleFullscreen`: A function to toggle fullscreen mode.
+ */
 export const useFullscreen = () => {
   const { state, dispatch } = useVideo();
   const { showControls } = useControlsVisibility();
 
+  /**
+   * Toggles the fullscreen mode of the video.
+   */
   const toggleFullscreen = useCallback(async () => {
     dispatch({ type: 'TOGGLE_FULLSCREEN' });
     const newFullscreenState = !state.fullscreen;

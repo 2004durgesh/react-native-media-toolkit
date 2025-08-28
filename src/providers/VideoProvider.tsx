@@ -5,7 +5,9 @@ import { defaultTheme } from '../themes';
 import { type LayoutRectangle, Dimensions } from 'react-native';
 import { ThemeProvider } from './ThemeProvider';
 
-// Default Configuration
+/**
+ * Default configuration for the video player.
+ */
 const defaultConfig: VideoPlayerConfig = {
   autoHideControls: true,
   autoHideDelay: 5000,
@@ -18,17 +20,45 @@ const defaultConfig: VideoPlayerConfig = {
   playbackRates: [0.5, 1, 1.25, 1.5, 2],
 };
 
-// State and Context
+/**
+ * Represents the state of the VideoProvider.
+ * @internal
+ */
 interface VideoProviderState extends VideoState {
+  /**
+   * The configuration for the video player.
+   */
   config: VideoPlayerConfig;
+  /**
+   * The theme for the video player.
+   */
   theme: Theme;
+  /**
+   * A ref to the video component.
+   */
   videoRef: React.RefObject<any> | null;
+  /**
+   * The opacity of the controls.
+   */
   controlsOpacity: SharedValue<number> | null;
+  /**
+   * A timeout ref for hiding the controls.
+   */
   hideTimeoutRef: NodeJS.Timeout | null;
+  /**
+   * The layout of the video component.
+   */
   videoLayout: LayoutRectangle;
+  /**
+   * The dimensions of the screen.
+   */
   dimensions: { width: number; height: number };
 }
 
+/**
+ * Represents the actions that can be dispatched to the video reducer.
+ * @internal
+ */
 type Action =
   | { type: 'INITIALIZE'; payload: { theme?: Partial<Theme>; config?: Partial<VideoPlayerConfig> } }
   | { type: 'SET_THEME'; payload: Partial<Theme> }
@@ -50,6 +80,10 @@ type Action =
   | { type: 'SET_VIDEO_LAYOUT'; payload: LayoutRectangle }
   | { type: 'SET_DIMENSIONS'; payload: { width: number; height: number } };
 
+/**
+ * The initial state for the VideoProvider.
+ * @internal
+ */
 const initialState: VideoProviderState = {
   isPlaying: defaultConfig.autoPlay,
   currentTime: 0,
@@ -69,6 +103,10 @@ const initialState: VideoProviderState = {
   dimensions: { width: Dimensions.get('window').width, height: Dimensions.get('window').height },
 };
 
+/**
+ * The context for the video player.
+ * @internal
+ */
 const VideoContext = createContext<
   | {
       state: VideoProviderState;
@@ -77,7 +115,10 @@ const VideoContext = createContext<
   | undefined
 >(undefined);
 
-// Reducer
+/**
+ * The reducer for the video player state.
+ * @internal
+ */
 function videoReducer(state: VideoProviderState, action: Action): VideoProviderState {
   switch (action.type) {
     case 'INITIALIZE':
@@ -143,10 +184,19 @@ function videoReducer(state: VideoProviderState, action: Action): VideoProviderS
   }
 }
 
-// Provider Component
+/**
+ * The provider component for the video player.
+ * This component provides the video state to all its children.
+ */
 export const VideoProvider: React.FC<{
   children: React.ReactNode;
+  /**
+   * The configuration for the video player.
+   */
   config?: Partial<VideoPlayerConfig>;
+  /**
+   * The theme for the video player.
+   */
   theme?: Partial<Theme>;
 }> = ({ children, config, theme }) => {
   const [state, dispatch] = useReducer(videoReducer, initialState);
@@ -162,7 +212,10 @@ export const VideoProvider: React.FC<{
   );
 };
 
-// Hook to use the context
+/**
+ * A hook to use the video context.
+ * This hook provides access to the video state and dispatch function.
+ */
 export const useVideo = () => {
   const context = useContext(VideoContext);
   if (context === undefined) {

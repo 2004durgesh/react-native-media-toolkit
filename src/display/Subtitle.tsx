@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, StyleSheet, type StyleProp, type TextStyle } from 'react-native';
-import { useVideo } from '../../providers';
+import { useVideo } from '../providers';
 
 export const Subtitle = ({ text, style }: { text: string; style?: StyleProp<TextStyle> }) => {
   const {

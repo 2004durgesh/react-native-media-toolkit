@@ -7,10 +7,16 @@ import { useVideo } from '../providers';
 import type { Component } from 'react';
 import type { GestureHandlerProps } from '../types';
 
+/**
+ * A component that displays the seek time text.
+ */
 export const SeekText: FC<{ children: React.ReactNode }> = ({ children }) => {
   return <Text style={styles.seekText}>{children}</Text>;
 };
 
+/**
+ * A component that displays an overlayed view.
+ */
 export const OverlayedView = React.forwardRef<
   Component,
   {
@@ -25,6 +31,11 @@ export const OverlayedView = React.forwardRef<
   );
 });
 
+/**
+ * A component that handles gestures for the video player.
+ *
+ * This component is responsible for handling single-tap, double-tap, and pan gestures.
+ */
 export const GestureHandler: FC<GestureHandlerProps> = ({
   doubleTapSeekInterval = 10,
   onDoubleTapSeekStart,

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-export const layoutStyles = StyleSheet.create({
+export const CommonLayoutStyles = StyleSheet.create({
   topControls: { flex: 1 },
   centerControls: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   bottomControls: { flex: 1, justifyContent: 'center', alignItems: 'center' },

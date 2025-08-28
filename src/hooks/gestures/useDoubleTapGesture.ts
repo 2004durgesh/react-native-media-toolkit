@@ -16,6 +16,21 @@ import {
 import type { UseDoubleTapGestureProps } from '../../types';
 import { useVideo } from '../../providers';
 
+/**
+ * A hook for handling double tap gestures to seek forward or backward in the video.
+ *
+ * @param props - The properties for the hook.
+ * @returns An object with the following properties:
+ * - `doubleTapGesture`: The gesture handler for double taps.
+ * - `isDoubleTap`: A boolean indicating whether a double tap is in progress.
+ * - `doubleTapValue`: An object with the forward and backward seek values.
+ * - `backwardRippleRef`: A ref for the backward ripple animation container.
+ * - `forwardRippleRef`: A ref for the forward ripple animation container.
+ * - `backwardAnimatedRipple`: The animated style for the backward ripple effect.
+ * - `forwardAnimatedRipple`: The animated style for the forward ripple effect.
+ * - `forwardAnimatedStyle`: The animated style for the forward seek animation.
+ * - `backwardAnimatedStyle`: The animated style for the backward seek animation.
+ */
 export const useDoubleTapGesture = ({
   videoRef,
   doubleTapSeekInterval = 10,

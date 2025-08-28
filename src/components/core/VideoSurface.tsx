@@ -5,11 +5,28 @@ import type { VideoSource } from '../../types';
 import { useVideo } from '../../providers';
 import { usePlayback, useVolume, useProgress, useBuffering, useControlsVisibility } from '../../hooks';
 
+/**
+ * Props for the VideoSurface component.
+ */
 interface VideoSurfaceProps extends ReactVideoProps {
+  /**
+   * The source of the video to be played.
+   * This can be a remote URL or a local file path.
+   */
   source: VideoSource;
+  /**
+   * Style for the container of the video player.
+   */
   style?: ReactVideoProps['style'];
 }
 
+/**
+ * A component that wraps the `react-native-video` library
+ * and provides a simple interface for playing videos.
+ *
+ * This component is responsible for handling video playback,
+ * events, and other video-related functionality.
+ */
 export const VideoSurface: FC<VideoSurfaceProps> = ({ source, style, ...rest }) => {
   const internalVideoRef = useRef(null);
   const { dispatch, state } = useVideo();

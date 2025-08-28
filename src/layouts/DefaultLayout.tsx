@@ -1,17 +1,15 @@
 import { View } from 'react-native';
 import { VideoPlayer } from '../components/VideoPlayer';
-import { layoutStyles } from '../components/common/CommonStyles';
+import { CommonLayoutStyles as layoutStyles } from '../components/common/CommonLayoutStyles';
 import { useBuffering } from '../hooks';
-import { Title } from '../components/info/Title';
-import { Subtitle } from '../components/info/Subtitle';
+import { Title, Subtitle } from '../display';
 import { defaultTheme } from '../themes';
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useVideo } from '../providers';
 
 export const DefaultLayout = () => {
   const { buffering } = useBuffering();
   const { setTheme } = useVideo();
-  const themeSetRef = useRef(false);
 
   useEffect(() => {
     setTheme(defaultTheme);

@@ -4,6 +4,13 @@ import { useVideo } from '../../providers';
 import { runOnJS } from 'react-native-reanimated';
 import type { UsePanGestureProps } from '../../types';
 
+/**
+ * A hook for handling pan gestures to control video playback.
+ *
+ * @param props - The properties for the hook.
+ * @returns An object with the following properties:
+ * - `verticalPanGesture`: The gesture handler for vertical pans.
+ */
 export const usePanGesture = ({ onLeftVerticalPan, onRightVerticalPan, onGlobalVerticalPan }: UsePanGestureProps) => {
   const { state } = useVideo();
   const { dimensions } = state;

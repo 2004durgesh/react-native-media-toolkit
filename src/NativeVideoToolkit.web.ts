@@ -5,12 +5,28 @@
  */
 
 export interface Spec {
+  /**
+   * Enters fullscreen mode.
+   * @returns A promise that resolves to a boolean indicating whether the operation was successful.
+   */
   enterFullscreen(): Promise<boolean>;
+  /**
+   * Exits fullscreen mode.
+   * @returns A promise that resolves to a boolean indicating whether the operation was successful.
+   */
   exitFullscreen(): Promise<boolean>;
+  /**
+   * Checks if the application is currently in fullscreen mode.
+   * @returns A promise that resolves to a boolean indicating whether the application is in fullscreen mode.
+   */
   isFullscreen(): Promise<boolean>;
 }
 
 export const NativeVideoToolkit: Spec = {
+  /**
+   * Enters fullscreen mode on the web.
+   * @returns A promise that resolves to a boolean indicating whether the operation was successful.
+   */
   enterFullscreen: async (): Promise<boolean> => {
     try {
       if (document.documentElement.requestFullscreen) {
@@ -23,6 +39,10 @@ export const NativeVideoToolkit: Spec = {
       return false;
     }
   },
+  /**
+   * Exits fullscreen mode on the web.
+   * @returns A promise that resolves to a boolean indicating whether the operation was successful.
+   */
   exitFullscreen: async (): Promise<boolean> => {
     try {
       if (document.exitFullscreen && document.fullscreenElement) {
@@ -35,6 +55,10 @@ export const NativeVideoToolkit: Spec = {
       return false;
     }
   },
+  /**
+   * Checks if the application is currently in fullscreen mode on the web.
+   * @returns A promise that resolves to a boolean indicating whether the application is in fullscreen mode.
+   */
   isFullscreen: async (): Promise<boolean> => {
     return document.fullscreenElement !== null;
   },

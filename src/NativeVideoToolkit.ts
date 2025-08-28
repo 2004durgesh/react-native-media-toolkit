@@ -11,8 +11,20 @@ import { type TurboModule } from 'react-native';
 import { TurboModuleRegistry } from 'react-native';
 
 export interface Spec extends TurboModule {
+  /**
+   * Enters fullscreen mode.
+   * @returns A promise that resolves to a boolean indicating whether the operation was successful.
+   */
   enterFullscreen(): Promise<boolean>;
+  /**
+   * Exits fullscreen mode.
+   * @returns A promise that resolves to a boolean indicating whether the operation was successful.
+   */
   exitFullscreen(): Promise<boolean>;
+  /**
+   * Checks if the application is currently in fullscreen mode.
+   * @returns A promise that resolves to a boolean indicating whether the application is in fullscreen mode.
+   */
   isFullscreen(): Promise<boolean>;
 }
 

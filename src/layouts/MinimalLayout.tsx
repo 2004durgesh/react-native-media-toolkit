@@ -1,11 +1,10 @@
 import { View, StyleSheet } from 'react-native';
 import { VideoPlayer } from '../components/VideoPlayer';
-import { layoutStyles } from '../components/common/CommonStyles';
+import { CommonLayoutStyles as layoutStyles } from '../components/common';
 import { useBuffering, useControlsVisibility } from '../hooks';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { useEffect } from 'react';
-import { Title } from '../components/info/Title';
-import { Subtitle } from '../components/info/Subtitle';
+import { Title, Subtitle } from '../display';
 import { minimalTheme } from '../themes';
 import { useVideo } from '../providers';
 
