@@ -1,8 +1,10 @@
 import { useVideo } from '../../providers';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useControlsVisibility } from './useControlsVisibility';
 import { NativeVideoToolkit } from '../../NativeVideoToolkit';
 import RNOrientationDirector, { Orientation } from 'react-native-orientation-director';
+import { Gesture } from 'react-native-gesture-handler';
+import { runOnJS } from 'react-native-reanimated';
 
 /**
  * A hook for controlling fullscreen mode.
@@ -10,6 +12,7 @@ import RNOrientationDirector, { Orientation } from 'react-native-orientation-dir
  * @returns An object with the following properties:
  * - `fullscreen`: A boolean indicating whether the video is in fullscreen mode.
  * - `toggleFullscreen`: A function to toggle fullscreen mode.
+ * - `fullscreenTapGesture`: A `Gesture` object for handling single taps to toggle fullscreen.
  */
 export const useFullscreen = () => {
   const { state, dispatch } = useVideo();
@@ -40,8 +43,21 @@ export const useFullscreen = () => {
     }
   }, [dispatch, state.fullscreen, state.hideTimeoutRef, showControls, state.config]);
 
+  const fullscreenTapGesture = useMemo(
+    () =>
+      Gesture.Tap()
+        .maxDuration(250)
+        .numberOfTaps(1)
+        .onEnd(() => {
+          'worklet';
+          runOnJS(toggleFullscreen)();
+        }),
+    [toggleFullscreen]
+  );
+
   return {
     fullscreen: state.fullscreen,
     toggleFullscreen,
+    fullscreenTapGesture,
   };
 };

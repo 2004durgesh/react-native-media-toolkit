@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { useVolume } from '../../hooks';
 import { Volume2, VolumeX } from 'lucide-react-native';
 import { BaseIconButton } from '../../components/common/BaseIconButton';
+import { GestureDetector } from 'react-native-gesture-handler';
 
 export interface MuteButtonProps {
   size?: number;
@@ -11,21 +12,28 @@ export interface MuteButtonProps {
   renderUnmuteIcon?: () => React.ReactNode;
 }
 
+/**
+ * A button that mutes and unmutes the video.
+ *
+ * @param {MuteButtonProps} props - The props for the component.
+ * @returns {React.ReactElement} - The mute button component.
+ */
 export const MuteButton = ({ size, color, style, renderMuteIcon, renderUnmuteIcon }: MuteButtonProps) => {
-  const { muted, toggleMute } = useVolume();
+  const { muted, toggleMute, muteTapGesture } = useVolume();
 
   const MuteIcon = renderMuteIcon || VolumeX;
   const UnmuteIcon = renderUnmuteIcon || Volume2;
 
   return (
-    <BaseIconButton
-      IconComponent={muted ? MuteIcon : UnmuteIcon}
-      size={size}
-      color={color}
-      // I dont think as no one will use extra onPress functionality here, but ill add in future if needed
-      onPress={toggleMute}
-      style={[styles.muteButton, style]}
-    />
+    <GestureDetector gesture={muteTapGesture}>
+      <BaseIconButton
+        IconComponent={muted ? MuteIcon : UnmuteIcon}
+        size={size}
+        color={color}
+        // onPress={toggleMute}
+        style={[styles.muteButton, style]}
+      />
+    </GestureDetector>
   );
 };
 

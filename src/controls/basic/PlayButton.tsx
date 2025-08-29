@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { usePlayback } from '../../hooks';
 import { Pause, Play } from 'lucide-react-native';
 import { BaseIconButton } from '../../components/common/BaseIconButton';
+import { GestureDetector } from 'react-native-gesture-handler';
 
 export interface PlayButtonProps {
   size?: number;
@@ -12,23 +13,29 @@ export interface PlayButtonProps {
   onPress?: () => void;
 }
 
+/**
+ * A button that plays and pauses the video.
+ *
+ * @param {PlayButtonProps} props - The props for the component.
+ * @returns {React.ReactElement} - The play button component.
+ */
 export const PlayButton = ({ size, color, style, renderPlayIcon, renderPauseIcon, onPress }: PlayButtonProps) => {
-  const { isPlaying, togglePlayPause } = usePlayback();
-
+  const { isPlaying, togglePlayPause, playTapGesture } = usePlayback();
   const PlayIcon = renderPlayIcon || Play;
   const PauseIcon = renderPauseIcon || Pause;
 
   return (
-    <BaseIconButton
-      IconComponent={isPlaying ? PauseIcon : PlayIcon}
-      size={size}
-      color={color}
-      // Using the onPress prop to allow external handling, while also toggling play/pause
-      onPress={() => {
-        (togglePlayPause(), onPress && onPress());
-      }}
-      style={[styles.playButton, style]}
-    />
+    <GestureDetector gesture={playTapGesture}>
+      <BaseIconButton
+        IconComponent={isPlaying ? PauseIcon : PlayIcon}
+        size={size}
+        color={color}
+        // onPress={() => {
+        //   (togglePlayPause(), onPress && onPress());
+        // }}
+        style={[styles.playButton, style]}
+      />
+    </GestureDetector>
   );
 };
 

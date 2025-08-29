@@ -6,13 +6,17 @@ import { useVideo } from '../../providers';
 
 export interface ProgressBarProps {
   height?: number;
-  trackColor?: string;
-  progressColor?: string;
   thumbWidth?: number;
   style?: StyleProp<ViewStyle>;
 }
 
-export const ProgressBar = ({ height = 4, trackColor, progressColor, thumbWidth = 12, style }: ProgressBarProps) => {
+/**
+ * A progress bar that shows the current time and duration of the video.
+ *
+ * @param {ProgressBarProps} props - The props for the component.
+ * @returns {React.ReactElement} - The progress bar component.
+ */
+export const ProgressBar = ({ height = 4, thumbWidth = 12, style }: ProgressBarProps) => {
   const { currentTime, duration, seek } = useProgress();
   const { showControls } = useControlsVisibility();
   const {
@@ -28,8 +32,8 @@ export const ProgressBar = ({ height = 4, trackColor, progressColor, thumbWidth 
   progress.value = currentTime;
   max.value = duration;
 
-  const trackBg = trackColor ?? theme.colors.secondary;
-  const progressBg = progressColor ?? theme.colors.primary;
+  const trackBg = theme.colors.secondary;
+  const progressBg = theme.colors.primary;
 
   const handleSlidingStart = () => {
     showControls();

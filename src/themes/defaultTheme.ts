@@ -1,18 +1,19 @@
 import type { Theme } from '../types';
 
+/**
+ * The default theme for the video player.
+ */
 export const defaultTheme: Theme = {
   colors: {
-    primary: '#1DB954',
-    secondary: '#535C68',
-    accent: '#FF4F81',
+    primary: '#5A9EE6',
+    secondary: '#2A2A2A',
+    accent: '#3A3A3A',
     background: '#121212',
     overlay: 'rgba(0, 0, 0, 0.75)',
-    text: '#FFFFFF',
-    textSecondary: '#A0A0A0',
-    error: '#FF3B30',
-    success: '#34C759',
-    border: '#2C2C2E',
-    focus: '#FFD93D',
+    text: '#FAFAFA',
+    error: '#F25252',
+    success: '#60D288',
+    border: '#3A3A3A',
   },
   sizing: {
     xs: 4,

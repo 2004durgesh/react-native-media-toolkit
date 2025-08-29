@@ -13,6 +13,7 @@ import {
   VideoProvider,
 } from 'react-native-video-toolkit';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const customTheme = {
   colors: {
@@ -86,19 +87,21 @@ const CustomPlayer = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'black' }}>
-      <VideoProvider
-        theme={{ ...customTheme }}
-        config={{
-          enableScreenRotation: true,
-          onEnterFullscreen: () => console.log('Entered fullscreen'),
-          onExitFullscreen: () => console.log('Exited fullscreen'),
-          onHideControls: () => console.log('Controls hidden'),
-          onShowControls: () => console.log('Controls shown'),
-        }}>
-        <VideoPlayer source={videoSource}>
-          <CustomPlayerUI />
-        </VideoPlayer>
-      </VideoProvider>
+      <SafeAreaView edges={['top']}>
+        <VideoProvider
+          theme={{ ...customTheme }}
+          config={{
+            enableScreenRotation: true,
+            onEnterFullscreen: () => console.log('Entered fullscreen'),
+            onExitFullscreen: () => console.log('Exited fullscreen'),
+            onHideControls: () => console.log('Controls hidden'),
+            onShowControls: () => console.log('Controls shown'),
+          }}>
+          <VideoPlayer source={videoSource}>
+            <CustomPlayerUI />
+          </VideoPlayer>
+        </VideoProvider>
+      </SafeAreaView>
     </GestureHandlerRootView>
   );
 };

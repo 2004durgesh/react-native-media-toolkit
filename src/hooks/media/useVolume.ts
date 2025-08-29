@@ -1,6 +1,8 @@
 import { useVideo } from '../../providers';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { useControlsVisibility } from './useControlsVisibility';
+import { Gesture } from 'react-native-gesture-handler';
+import { runOnJS } from 'react-native-reanimated';
 
 /**
  * A hook for controlling video volume.
@@ -10,6 +12,7 @@ import { useControlsVisibility } from './useControlsVisibility';
  * - `muted`: A boolean indicating whether the video is muted.
  * - `setVolume`: A function to set the volume of the video.
  * - `toggleMute`: A function to toggle the mute state of the video.
+ * - `muteTapGesture`: A `Gesture` object for handling single taps to toggle mute.
  */
 export const useVolume = () => {
   const { state, dispatch } = useVideo();
@@ -40,10 +43,22 @@ export const useVolume = () => {
     }
   }, [dispatch, state.muted, state.hideTimeoutRef, showControls]);
 
+  const muteTapGesture = useMemo(
+    () =>
+      Gesture.Tap()
+        .maxDuration(250)
+        .numberOfTaps(1)
+        .onEnd(() => {
+          'worklet';
+          runOnJS(toggleMute)();
+        }),
+    [toggleMute]
+  );
   return {
     volume: state.volume,
     muted: state.muted,
     setVolume,
     toggleMute,
+    muteTapGesture,
   };
 };

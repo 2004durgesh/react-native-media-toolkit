@@ -1,6 +1,8 @@
+import { Gesture } from 'react-native-gesture-handler';
 import { useVideo } from '../../providers';
 import { useControlsVisibility } from './useControlsVisibility';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
+import { runOnJS } from 'react-native-reanimated';
 
 /**
  * A hook for controlling video playback.
@@ -9,6 +11,7 @@ import { useCallback } from 'react';
  * - `isPlaying`: A boolean indicating whether the video is currently playing.
  * - `togglePlayPause`: A function to toggle between play and pause.
  * - `setPlaying`: A function to set the playing state directly.
+ * - `playTapGesture`: A `Gesture` object for handling single taps to toggle play/pause.
  */
 export const usePlayback = () => {
   const { state, dispatch } = useVideo();
@@ -40,9 +43,22 @@ export const usePlayback = () => {
     [dispatch]
   );
 
+  const playTapGesture = useMemo(
+    () =>
+      Gesture.Tap()
+        .maxDuration(250)
+        .numberOfTaps(1)
+        .onEnd(() => {
+          'worklet';
+          runOnJS(togglePlayPause)();
+        }),
+    [togglePlayPause]
+  );
+
   return {
     isPlaying: state.isPlaying,
     togglePlayPause,
     setPlaying,
+    playTapGesture,
   };
 };

@@ -2,6 +2,7 @@ import { StyleSheet } from 'react-native';
 import { useFullscreen } from '../../hooks';
 import { Maximize, Minimize } from 'lucide-react-native';
 import { BaseIconButton } from '../../components/common/BaseIconButton';
+import { GestureDetector } from 'react-native-gesture-handler';
 
 export interface FullscreenButtonProps {
   size?: number;
@@ -12,6 +13,12 @@ export interface FullscreenButtonProps {
   onPress?: () => void;
 }
 
+/**
+ * A button that toggles fullscreen mode.
+ *
+ * @param {FullscreenButtonProps} props - The props for the component.
+ * @returns {React.ReactElement} - The fullscreen button component.
+ */
 export const FullscreenButton = ({
   size,
   color,
@@ -20,22 +27,23 @@ export const FullscreenButton = ({
   renderExitIcon,
   onPress,
 }: FullscreenButtonProps) => {
-  const { fullscreen, toggleFullscreen } = useFullscreen();
+  const { fullscreen, toggleFullscreen, fullscreenTapGesture } = useFullscreen();
 
   const EnterIcon = renderEnterIcon || Maximize;
   const ExitIcon = renderExitIcon || Minimize;
 
   return (
-    <BaseIconButton
-      IconComponent={fullscreen ? ExitIcon : EnterIcon}
-      size={size}
-      color={color}
-      // Using the onPress prop to allow external handling, while also toggling fullscreen, also the react-native-video has events to handle much more low-level fullscreen handling
-      onPress={() => {
-        (toggleFullscreen(), onPress && onPress());
-      }}
-      style={[styles.fullscreenButton, style]}
-    />
+    <GestureDetector gesture={fullscreenTapGesture}>
+      <BaseIconButton
+        IconComponent={fullscreen ? ExitIcon : EnterIcon}
+        size={size}
+        color={color}
+        // onPress={() => {
+        //   (toggleFullscreen(), onPress && onPress());
+        // }}
+        style={[styles.fullscreenButton, style]}
+      />
+    </GestureDetector>
   );
 };
 

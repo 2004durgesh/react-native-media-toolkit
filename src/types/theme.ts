@@ -31,10 +31,6 @@ export interface Theme {
      */
     text: string;
     /**
-     * The secondary text color.
-     */
-    textSecondary: string;
-    /**
      * The error color.
      */
     error: string;
@@ -46,10 +42,6 @@ export interface Theme {
      * The border color.
      */
     border: string;
-    /**
-     * The focus color.
-     */
-    focus: string;
   };
   /**
    * The sizing values used in the theme.

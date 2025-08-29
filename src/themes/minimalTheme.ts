@@ -1,5 +1,8 @@
 import type { Theme } from '../types';
 
+/**
+ * A minimal theme for the video player.
+ */
 export const minimalTheme: Theme = {
   colors: {
     primary: '#4F8EF7',
@@ -8,11 +11,9 @@ export const minimalTheme: Theme = {
     background: '#0B0B0D',
     overlay: 'rgba(0, 0, 0, 0.6)',
     text: '#FFFFFF',
-    textSecondary: '#B3B3B3',
     error: '#E74C3C',
     success: '#2ECC71',
     border: '#2F2F35',
-    focus: '#FFD166',
   },
   sizing: { xs: 4, sm: 8, md: 16, lg: 24, xl: 32 },
   iconSizes: {

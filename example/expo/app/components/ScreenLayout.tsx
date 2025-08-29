@@ -70,7 +70,7 @@ const Main = ({ layout }: { layout: React.ReactNode }) => {
     { type: 'asset-vertical', uri: require('../../assets/vertical.mp4') },
   ];
   const { fullscreen } = useFullscreen();
-  const [uri, setUri] = useState<string>(samples[1]?.uri!);
+  const [uri, setUri] = useState<string>(samples[3]?.uri!);
   const videoSource = { uri };
 
   return (
