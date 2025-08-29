@@ -26,7 +26,7 @@ export const FullscreenButton = ({
   renderEnterIcon,
   renderExitIcon,
   onPress,
-}: FullscreenButtonProps) => {
+}: FullscreenButtonProps): React.ReactElement => {
   const { fullscreen, toggleFullscreen, fullscreenTapGesture } = useFullscreen();
 
   const EnterIcon = renderEnterIcon || Maximize;

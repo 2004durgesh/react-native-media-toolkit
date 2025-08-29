@@ -99,11 +99,11 @@ const Main = ({ layout }: { layout: React.ReactNode }) => {
 export const ScreenLayout = ({ layout }: { layout: React.ReactNode }) => {
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'black' }}>
-      <SafeAreaView edges={['top']}>
-        <VideoProvider>
+      <VideoProvider>
+        <SafeAreaView edges={['top']}>
           <Main layout={layout} />
-        </VideoProvider>
-      </SafeAreaView>
+        </SafeAreaView>
+      </VideoProvider>
     </GestureHandlerRootView>
   );
 };

@@ -19,8 +19,6 @@ export const VolumeControl = ({
   width = 100,
   height = 4,
   thumbWidth = 12,
-  trackColor,
-  progressColor,
   style,
 }: VolumeControlProps) => {
   const { volume, setVolume } = useVolume();

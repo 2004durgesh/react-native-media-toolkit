@@ -4,6 +4,8 @@ import type { VideoPlayerConfig, VideoState, Theme } from '../types';
 import { defaultTheme } from '../themes';
 import { type LayoutRectangle, Dimensions } from 'react-native';
 import { ThemeProvider } from './ThemeProvider';
+import { SettingsProvider } from './SettingsProvider';
+import { BottomSheetProvider } from './BottomSheetProvider';
 
 /**
  * Default configuration for the video player.
@@ -174,11 +176,11 @@ function videoReducer(state: VideoProviderState, action: Action): VideoProviderS
       return { ...state, fullscreen: !state.fullscreen };
     case 'SET_HIDE_TIMEOUT':
       return { ...state, hideTimeoutRef: action.payload };
-
     case 'SET_VIDEO_LAYOUT':
       return { ...state, videoLayout: action.payload };
     case 'SET_DIMENSIONS':
       return { ...state, dimensions: action.payload };
+
     default:
       return state;
   }
@@ -207,7 +209,11 @@ export const VideoProvider: React.FC<{
 
   return (
     <VideoContext.Provider value={{ state, dispatch }}>
-      <ThemeProvider theme={state.theme}>{children}</ThemeProvider>
+      <ThemeProvider theme={state.theme}>
+        <SettingsProvider>
+          <BottomSheetProvider>{children}</BottomSheetProvider>
+        </SettingsProvider>
+      </ThemeProvider>
     </VideoContext.Provider>
   );
 };

@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 
 export const CommonLayoutStyles = StyleSheet.create({
-  topControls: { flex: 1 },
+  topControls: { flex: 1, justifyContent: 'space-between', flexDirection: 'row', alignItems: 'center' },
   centerControls: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   bottomControls: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   row: { flexDirection: 'row', alignItems: 'center' },

@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React, { type FC, type ReactNode } from 'react';
 import { View, StyleSheet, type StyleProp, type ViewStyle } from 'react-native';
 import {
   PlayButton,
@@ -8,7 +8,8 @@ import {
   FullscreenButton,
   MuteButton,
   LoadingSpinner,
-} from '../controls/basic';
+  SettingsButton,
+} from '../controls';
 import type { GestureHandlerProps, VideoSource } from '../types';
 import { VideoSurface } from './core';
 import type { ReactVideoProps } from 'react-native-video';
@@ -71,7 +72,7 @@ const VideoPlayerComponent = ({ source, children, containerStyle, videoProps, ge
  * A container for video controls.
  * This component is used to group controls together and position them on top of the video.
  */
-const VideoControls: React.FC<{ children?: ReactNode; style?: any }> = ({ children, style }) => {
+const VideoControls: FC<{ children?: ReactNode; style?: any }> = ({ children, style }) => {
   return <View style={[styles.controlsContainer, style]}>{children}</View>;
 };
 
@@ -88,6 +89,7 @@ export const VideoPlayer = Object.assign(VideoPlayerComponent, {
   FullscreenButton,
   MuteButton,
   LoadingSpinner,
+  SettingsButton,
 });
 
 const styles = StyleSheet.create({

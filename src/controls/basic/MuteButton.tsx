@@ -18,7 +18,13 @@ export interface MuteButtonProps {
  * @param {MuteButtonProps} props - The props for the component.
  * @returns {React.ReactElement} - The mute button component.
  */
-export const MuteButton = ({ size, color, style, renderMuteIcon, renderUnmuteIcon }: MuteButtonProps) => {
+export const MuteButton = ({
+  size,
+  color,
+  style,
+  renderMuteIcon,
+  renderUnmuteIcon,
+}: MuteButtonProps): React.ReactElement => {
   const { muted, toggleMute, muteTapGesture } = useVolume();
 
   const MuteIcon = renderMuteIcon || VolumeX;
@@ -30,7 +36,6 @@ export const MuteButton = ({ size, color, style, renderMuteIcon, renderUnmuteIco
         IconComponent={muted ? MuteIcon : UnmuteIcon}
         size={size}
         color={color}
-        // onPress={toggleMute}
         style={[styles.muteButton, style]}
       />
     </GestureDetector>

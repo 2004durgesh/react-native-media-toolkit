@@ -16,7 +16,7 @@ export interface ProgressBarProps {
  * @param {ProgressBarProps} props - The props for the component.
  * @returns {React.ReactElement} - The progress bar component.
  */
-export const ProgressBar = ({ height = 4, thumbWidth = 12, style }: ProgressBarProps) => {
+export const ProgressBar = ({ height = 4, thumbWidth = 12, style }: ProgressBarProps): React.ReactElement => {
   const { currentTime, duration, seek } = useProgress();
   const { showControls } = useControlsVisibility();
   const {

@@ -10,7 +10,6 @@ export interface PlayButtonProps {
   style?: any;
   renderPlayIcon?: () => React.ReactNode;
   renderPauseIcon?: () => React.ReactNode;
-  onPress?: () => void;
 }
 
 /**
@@ -19,7 +18,13 @@ export interface PlayButtonProps {
  * @param {PlayButtonProps} props - The props for the component.
  * @returns {React.ReactElement} - The play button component.
  */
-export const PlayButton = ({ size, color, style, renderPlayIcon, renderPauseIcon, onPress }: PlayButtonProps) => {
+export const PlayButton = ({
+  size,
+  color,
+  style,
+  renderPlayIcon,
+  renderPauseIcon,
+}: PlayButtonProps): React.ReactElement => {
   const { isPlaying, togglePlayPause, playTapGesture } = usePlayback();
   const PlayIcon = renderPlayIcon || Play;
   const PauseIcon = renderPauseIcon || Pause;
@@ -30,9 +35,6 @@ export const PlayButton = ({ size, color, style, renderPlayIcon, renderPauseIcon
         IconComponent={isPlaying ? PauseIcon : PlayIcon}
         size={size}
         color={color}
-        // onPress={() => {
-        //   (togglePlayPause(), onPress && onPress());
-        // }}
         style={[styles.playButton, style]}
       />
     </GestureDetector>

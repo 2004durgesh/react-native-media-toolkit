@@ -1,3 +1,4 @@
+import { hexToRgba } from 'src/utils';
 import type { Theme } from '../types';
 
 /**
@@ -9,7 +10,7 @@ export const defaultTheme: Theme = {
     secondary: '#2A2A2A',
     accent: '#3A3A3A',
     background: '#121212',
-    overlay: 'rgba(0, 0, 0, 0.75)',
+    overlay: hexToRgba('#121212', 0.6),
     text: '#FAFAFA',
     error: '#F25252',
     success: '#60D288',

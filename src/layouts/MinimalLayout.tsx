@@ -6,7 +6,7 @@ import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanima
 import { useEffect } from 'react';
 import { Title, Subtitle } from '../display';
 import { minimalTheme } from '../themes';
-import { useVideo } from '../providers';
+import { useSettingsContext, useVideo } from '../providers';
 
 export const MinimalLayout = () => {
   const { buffering } = useBuffering();
@@ -15,7 +15,7 @@ export const MinimalLayout = () => {
 
   // Get theme and store functions
   const { setOpacity } = useControlsVisibility();
-
+  const { state: settingsState, dispatch: settingsDispatch } = useSettingsContext();
   useEffect(() => {
     setTheme(minimalTheme);
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -37,8 +37,13 @@ export const MinimalLayout = () => {
       <VideoPlayer.Controls>
         <View style={[layoutStyles.column, { justifyContent: 'space-between', height: '100%', paddingHorizontal: 15 }]}>
           <View style={layoutStyles.topControls}>
-            <Title text="Minimal Title" />
-            <Subtitle text="Minimal Subtitle" />
+            <View>
+              <Title text="Minimal Title" />
+              <Subtitle text="Minimal Subtitle" />
+            </View>
+            <View>
+              <VideoPlayer.SettingsButton />
+            </View>
           </View>
           <View style={layoutStyles.centerControls}>
             {!buffering ? <VideoPlayer.PlayButton /> : <VideoPlayer.LoadingSpinner />}
