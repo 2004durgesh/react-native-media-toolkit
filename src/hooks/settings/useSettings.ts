@@ -1,5 +1,5 @@
 import type { AudioTrack, TextTrack, VideoTrack } from 'react-native-video';
-import { useSettingsContext, useBottomSheet } from '../../providers';
+import { useSettingsContext } from '../../providers';
 import { useCallback, useMemo } from 'react';
 import { Gesture } from 'react-native-gesture-handler';
 import { runOnJS } from 'react-native-reanimated';
@@ -17,21 +17,24 @@ import { runOnJS } from 'react-native-reanimated';
  */
 export const useSettings = () => {
   const { state, dispatch } = useSettingsContext();
-  const { open, close } = useBottomSheet();
 
-  /**
-   * Toggles the playback state of the video.
-   */
+  const openSettings = useCallback(() => {
+    dispatch({ type: 'OPEN_SETTINGS_SHEET' });
+  }, [dispatch]);
+
+  const closeSettings = useCallback(() => {
+    dispatch({ type: 'CLOSE_SETTINGS_SHEET' });
+  }, [dispatch]);
   const toggleSettingsMenu = useCallback(() => {
     dispatch({ type: 'TOGGLE_SETTINGS_MENU' });
     const newSettingsMenuState = !state.isSettingsMenuVisible;
 
     if (newSettingsMenuState) {
-      open(state.settingsBottomSheetContent);
+      openSettings();
     } else {
-      close();
+      closeSettings();
     }
-  }, [dispatch, state.isSettingsMenuVisible, open, close, state.settingsBottomSheetContent]);
+  }, [dispatch, state.isSettingsMenuVisible, openSettings, closeSettings]);
 
   /**
    * Sets the video quality.
@@ -86,6 +89,8 @@ export const useSettings = () => {
     subtitleTrack: state.subtitleTrack,
     setSubtitleTrack,
     isSettingsMenuVisible: state.isSettingsMenuVisible,
+    openSettings,
+    closeSettings,
     toggleSettingsMenu,
     settingsTapGesture,
   };

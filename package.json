@@ -188,6 +188,7 @@
     "version": "0.52.1"
   },
   "dependencies": {
+    "@rn-primitives/portal": "^1.3.0",
     "react-native-awesome-slider": "^2.9.0",
     "react-native-material-ripple": "^0.9.1",
     "react-native-orientation-director": "^2.6.1"

@@ -5439,6 +5439,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rn-primitives/portal@npm:^1.3.0":
+  version: 1.3.0
+  resolution: "@rn-primitives/portal@npm:1.3.0"
+  dependencies:
+    zustand: ^5.0.4
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+    react-native-web: "*"
+  peerDependenciesMeta:
+    react-native:
+      optional: true
+    react-native-web:
+      optional: true
+  checksum: ca4d408b0c27a1b94cee227e0bb3fcae9acb163b232773b0af35eafda31b1eae87b32db4ed8c756ae61f1b17055df60dd17092d4c4a1636196adb2df76ca7b33
+  languageName: node
+  linkType: hard
+
 "@sideway/address@npm:^4.1.5":
   version: 4.1.5
   resolution: "@sideway/address@npm:4.1.5"
@@ -19747,6 +19765,7 @@ __metadata:
     "@react-native-community/cli": latest
     "@react-native/eslint-config": ^0.73.1
     "@release-it/conventional-changelog": ^9.0.2
+    "@rn-primitives/portal": ^1.3.0
     "@types/jest": ^29.5.5
     "@types/react": ^19.0.0
     "@types/react-native-material-ripple": ^0.9.6
@@ -23864,6 +23883,27 @@ __metadata:
   version: 2.1.3
   resolution: "yoctocolors-cjs@npm:2.1.3"
   checksum: 207df586996c3b604fa85903f81cc54676f1f372613a0c7247f0d24b1ca781905685075d06955211c4d5d4f629d7d5628464f8af0a42d286b7a8ff88e9dadcb8
+  languageName: node
+  linkType: hard
+
+"zustand@npm:^5.0.4":
+  version: 5.0.8
+  resolution: "zustand@npm:5.0.8"
+  peerDependencies:
+    "@types/react": ">=18.0.0"
+    immer: ">=9.0.6"
+    react: ">=18.0.0"
+    use-sync-external-store: ">=1.2.0"
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    immer:
+      optional: true
+    react:
+      optional: true
+    use-sync-external-store:
+      optional: true
+  checksum: 1a0f896f335e21841509a605fb61db34342497c5073f8c4b69889a669f829c9cf39d0282d68ac8fec1c8814cdaa89ee6711d59989feb80dc0364f19ac72e75e0
   languageName: node
   linkType: hard
 

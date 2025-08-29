@@ -12,13 +12,13 @@ export interface SettingsButtonProps {
 }
 
 /**
- * A button that plays and pauses the video.
+ * A button that opens the settings menu.
  *
  * @param {SettingsButtonProps} props - The props for the component.
- * @returns {React.ReactElement} - The play button component.
+ * @returns {React.ReactElement} - The settings button component.
  */
 export const SettingsButton = ({ size, color, style, renderSettingIcon }: SettingsButtonProps): React.ReactElement => {
-  const { isSettingsMenuVisible, settingsTapGesture } = useSettings();
+  const { settingsTapGesture } = useSettings();
   const SettingsIcon = renderSettingIcon || Settings;
   return (
     <GestureDetector gesture={settingsTapGesture}>

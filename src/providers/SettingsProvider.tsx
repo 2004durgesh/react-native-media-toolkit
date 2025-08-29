@@ -22,9 +22,9 @@ interface SettingsProviderState {
    */
   subtitleTrack: TextTrack | null;
   /**
-   * The content to be displayed in the settings bottom sheet.
+   * The current playback rate setting.
    */
-  settingsBottomSheetContent: React.ReactNode | null;
+  playbackRate: number;
 }
 
 /**
@@ -35,7 +35,9 @@ type SettingsAction =
   | { type: 'SET_QUALITY'; payload: VideoTrack | null }
   | { type: 'SET_AUDIO_TRACK'; payload: AudioTrack | null }
   | { type: 'SET_SUBTITLE_TRACK'; payload: TextTrack | null }
-  | { type: 'SET_SETTINGS_BOTTOM_SHEET_CONTENT'; payload: React.ReactNode | null };
+  | { type: 'SET_PLAYBACK_RATE'; payload: number }
+  | { type: 'OPEN_SETTINGS_SHEET' }
+  | { type: 'CLOSE_SETTINGS_SHEET' };
 
 /**
  * The initial state for the SettingsProvider.
@@ -45,7 +47,7 @@ const initialSettingsState: SettingsProviderState = {
   quality: null,
   audioTrack: null,
   subtitleTrack: null,
-  settingsBottomSheetContent: null,
+  playbackRate: 1,
 };
 
 /**
@@ -61,8 +63,12 @@ function settingsReducer(state: SettingsProviderState, action: SettingsAction): 
       return { ...state, audioTrack: action.payload };
     case 'SET_SUBTITLE_TRACK':
       return { ...state, subtitleTrack: action.payload };
-    case 'SET_SETTINGS_BOTTOM_SHEET_CONTENT':
-      return { ...state, settingsBottomSheetContent: action.payload };
+    case 'SET_PLAYBACK_RATE':
+      return { ...state, playbackRate: action.payload };
+    case 'OPEN_SETTINGS_SHEET':
+      return { ...state, isSettingsMenuVisible: true };
+    case 'CLOSE_SETTINGS_SHEET':
+      return { ...state, isSettingsMenuVisible: false };
     default:
       return state;
   }

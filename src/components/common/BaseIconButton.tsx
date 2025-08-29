@@ -10,12 +10,19 @@ interface BaseIconButtonProps extends TouchableWithoutFeedbackProps {
 }
 
 /**
- * A base icon button component.
+ * `BaseIconButton` is a foundational component for creating interactive icon buttons within the video player.
+ * It wraps an `IconComponent` with a ripple effect provided by `react-native-material-ripple`,
+ * and integrates with the player's theme for consistent sizing and coloring.
  *
- * @param {BaseIconButtonProps} props - The props for the component.
- * @returns {React.ReactElement} - The base icon button component.
+ * @param {object} props - The props for the BaseIconButton component.
+ * @param {React.ElementType} props.IconComponent - The icon component to render inside the button (e.g., from `@expo/vector-icons` or a custom SVG component).
+ * @param {number} [props.size] - Optional size for the icon. If not provided, it defaults to `theme.iconSizes.md`.
+ * @param {string} [props.color] - Optional color for the icon. If not provided, it defaults to `theme.colors.text`.
+ * @param {TouchableWithoutFeedbackProps} [props.rest] - Additional props passed directly to the underlying `TouchableWithoutFeedback` component.
+ *
+ * @returns {React.ReactElement} A touchable icon button with a ripple effect.
  */
-export const BaseIconButton = ({ IconComponent, size, color, ...props }: BaseIconButtonProps) => {
+export const BaseIconButton = ({ IconComponent, size, color, ...props }: BaseIconButtonProps): React.ReactElement => {
   const {
     state: { theme },
   } = useVideo();

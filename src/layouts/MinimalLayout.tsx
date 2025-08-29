@@ -1,21 +1,29 @@
 import { View, StyleSheet } from 'react-native';
 import { VideoPlayer } from '../components/VideoPlayer';
 import { CommonLayoutStyles as layoutStyles } from '../components/common';
-import { useBuffering, useControlsVisibility } from '../hooks';
+import { useBuffering, useControlsVisibility, useSettings } from '../hooks';
 import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
 import { useEffect } from 'react';
 import { Title, Subtitle } from '../display';
 import { minimalTheme } from '../themes';
-import { useSettingsContext, useVideo } from '../providers';
-
+import { useVideo } from '../providers';
+import BottomSheet from 'src/components/common/BottomSheet';
+/**
+ * `MinimalLayout` is a predefined layout component for the video player controls,
+ * offering a more streamlined and less intrusive user interface.
+ * It includes essential controls like play/pause, progress bar, time display,
+ * fullscreen toggle, mute button, and a settings button that opens a bottom sheet.
+ *
+ * @returns {React.ReactElement} A configured `VideoPlayer.Controls` component with a minimal layout.
+ */
 export const MinimalLayout = () => {
   const { buffering } = useBuffering();
   const opacity = useSharedValue(1);
   const { state, setTheme } = useVideo();
-
+  const { isSettingsMenuVisible, openSettings, closeSettings } = useSettings();
   // Get theme and store functions
   const { setOpacity } = useControlsVisibility();
-  const { state: settingsState, dispatch: settingsDispatch } = useSettingsContext();
+
   useEffect(() => {
     setTheme(minimalTheme);
     //eslint-disable-next-line react-hooks/exhaustive-deps
@@ -43,6 +51,14 @@ export const MinimalLayout = () => {
             </View>
             <View>
               <VideoPlayer.SettingsButton />
+              <BottomSheet visible={isSettingsMenuVisible} onClose={closeSettings}>
+                <>
+                  <VideoPlayer.Menu.Item value={0.5}>0.5x</VideoPlayer.Menu.Item>
+                  <VideoPlayer.Menu.Item value={1}>1x (Normal)</VideoPlayer.Menu.Item>
+                  <VideoPlayer.Menu.Item value={1.5}>1.5x</VideoPlayer.Menu.Item>
+                  <VideoPlayer.Menu.Item value={2}>2x</VideoPlayer.Menu.Item>
+                </>
+              </BottomSheet>
             </View>
           </View>
           <View style={layoutStyles.centerControls}>

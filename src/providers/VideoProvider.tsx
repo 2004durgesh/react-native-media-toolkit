@@ -5,8 +5,7 @@ import { defaultTheme } from '../themes';
 import { type LayoutRectangle, Dimensions } from 'react-native';
 import { ThemeProvider } from './ThemeProvider';
 import { SettingsProvider } from './SettingsProvider';
-import { BottomSheetProvider } from './BottomSheetProvider';
-
+import { PortalHost } from '@rn-primitives/portal';
 /**
  * Default configuration for the video player.
  */
@@ -211,7 +210,8 @@ export const VideoProvider: React.FC<{
     <VideoContext.Provider value={{ state, dispatch }}>
       <ThemeProvider theme={state.theme}>
         <SettingsProvider>
-          <BottomSheetProvider>{children}</BottomSheetProvider>
+          {children}
+          <PortalHost />
         </SettingsProvider>
       </ThemeProvider>
     </VideoContext.Provider>

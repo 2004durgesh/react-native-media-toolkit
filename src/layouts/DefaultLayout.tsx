@@ -7,6 +7,14 @@ import { defaultTheme } from '../themes';
 import { useEffect } from 'react';
 import { useVideo } from '../providers';
 
+/**
+ * `DefaultLayout` is a predefined layout component for the video player controls.
+ * It arranges common video player controls such as play/pause, progress bar, time display,
+ * fullscreen toggle, and mute button in a standard configuration.
+ * This layout serves as a sensible default for most video playback scenarios.
+ *
+ * @returns {React.ReactElement} A configured `VideoPlayer.Controls` component with default layout.
+ */
 export const DefaultLayout = () => {
   const { buffering } = useBuffering();
   const { setTheme } = useVideo();

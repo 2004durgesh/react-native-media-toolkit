@@ -3,6 +3,7 @@ import { StyleSheet, View, Dimensions, Pressable } from 'react-native';
 import Animated, { useSharedValue, useAnimatedStyle, withTiming, runOnJS } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useVideo } from '../../providers';
+import { Portal } from '@rn-primitives/portal';
 
 interface BottomSheetProps {
   visible: boolean;
@@ -12,12 +13,34 @@ interface BottomSheetProps {
 
 const { height, width } = Dimensions.get('window');
 
-const BottomSheet: FC<BottomSheetProps> = ({ visible, onClose, children }) => {
+/**
+ * `BottomSheet` is a customizable, animated bottom sheet component.
+ * It provides a modal-like overlay that slides up from the bottom of the screen,
+ * and can be dismissed by swiping down or tapping outside.
+ * It integrates with the video player's theme and handles fullscreen mode adjustments.
+ *
+ * @param {object} props - The props for the BottomSheet component.
+ * @param {boolean} props.visible - Controls the visibility of the bottom sheet. When `true`, the sheet slides up.
+ * @param {() => void} [props.onClose] - Callback function invoked when the bottom sheet is requested to close (e.g., by swiping down or tapping the overlay).
+ * @param {ReactNode} props.children - The content to be rendered inside the bottom sheet.
+ *
+ * @returns {JSX.Element | null} The BottomSheet component, or `null` if not visible.
+ */
+const BottomSheet: FC<BottomSheetProps> = ({
+  visible,
+  onClose,
+  children,
+}: {
+  visible: boolean;
+  onClose?: () => void;
+  children: ReactNode;
+}): JSX.Element | null => {
   const { state } = useVideo();
   const { theme, fullscreen } = state;
-  const SHEET_HEIGHT = fullscreen ? height * 0.95 : height * 0.45;
+  const SHEET_HEIGHT = fullscreen ? width * 0.85 : height * 0.45;
+  const SHEET_WIDTH = fullscreen ? height * 0.75 : width * 0.9;
   const translateY = useSharedValue(SHEET_HEIGHT);
-  // Animate open/close
+
   useEffect(() => {
     if (visible) {
       translateY.value = withTiming(0, { duration: 300 });
@@ -41,8 +64,6 @@ const BottomSheet: FC<BottomSheetProps> = ({ visible, onClose, children }) => {
         translateY.value = withTiming(0, { duration: 200 });
       }
     });
-
-  // Animated style
   const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateY: translateY.value }],
   }));
@@ -50,26 +71,27 @@ const BottomSheet: FC<BottomSheetProps> = ({ visible, onClose, children }) => {
   if (!visible) return null;
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.overlay }]}>
-      {/* backdrop */}
-      <Pressable style={{ height, width }} onPress={onClose} />
-      <GestureDetector gesture={gesture}>
-        <Animated.View
-          style={[
-            styles.sheetContainer,
-            animatedStyle,
-            {
-              backgroundColor: theme.colors.background,
-              height: SHEET_HEIGHT,
-              width: width * 0.9,
-              borderRadius: 16,
-              overflow: 'hidden',
-            },
-          ]}>
-          {children}
-        </Animated.View>
-      </GestureDetector>
-    </View>
+    <Portal name="sheet-portal">
+      <View style={[styles.container, { backgroundColor: theme.colors.overlay }]}>
+        <Pressable style={{ height, width }} onPress={onClose} />
+        <GestureDetector gesture={gesture}>
+          <Animated.View
+            style={[
+              styles.sheetContainer,
+              animatedStyle,
+              {
+                backgroundColor: theme.colors.background,
+                height: SHEET_HEIGHT,
+                width: SHEET_WIDTH,
+                borderRadius: 16,
+                overflow: 'hidden',
+              },
+            ]}>
+            {children}
+          </Animated.View>
+        </GestureDetector>
+      </View>
+    </Portal>
   );
 };
 
